@@ -100,10 +100,10 @@ public class LectureController {
 
         URL url = new URL(
                 "http://api.data.go.kr/openapi/tn_pubr_public_lftm_lrn_lctre_api"
-                + "?serviceKey=U%2BFAmDElGz%2BqU3DnkL9KnewJSgBy7chmjHrqGFnZJIZF2DjSKEB0jHObepr4LW%2B5HVRVN%2BAPVVNdFfSle2m%2FBw%3D%3D"
-                + "&pageNo=1&numOfRows=100"
-                + "&type=json"
-                + "referenceDate=" + referenceDate
+                        + "?serviceKey=U%2BFAmDElGz%2BqU3DnkL9KnewJSgBy7chmjHrqGFnZJIZF2DjSKEB0jHObepr4LW%2B5HVRVN%2BAPVVNdFfSle2m%2FBw%3D%3D"
+                        + "&pageNo=1&numOfRows=100"
+                        + "&type=json"
+                        + "referenceDate=" + referenceDate
         );
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
@@ -120,7 +120,57 @@ public class LectureController {
 
             for (int i = 0; i < items.size(); i++) {
                 JSONObject tmp = (JSONObject) items.get(i);
-                
+
+                String edcStartDay1 = ((String) tmp.get("edcStartDay")).length() == 0 ? "1000-01-01" : (String) tmp.get("edcStartDay");
+                LocalDate edcStartDay2 = LocalDate.parse(edcStartDay1, DateTimeFormatter.ISO_DATE);
+
+                String edcEndDay1 = ((String) tmp.get("edcEndDay")).length() == 0 ? "1000-01-01" : (String) tmp.get("edcEndDay");
+                LocalDate edcEndDay2 = LocalDate.parse(edcEndDay1, DateTimeFormatter.ISO_DATE);
+
+                String rceptStartDate1 = ((String) tmp.get("rceptStartDate")).length() == 0 ? "1000-01-01" : (String) tmp.get("rceptStartDate");
+                LocalDate rceptStartDate2 = LocalDate.parse(rceptStartDate1, DateTimeFormatter.ISO_DATE);
+
+                String rceptEndDate1 = ((String) tmp.get("rceptEndDate")).length() == 0 ? "1000-01-01" : (String) tmp.get("rceptEndDate");
+                LocalDate rceptEndDate2 = LocalDate.parse(rceptEndDate1, DateTimeFormatter.ISO_DATE);
+
+                String referenceDate1 = ((String) tmp.get("referenceDate")).length() == 0 ? "1000-01-01" : (String) tmp.get("referenceDate");
+                LocalDate referenceDate2 = LocalDate.parse(referenceDate1, DateTimeFormatter.ISO_DATE);
+
+                if (
+                        edcEndDay2.isAfter(LocalDate.of(2023, 1, 1))
+                                && referenceDate2.isAfter(LocalDate.of(2022, 6, 6))
+                ) {
+                    Lecture lectureInfo = new Lecture(
+                            i + 1,
+                            (String) tmp.get("lctreNm"),
+                            (String) tmp.get("instrctrNm"),
+                            edcStartDay2,
+                            edcEndDay2,
+                            (String) tmp.get("edcStartTime"),
+                            (String) tmp.get("edcColseTime"),
+                            (String) tmp.get("lctreCo"),
+                            (String) tmp.get("edcTrgetType"),
+                            (String) tmp.get("edcMthType"),
+                            (String) tmp.get("operDay"),
+                            (String) tmp.get("edcPlace"),
+                            (String) tmp.get("psncpa"),
+                            (String) tmp.get("lctreCost"),
+                            (String) tmp.get("edcRdnmadr"),
+                            (String) tmp.get("operInstitutionNm"),
+                            (String) tmp.get("operPhoneNumber"),
+                            rceptStartDate2,
+                            rceptEndDate2,
+                            (String) tmp.get("rceptMthType"),
+                            (String) tmp.get("slctnMthType"),
+                            (String) tmp.get("homepageUrl"),
+                            tmp.get("oadtCtLctreYn").equals("Y"),
+                            tmp.get("pntBankAckestYn").equals("Y"),
+                            tmp.get("lrnAcnutAckestYn").equals("Y"),
+                            referenceDate2,
+                            (String) tmp.get("insttCode")
+                    );
+                    lectureRepository.save(lectureInfo);
+                }
             }
         }
     }
