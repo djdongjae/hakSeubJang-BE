@@ -45,7 +45,6 @@ public class Lecture {
 
     @Builder
     public Lecture(
-            int id,
             String lctreNm,
             String instrctrNm,
             LocalDate edcStartDay,
@@ -73,7 +72,6 @@ public class Lecture {
             LocalDate referenceDate,
             String insttCode
     ) {
-        this.id = id;
         this.lctreNm = lctreNm;
         this.instrctrNm = instrctrNm;
         this.edcStartDay = edcStartDay;
@@ -100,5 +98,38 @@ public class Lecture {
         this.lrnAcnutAckestYn = lrnAcnutAckestYn;
         this.referenceDate = referenceDate;
         this.insttCode = insttCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "id=" + id +
+                ", lctreNm='" + lctreNm + '\'' +
+                ", instrctrNm='" + instrctrNm + '\'' +
+                ", edcStartDay=" + edcStartDay +
+                ", edcEndDay=" + edcEndDay +
+                ", edcStartTime='" + edcStartTime + '\'' +
+                ", edcCloseTime='" + edcCloseTime + '\'' +
+                ", lctreCo='" + lctreCo + '\'' +
+                ", edcTrgetType='" + edcTrgetType + '\'' +
+                ", edcMthType='" + edcMthType + '\'' +
+                ", operDay='" + operDay + '\'' +
+                ", edcPlace='" + edcPlace + '\'' +
+                ", psncpa='" + psncpa + '\'' +
+                ", lctreCost='" + lctreCost + '\'' +
+                ", edcRdnmadr='" + edcRdnmadr + '\'' +
+                ", operInstitutionNm='" + operInstitutionNm + '\'' +
+                ", operPhoneNumber='" + operPhoneNumber + '\'' +
+                ", rceptStartDate=" + rceptStartDate +
+                ", rceptEndDate=" + rceptEndDate +
+                ", rceptMthType='" + rceptMthType + '\'' +
+                ", slctnMthType='" + slctnMthType + '\'' +
+                ", homepageUrl='" + homepageUrl + '\'' +
+                ", oadtCtLctreYn=" + oadtCtLctreYn +
+                ", pntBankAckestYn=" + pntBankAckestYn +
+                ", lrnAcnutAckestYn=" + lrnAcnutAckestYn +
+                ", referenceDate=" + referenceDate +
+                ", insttCode='" + insttCode + '\'' +
+                '}';
     }
 }
