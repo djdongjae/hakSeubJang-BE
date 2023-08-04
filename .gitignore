@@ -302,3 +302,5 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,intellij,eclipse,macos
+
+application-oauth.properties
