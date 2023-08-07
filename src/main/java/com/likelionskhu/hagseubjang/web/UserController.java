@@ -26,6 +26,11 @@ public class UserController {
         return "user/main";
     }
 
+    @GetMapping("login")
+    public String login(Model model) {
+        return "user/login";
+    }
+
     @RequestMapping("delete/wish")
     public String deleteWish(Model model, @RequestParam("wishId") int wishId) {
         wishService.delete(wishId);

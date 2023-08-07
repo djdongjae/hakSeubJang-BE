@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강좌 목록(검색)</title>
+    <style>
+        div.container {
+            width: 1500px;
+            margin: 50px auto;
+        }
+
+        thead th {
+            background-color: #eee;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            padding: 4px;
+            border: 1px solid lightgray;
+        }
+
+        td:nth-child(4), td:nth-child(3) {
+            text-align: center;
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
-
+<div class="container">
+    <h1>강좌 목록</h1>
+    <br>
+    <table class="table table-bordered table-condensed">
+        <thead>
+        <tr>
+            <th>강좌명</th>
+            <th>강사명</th>
+            <th>접수시작일자</th>
+            <th>접수종료일자</th>
+            <th>교육대상</th>
+            <th>운영요일</th>
+            <th>교육장소</th>
+            <th>수강료</th>
+            <th>찜하기</th>
+            <th>찜여부</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lecture: ${lectures}">
+            <td th:text="${lecture.getLctreNm()}"></td>
+            <td th:text="${lecture.instrctrNm}"></td>
+            <td th:text="${lecture.getRceptStartDate()}"></td>
+            <td th:text="${lecture.getRceptEndDate()}"></td>
+            <td th:text="${lecture.getEdcTrgetType()}"></td>
+            <td th:text="${lecture.operDay}"></td>
+            <td th:text="${lecture.getEdcRdnmadr()}"></td>
+            <td th:text="${lecture.getLctreCost()}"></td>
+            <td>
+                <a th:href="@{create/wish(lectureId=${lecture.getId()})}">찜하기</a>
+            </td>
+            <td>
+                <div th:each="wish: ${lecture.wishes}">
+                    <span th:if="${wish.user.getEmail() == user.getEmail()}">true</span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

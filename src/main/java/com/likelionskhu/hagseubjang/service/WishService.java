@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 @Service
 public class WishService {
 
-    private WishRepository wishRepository;
-    private UserRepository userRepository;
-    private LectureRepository lectureRepository;
+    private final WishRepository wishRepository;
+    private final UserRepository userRepository;
+    private final LectureRepository lectureRepository;
 
     private final HttpSession httpSession;
 
