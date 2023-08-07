@@ -1,11 +1,13 @@
 package com.likelionskhu.hagseubjang.domain.lecture;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.likelionskhu.hagseubjang.domain.review.Review;
+import com.likelionskhu.hagseubjang.domain.wish.Wish;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -42,6 +44,18 @@ public class Lecture {
     private Boolean lrnAcnutAckestYn;
     private LocalDate referenceDate;
     private String insttCode;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "lecture")
+    private List<Review> reviews;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "lecture")
+    private List<Wish> wishes;
 
     @Builder
     public Lecture(

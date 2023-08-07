@@ -1,5 +1,6 @@
 package com.likelionskhu.hagseubjang.service;
 
+import com.likelionskhu.hagseubjang.config.auth.dto.SessionUser;
 import com.likelionskhu.hagseubjang.domain.lecture.Lecture;
 import com.likelionskhu.hagseubjang.domain.lecture.LectureRepository;
 import com.likelionskhu.hagseubjang.domain.review.Review;
@@ -12,25 +13,43 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Service
 public class ReviewService {
+
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final LectureRepository lectureRepository;
+    private final HttpSession httpSession;
+
+    @Transactional
+    public Review findById(int reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 후기가 없습니다. id=" + reviewId));
+        return review;
+    }
+
+    @Transactional
+    public Review create(int lectureId) {
+        Review review = new Review();
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        User user1 = userRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email=" + user.getEmail()));
+        review.setUser(user1);
+
+        Lecture lecture = lectureRepository.findById(lectureId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. id=" + lectureId));
+        review.setLecture(lecture);
+
+        return review;
+    }
 
     @Transactional
     public void save(ReviewSaveRequestDto requestDto) {
         Review review = requestDto.toEntity();
-
-        User user = userRepository.findById(requestDto.getUserId())
-                        .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id=" + requestDto.getUserId()));
-        review.setUser(user);
-
-        Lecture lecture = lectureRepository.findById(requestDto.getLectureId())
-                        .orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. id=" + requestDto.getLectureId()));
-        review.setLecture(lecture);
-
         reviewRepository.save(review);
     }
 
