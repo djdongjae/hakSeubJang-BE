@@ -2,6 +2,7 @@ package com.likelionskhu.hagseubjang.service;
 
 import com.likelionskhu.hagseubjang.domain.lecture.Lecture;
 import com.likelionskhu.hagseubjang.domain.lecture.LectureRepository;
+import com.likelionskhu.hagseubjang.domain.review.Review;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,16 +19,31 @@ import java.io.Reader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @RequiredArgsConstructor
 @EnableScheduling
 @Service
 public class LectureService {
+
     private final LectureRepository lectureRepository;
+
+    @Transactional
+    public List<Lecture> findAll() {
+        return lectureRepository.findAll();
+    }
+
+    @Transactional
+    public Lecture findById(int id) {
+        Lecture lecture = lectureRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. id=" + id));
+
+        return lecture;
+    }
 
     // 파일 데이터 이용하여 강좌 테이블 초기화 저장
     @Transactional
-    public void save() throws Exception {
+    public void loadSave() throws Exception {
         JSONParser parser = new JSONParser();
         Reader reader = new FileReader("/Users/dongjae/Desktop/lecture.json");
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -170,4 +186,5 @@ public class LectureService {
             }
         }
     }
+
 }

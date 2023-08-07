@@ -15,20 +15,45 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/", "/css/**", "/images/**", "/js/**")
-                .permitAll()
-                .antMatchers("/list/*/review/*")
-                .hasRole(Role.USER.name())
-                .anyRequest()
-                .authenticated()
+                    .authorizeRequests()
+                    .antMatchers(
+                            "/",
+                            "/css/**",
+                            "/images/**",
+                            "/js/**",
+                            "/lecture/list",
+                            "/lecture/detail"
+                    )
+                    .permitAll()
+                    .antMatchers(
+                            "/lecture/create/wish",
+                            "/lecture/delete/wish",
+                            "/lecture/load_save",
+                            "/review/**",
+                            "/user/**"
+                    )
+                    .hasRole(Role.USER.name())
+                    .anyRequest()
+                    .authenticated()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")
+                    .formLogin()
+                    .loginPage("/user/login")
+                    .defaultSuccessUrl("/lecture/list")
+                    .permitAll()
                 .and()
-                .oauth2Login()
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService);
+                    .logout()
+                    .logoutUrl("/user/logout")
+                    .logoutSuccessUrl("/")
+                .and()
+                    .oauth2Login()
+                    .userInfoEndpoint()
+                    .userService(customOAuth2UserService)
+                    .and()
+                    .defaultSuccessUrl("/lecture/list")
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/user/login")
+        ;
     }
 
 }

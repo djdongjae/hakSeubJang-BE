@@ -1,35 +1,49 @@
 package com.likelionskhu.hagseubjang.web;
 
+import com.likelionskhu.hagseubjang.domain.review.Review;
 import com.likelionskhu.hagseubjang.service.ReviewService;
 import com.likelionskhu.hagseubjang.web.dto.ReviewSaveRequestDto;
 import com.likelionskhu.hagseubjang.web.dto.ReviewUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("")
+@RequestMapping("review")
 public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @PostMapping("")
-    public String create(@RequestBody ReviewSaveRequestDto reviewSaveRequestDto) {
-        reviewService.save(reviewSaveRequestDto);
-        return "redirect:list";
+    @GetMapping("create")
+    public String create(Model model, @RequestParam("lectureId") int lectureId) {
+        model.addAttribute("review", reviewService.create(lectureId));
+        return "edit";
     }
 
-    @PutMapping("")
-    public String update(@PathVariable int id, @RequestBody ReviewUpdateRequestDto requestDto) {
-        reviewService.update(id, requestDto);
-        return "redirect:list";
+    @PostMapping("create")
+    public String create(Model model, ReviewSaveRequestDto requestDto) {
+        reviewService.save(requestDto);
+        return "redirect:/lecture/detail?id=" + requestDto.getLecture().getId();
     }
 
-    @DeleteMapping("")
-    public String delete(@PathVariable int id) {
-        reviewService.delete(id);
-        return "redirect:list";
+    @GetMapping("edit")
+    public String edit(Model model, @RequestParam("reviewId") int reviewId) {
+        model.addAttribute("review", reviewService.findById(reviewId));
+        return "edit";
+    }
+
+    @PostMapping (value = "edit", params = "cmd=save")
+    public String edit(Model model, @RequestParam("reviewId") int reviewId, ReviewUpdateRequestDto requestDto) {
+        reviewService.update(reviewId, requestDto);
+        return "redirect:/user";
+    }
+
+    @PostMapping(value = "edit", params = "cmd=delete")
+    public String delete(Model model, @RequestParam("reviewId") int reviewId) {
+        reviewService.delete(reviewId);
+        return "redirect:/user";
     }
 
 }
