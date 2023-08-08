@@ -1,14 +1,8 @@
 package com.likelionskhu.hagseubjang.web.dto;
 
-import com.likelionskhu.hagseubjang.domain.lecture.Lecture;
-import com.likelionskhu.hagseubjang.domain.review.Review;
-import com.likelionskhu.hagseubjang.domain.review.ReviewRepository;
-import com.likelionskhu.hagseubjang.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @NoArgsConstructor
@@ -16,23 +10,24 @@ public class ReviewSaveRequestDto {
 
     private String title;
     private String content;
-    private Lecture lecture;
-    private User user;
+    private int lectureId;
+    private String userEmail;
 
     @Builder
-    public ReviewSaveRequestDto(String title, String content, Lecture lecture, User user) {
+    public ReviewSaveRequestDto(String title, String content, int lectureId, String userEmail) {
         this.title = title;
         this.content = content;
-        this.lecture = lecture;
-        this.user = user;
+        this.lectureId = lectureId;
+        this.userEmail = userEmail;
     }
 
-    public Review toEntity() {
-        return Review.builder()
-                .title(title)
-                .content(content)
-                .lecture(lecture)
-                .user(user)
-                .build();
+    @Override
+    public String toString() {
+        return "ReviewSaveRequestDto{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", lectureId=" + lectureId +
+                ", userEmail='" + userEmail + '\'' +
+                '}';
     }
 }

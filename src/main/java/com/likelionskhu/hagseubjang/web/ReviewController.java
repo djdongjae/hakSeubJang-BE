@@ -19,19 +19,19 @@ public class ReviewController {
     @GetMapping("create")
     public String create(Model model, @RequestParam("lectureId") int lectureId) {
         model.addAttribute("review", reviewService.create(lectureId));
-        return "edit";
+        return "review/edit";
     }
 
     @PostMapping("create")
-    public String create(Model model, ReviewSaveRequestDto requestDto) {
-        reviewService.save(requestDto);
-        return "redirect:/lecture/detail?id=" + requestDto.getLecture().getId();
+    public String create(Model model, Review review) {
+        reviewService.save(review);
+        return "redirect:/lecture/detail?id=" + review.getLecture().getId();
     }
 
     @GetMapping("edit")
     public String edit(Model model, @RequestParam("reviewId") int reviewId) {
         model.addAttribute("review", reviewService.findById(reviewId));
-        return "edit";
+        return "review/edit";
     }
 
     @PostMapping (value = "edit", params = "cmd=save")

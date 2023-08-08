@@ -2,11 +2,11 @@ package com.likelionskhu.hagseubjang.service;
 
 import com.likelionskhu.hagseubjang.domain.lecture.Lecture;
 import com.likelionskhu.hagseubjang.domain.lecture.LectureRepository;
-import com.likelionskhu.hagseubjang.domain.review.Review;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -19,6 +19,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,8 +30,24 @@ public class LectureService {
     private final LectureRepository lectureRepository;
 
     @Transactional
-    public List<Lecture> findAll() {
-        return lectureRepository.findAll();
+    public Page<Lecture> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+
+        List<Lecture> lectures = lectureRepository.findAll();
+        List<Lecture> list;
+
+        if (lectures.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, lectures.size());
+            list = lectures.subList(startItem, toIndex);
+        }
+
+        Page<Lecture> lecturePage = new PageImpl<Lecture>(list, PageRequest.of(currentPage, pageSize), lectures.size());
+
+        return lecturePage;
     }
 
     @Transactional

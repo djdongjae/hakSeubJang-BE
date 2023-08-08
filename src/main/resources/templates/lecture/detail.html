@@ -1,10 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/common.css">
+    <script src="/common.js"></script>
+    <style>
+        form {
+            width: 600px;
+            margin: auto;
+            box-shadow: 0 0 4px lightgray, 2px 2px 4px gray;
+            overflow: auto;
+        }
+
+        div.title {
+            font-size: 20pt;
+            padding: 10px;
+            background-color: #eee;
+        }
+
+        table {
+            margin: 20px;
+        }
+
+        td {
+            min-width: 100px;
+            padding: 5px;
+        }
+
+        td:nth-child(1) {
+            text-align: right;
+        }
+
+        div.buttons {
+            padding: 10px 20px 20px 20px;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">강좌 상세</div>
+        <div class="details">
+            <table>
+                <tr>
+                    <td>강좌명:</td>
+                    <td th:text="${lecture.getLctreNm()}"></td>
+                </tr>
+                <tr>
+                    <td>강사명:</td>
+                    <td th:text="${lecture.getInstrctrNm()}"></td>
+                </tr>
+                <tr>
+                    <td>교육시작일자:</td>
+                    <td th:text="${lecture.getEdcStartDay()}"></td>
+                </tr>
+                <tr>
+                    <td>교육종료일자:</td>
+                    <td th:text="${lecture.getEdcEndDay()}"></td>
+                </tr>
+                <tr>
+                    <td>교육시작시각:</td>
+                    <td th:text="${lecture.getEdcStartTime()}"></td>
+                </tr>
+                <tr>
+                    <td>교육종료시각:</td>
+                    <td th:text="${lecture.getEdcCloseTime()}"></td>
+                </tr>
+                <tr>
+                    <td>강좌내용:</td>
+                    <td th:text="${lecture.getLctreCo()}"></td>
+                </tr>
+                <tr>
+                    <td>교육대상구분:</td>
+                    <td th:text="${lecture.getEdcTrgetType()}"></td>
+                </tr>
+                <tr>
+                    <td>교육방법구분:</td>
+                    <td th:text="${lecture.getEdcMthType()}"></td>
+                </tr>
+                <tr>
+                    <td>운영요일:</td>
+                    <td th:text="${lecture.getOperDay()}"></td>
+                </tr>
+                <tr>
+                    <td>교육장소:</td>
+                    <td th:text="${lecture.getEdcPlace()}"></td>
+                </tr>
+                <tr>
+                    <td>강좌정원수:</td>
+                    <td th:text="${lecture.getPsncpa()}"></td>
+                </tr>
+                <tr>
+                    <td>수강료:</td>
+                    <td th:text="${lecture.getLctreCost()}"></td>
+                </tr>
+                <tr>
+                    <td>교육장도로명주소:</td>
+                    <td th:text="${lecture.getEdcRdnmadr()}"></td>
+                </tr>
+                <tr>
+                    <td>운영기관명:</td>
+                    <td th:text="${lecture.getOperInstitutionNm()}"></td>
+                </tr>
+                <tr>
+                    <td>운영기관전화번호:</td>
+                    <td th:text="${lecture.getOperPhoneNumber()}"></td>
+                </tr>
+                <tr>
+                    <td>접수시작일자:</td>
+                    <td th:text="${lecture.getRceptStartDate()}"></td>
+                </tr>
+                <tr>
+                    <td>접수종료일자:</td>
+                    <td th:text="${lecture.getRceptEndDate()}"></td>
+                </tr>
+                <tr>
+                    <td>접수방법구분:</td>
+                    <td th:text="${lecture.getRceptMthType()}"></td>
+                </tr>
+                <tr>
+                    <td>선정방법구분:</td>
+                    <td th:text="${lecture.getSlctnMthType()}"></td>
+                </tr>
+                <tr>
+                    <td>홈페이지주소:</td>
+                    <td th:text="${lecture.getHomepageUrl()}"></td>
+                </tr>
+                <tr>
+                    <td>직업능력개발훈련비지원강좌여부:</td>
+                    <td th:text="${lecture.getOadtCtLctreYn()}"></td>
+                </tr>
+                <tr>
+                    <td>학점은행제평가(학점)인정여부:</td>
+                    <td th:text="${lecture.getPntBankAckestYn()}"></td>
+                </tr>
+                <tr>
+                    <td>평생학습계좌제평가인정여부:</td>
+                    <td th:text="${lecture.getLrnAcnutAckestYn()}"></td>
+                </tr>
+                <tr>
+                    <td>데이터기준일자:</td>
+                    <td th:text="${lecture.getReferenceDate()}"></td>
+                </tr>
+                <tr>
+                    <td>제공기관코드:</td>
+                    <td th:text="${lecture.getInsttCode()}"></td>
+                </tr>
+                <tr>
+                    <td>제공기관명:</td>
+                    <td th:text="${lecture.getOperInstitutionNm()}"></td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+        <p style="text-align: center">
+            <a th:href="@{/review/create(lectureId=${lecture.getId()})}"><button>후기 작성</button></a>
+        </p>
+    </div>
 </body>
+
 </html>
