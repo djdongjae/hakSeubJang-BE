@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        div.container { width: 600px; margin: 50px auto; font-size: 10pt; }
+        form { width: 600px; margin: auto;
+            box-shadow: 0 0 4px lightgray, 2px 2px 4px gray; overflow: auto; }
+        div.title { font-size: 20pt; padding: 10px; background-color: #eee; }
+        table { margin: 20px; }
+        td { min-width: 100px; padding: 5px; }
+        td:nth-child(1) { text-align: right; }
+        input, select { padding: 5px; }
+        .btn { padding: 0.4em 1em; border: 1px solid gray;
+            border-radius: 0.5em; background: linear-gradient(#fff, #ddd);
+            text-decoration: none; color: black; display: inline-block; }
+        button { margin: 5px 0 20px 20px; }
+    </style>
 </head>
 <body>
-
+<div class="container">
+    <form th:action="@{/review/create}" th:object="${review}" method="post">
+        <div class="title">후기 <span th:if="${review.getId() > 0}">수정</span><span th:unless="${review.getId() > 0}">등록</span></div>
+        <table>
+            <tr>
+                <td>강좌명 : </td>
+                <td th:text="${review.getLecture().getLctreNm()}"></td>
+            </tr>
+            <tr>
+                <td>제목 : </td>
+                <td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
+            </tr>
+            <tr>
+                <td>내용 : </td>
+                <td><textarea name="content" placeholder="내용을 입력하세요"></textarea></td>
+            </tr>
+            <tr>
+                <td>강좌 ID : </td>
+                <td><input type="number" th:field="*{lecture.id}" th:value="${review.getLecture().getId()}"></td>
+            </tr>
+            <tr>
+                <td>작성자 : </td>
+                <td><input type="text" th:field="*{user.id}" th:value="${review.getUser().getId()}"></td>
+            </tr>
+        </table>
+        <hr />
+        <div>
+            <input type="submit" class="btn" />
+            <a th:href="@{/lecture/detail(id=${review.getLecture().getId()})}" class="btn">목록으로</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
+

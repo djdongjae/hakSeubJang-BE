@@ -48,8 +48,19 @@ public class ReviewService {
     }
 
     @Transactional
-    public void save(ReviewSaveRequestDto requestDto) {
-        Review review = requestDto.toEntity();
+    public void save(Review review) {
+
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+//        User user1 = userRepository.findByEmail(user.getEmail())
+//                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. email=" + user.getEmail()));
+//        review.setUser(user1);
+//
+//        Lecture lecture = lectureRepository.findById(review.getLecture())
+//                .orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. id=" + requestDto.getLectureId()));
+//        review.setLecture(lecture);
+//
+//        review.setTitle(requestDto.getTitle());
+//        review.setContent(requestDto.getContent());
         reviewRepository.save(review);
     }
 

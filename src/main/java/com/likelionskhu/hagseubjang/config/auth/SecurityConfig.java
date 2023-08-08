@@ -26,8 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     )
                     .permitAll()
                     .antMatchers(
-                            "/lecture/create/wish",
-                            "/lecture/delete/wish",
+                            "/lecture/wish",
                             "/lecture/load_save",
                             "/review/**",
                             "/user/**"
@@ -38,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin()
                     .loginPage("/user/login")
-                    .defaultSuccessUrl("/lecture/list")
+                    .defaultSuccessUrl("/lecture/list?")
                     .permitAll()
                 .and()
                     .logout()
