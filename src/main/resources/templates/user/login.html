@@ -1,14 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- favicon 적용 모든 html에 적용되어야 함.-->
+    <link rel="icon" th:href="@{/img/icon_regular.png}">
+
+    <!-- reset.css, common 모든 html에 적용되어야 함. -->
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+
+    <title>평생학습의 장터, 학습장</title>
 </head>
-
 <body>
-    <h1>로그인</h1>
-    <button onclick="location.href = '/oauth2/authorization/google'">구글 로그인</button>
-</body>
+<div id="root">
+    <!-- nav -->
+    <div class="nav_container">
+        <nav class="nav">
+            <a class="nav_logo" th:href="@{/}">
+                <img class="logo" th:src="@{/img/icon_word.png}">
+            </a>
+            <div class="navbar_Loginwrapper" sec:authorize="isAnonymous()">
+                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
+                <a th:href="@{/user/login}" class="nav_list">로그인</a>
+            </div>
+            <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
+                <!--                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>-->
+                <!--                <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>-->
+                <!--                <a th:href="@{/user/logout}" class="nav_list"><span th:text="${userName}"></span>님 로그아웃</a>-->
+                <a th:href="@{/user/mypage}">마이페이지</a>
+                <form th:action="@{/user/logout}" method="post">
+                    <input type="submit" th:value="로그아웃" class="nav_list">
+                </form>
+            </div>
+        </nav>
+    </div> <!-- nav_container -->
 
+    <!-- 여기서부터 코드 짜면됨. 단, content class이름 자체는 절대 건들지 말 것. -->
+    <div class="content">
+        <div class="login_container">
+            <div class="logo-img">
+                <img class="logo" th:src="@{/img/icon_regular.png}">
+            </div>
+            <h2 class="fs26fw600 fs18fw600">로그인/회원가입</h2>
+            <div class="btn_list">
+                <!-- <button class="btn_social kakao" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M14.4932 5C9.23804 5 5 8.66793 5 13.1208C5 16.0112 6.76303 18.5421 9.40757 19.9873L8.51249 23.6039C8.49562 23.6581 8.49302 23.7163 8.505 23.772C8.51697 23.8277 8.54305 23.8787 8.5803 23.9193C8.63462 23.9711 8.70452 23.9998 8.77695 24C8.837 23.9948 8.89398 23.9691 8.93968 23.9267L12.7912 21.117C13.3598 21.2019 13.9329 21.246 14.5068 21.249C19.7552 21.249 24 17.5811 24 13.1208C24 8.66059 19.7416 5 14.4932 5Z" fill="#423630"/>
+                        </svg>
+                    <span class="fs18fw600 fs16">카카오로 시작하기</span>
+                </button> -->
+                <button class="btn_social naver" type="button" onclick="location.href = '/oauth2/authorization/naver'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.60027 4.54565H8.89043V19.4543H3.60027V4.54565ZM14.7098 4.54565H20V19.4543H14.7099H14.7098V19.4542L8.89072 12V4.54565L14.7098 12.5324V4.54565Z" fill="white"/>
+                    </svg>
+                    <span class="fs18fw600 fs16">네이버로 시작하기</span>
+                </button>
+                <button class="btn_social google" type="button" onclick="location.href = '/oauth2/authorization/google'">
+                    <svg width="24" height="24" viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><path d="M23.75,16A7.7446,7.7446,0,0,1,8.7177,18.6259L4.2849,22.1721A13.244,13.244,0,0,0,29.25,16" fill="#00ac47"/><path d="M23.75,16a7.7387,7.7387,0,0,1-3.2516,6.2987l4.3824,3.5059A13.2042,13.2042,0,0,0,29.25,16" fill="#4285f4"/><path d="M8.25,16a7.698,7.698,0,0,1,.4677-2.6259L4.2849,9.8279a13.177,13.177,0,0,0,0,12.3442l4.4328-3.5462A7.698,7.698,0,0,1,8.25,16Z" fill="#ffba00"/><polygon fill="#2ab2db" points="8.718 13.374 8.718 13.374 8.718 13.374 8.718 13.374"/><path d="M16,8.25a7.699,7.699,0,0,1,4.558,1.4958l4.06-3.7893A13.2152,13.2152,0,0,0,4.2849,9.8279l4.4328,3.5462A7.756,7.756,0,0,1,16,8.25Z" fill="#ea4435"/><polygon fill="#2ab2db" points="8.718 18.626 8.718 18.626 8.718 18.626 8.718 18.626"/><path d="M29.25,15v1L27,19.5H16.5V14H28.25A1,1,0,0,1,29.25,15Z" fill="#4285f4"/></svg>
+                    <span class="fs18fw600 fs16">구글로 시작하기</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer_container">
+        <footer class="footer">
+            <div class="copyright">
+                <h2>학습장</h2>
+                <div class="copyright_content">
+                    <span>Contact</span>
+                    <span>lemonherb0323@naver.com</span>
+                </div>
+                <div class="copyright_content">
+                    <span>Copyright</span>
+                    <span>HakSeubJang. All rights reserved</span>
+                </div>
+            </div>
+            <div class="hakseubjang">
+                <a class="ft14-fw600" href="#">이용약관</a>
+                <a class="ft14-fw600" href="#">개인정보처리방침</a>
+                <a class="ft14-fw600" href="#">서비스소개</a>
+            </div>
+
+        </footer>
+    </div>
+</div>
+
+</body>
 </html>

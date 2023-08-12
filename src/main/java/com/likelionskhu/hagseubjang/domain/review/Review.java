@@ -46,4 +46,15 @@ public class Review extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", lecture=" + lecture +
+                ", user=" + user +
+                '}';
+    }
 }

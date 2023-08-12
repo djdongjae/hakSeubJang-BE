@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -19,6 +20,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,12 +32,78 @@ public class LectureService {
     private final LectureRepository lectureRepository;
 
     @Transactional
-    public Page<Lecture> findPaginated(Pageable pageable) {
+    public Page<Lecture> findPaginatedInFilter(
+            Pageable pageable,
+            String region,
+            String edcMthType,
+            String edcTrgetType
+    ) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
 
-        List<Lecture> lectures = lectureRepository.findAll();
+        List<Lecture> lectures =
+                lectureRepository.findByEdcRdnmadrLikeOrderByRceptEndDate("%" + region + "%");
+
+        List<Lecture> result1;
+
+        if (edcMthType.equals("")) {
+            result1 = lectures;
+        } else if (edcMthType.equals("온라인")) {
+            result1 = lectures.stream()
+                    .filter(l -> l.getEdcMthType().equals("온라인")).toList();
+        } else {
+            result1 = lectures.stream()
+                    .dropWhile(l -> l.getEdcMthType().equals("온라인")).toList();
+        }
+        
+        List<Lecture> result2 = null;
+        
+        if (edcTrgetType.equals("")) {
+            result2 = result1;
+        } else if (edcTrgetType.equals("성인")) {
+            result2 = result1.stream()
+                    .filter(l -> l.getEdcTrgetType().equals("성인")).toList();
+        } else if (edcTrgetType.equals("시니어")) {
+            result2 = result1.stream()
+                    .filter(l -> l.getEdcTrgetType().equals("시니어")).toList();
+        } else if (edcTrgetType.equals("어린이")) {
+            result2 = result1.stream()
+                    .filter(l -> {
+                        return l.getEdcTrgetType().startsWith("초") || l.getEdcTrgetType().equals("어린이");
+                    }).toList();
+        } else if (edcTrgetType.equals("장애인")) {
+            result2 = result1.stream()
+                    .filter(l -> l.getEdcTrgetType().equals("장애인")).toList();
+        }
+
+        List<Lecture> list;
+
+        if (result2.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, result2.size());
+            list = result2.subList(startItem, toIndex);
+        }
+
+        Page<Lecture> lecturePage = new PageImpl<Lecture>(list, PageRequest.of(currentPage, pageSize), result2.size());
+
+        return lecturePage;
+    }
+
+    @Transactional
+    public Page<Lecture> findPaginatedInSearch(
+            Pageable pageable,
+            String srchText
+    ) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+
+        List<Lecture> lectures =
+                lectureRepository.findByLctreNmLikeOrderByRceptEndDate("%" + srchText + "%");
+
+
         List<Lecture> list;
 
         if (lectures.size() < startItem) {
@@ -50,6 +118,7 @@ public class LectureService {
         return lecturePage;
     }
 
+
     @Transactional
     public Lecture findById(int id) {
         Lecture lecture = lectureRepository.findById(id)
@@ -62,7 +131,7 @@ public class LectureService {
     @Transactional
     public void loadSave() throws Exception {
         JSONParser parser = new JSONParser();
-        Reader reader = new FileReader("/Users/dongjae/Desktop/lecture.json");
+        Reader reader = new FileReader("/Users/dongjae/Desktop/hagseubjang/lecture.json");
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
         JSONArray records = (JSONArray) jsonObject.get("records");
 
@@ -72,20 +141,20 @@ public class LectureService {
             String edcStartDay1 = ((String) tmp.get("교육시작일자")).length() == 0 ? "1000-01-01" : (String) tmp.get("교육시작일자");
             LocalDate edcStartDay2 = LocalDate.parse(edcStartDay1, DateTimeFormatter.ISO_DATE);
 
-            String edcEndDay1 = ((String) tmp.get("교육종료일자")).length() == 0 ? "1000-01-01" : (String) tmp.get("교육종료일자");
+            String edcEndDay1 = ((String) tmp.get("교육종료일자")).length() == 0 ? "9999-12-31" : (String) tmp.get("교육종료일자");
             LocalDate edcEndDay2 = LocalDate.parse(edcEndDay1, DateTimeFormatter.ISO_DATE);
 
             String rceptStartDate1 = ((String) tmp.get("접수시작일자")).length() == 0 ? "1000-01-01" : (String) tmp.get("접수시작일자");
             LocalDate rceptStartDate2 = LocalDate.parse(rceptStartDate1, DateTimeFormatter.ISO_DATE);
 
-            String rceptEndDate1 = ((String) tmp.get("접수종료일자")).length() == 0 ? "1000-01-01" : (String) tmp.get("접수종료일자");
+            String rceptEndDate1 = ((String) tmp.get("접수종료일자")).length() == 0 ? "9999-12-31" : (String) tmp.get("접수종료일자");
             LocalDate rceptEndDate2 = LocalDate.parse(rceptEndDate1, DateTimeFormatter.ISO_DATE);
 
             String referenceDate1 = ((String) tmp.get("데이터기준일자")).length() == 0 ? "1000-01-01" : (String) tmp.get("데이터기준일자");
             LocalDate referenceDate2 = LocalDate.parse(referenceDate1, DateTimeFormatter.ISO_DATE);
 
             if (
-                    edcEndDay2.isAfter(LocalDate.of(2023, 1, 1))
+                    rceptEndDate2.isAfter(LocalDate.now())
                             && referenceDate2.isAfter(LocalDate.of(2022, 6, 6))
             ) {
                 Lecture lecture = Lecture.builder()
@@ -123,7 +192,7 @@ public class LectureService {
     }
 
     // OpenAPI를 이용하여 매일 11시 55분에 새로운 강좌 추가
-    @Scheduled(cron = "0 55 23 * * *")
+    @Scheduled(cron = "0 42 03 * * *")
     @Transactional
     public void update() throws Exception {
 
@@ -158,13 +227,13 @@ public class LectureService {
                 String edcStartDay1 = ((String) tmp.get("edcStartDay")).length() == 0 ? "1000-01-01" : (String) tmp.get("edcStartDay");
                 LocalDate edcStartDay2 = LocalDate.parse(edcStartDay1, DateTimeFormatter.ISO_DATE);
 
-                String edcEndDay1 = ((String) tmp.get("edcEndDay")).length() == 0 ? "1000-01-01" : (String) tmp.get("edcEndDay");
+                String edcEndDay1 = ((String) tmp.get("edcEndDay")).length() == 0 ? "9999-12-31" : (String) tmp.get("edcEndDay");
                 LocalDate edcEndDay2 = LocalDate.parse(edcEndDay1, DateTimeFormatter.ISO_DATE);
 
                 String rceptStartDate1 = ((String) tmp.get("rceptStartDate")).length() == 0 ? "1000-01-01" : (String) tmp.get("rceptStartDate");
                 LocalDate rceptStartDate2 = LocalDate.parse(rceptStartDate1, DateTimeFormatter.ISO_DATE);
 
-                String rceptEndDate1 = ((String) tmp.get("rceptEndDate")).length() == 0 ? "1000-01-01" : (String) tmp.get("rceptEndDate");
+                String rceptEndDate1 = ((String) tmp.get("rceptEndDate")).length() == 0 ? "9999-12-31" : (String) tmp.get("rceptEndDate");
                 LocalDate rceptEndDate2 = LocalDate.parse(rceptEndDate1, DateTimeFormatter.ISO_DATE);
 
                 String referenceDate1 = ((String) tmp.get("referenceDate")).length() == 0 ? "1000-01-01" : (String) tmp.get("referenceDate");
@@ -201,6 +270,11 @@ public class LectureService {
 
                 lectureRepository.save(lecture);
             }
+        }
+
+        List<Lecture> lectures = lectureRepository.findAll();
+        for (Lecture lecture : lectures) {
+            lecture.setRemainDay(LocalDate.now().until(lecture.getRceptEndDate(), ChronoUnit.DAYS));
         }
     }
 

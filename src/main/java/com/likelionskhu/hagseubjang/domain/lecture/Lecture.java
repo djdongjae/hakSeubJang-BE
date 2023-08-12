@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Lecture {
@@ -44,6 +45,7 @@ public class Lecture {
     private Boolean lrnAcnutAckestYn;
     private LocalDate referenceDate;
     private String insttCode;
+    private Long remainDay;
 
     @JsonIgnore
     @ToString.Exclude

@@ -4,8 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/common.css">
-    <script src="/common.js"></script>
+    <link rel="stylesheet" href="/common2.css">
+    <script src="/common2.js"></script>
     <style>
         form {
             width: 600px;
@@ -162,8 +162,29 @@
             </table>
         </div>
         <hr />
+        <div th:each="review : ${lecture.reviews}">
+            <table>
+                <tr>
+                    <td>제목: </td>
+                    <td th:text="${review.title}"></td>
+                </tr>
+                <tr>
+                    <td>내용: </td>
+                    <td th:text="${review.content}"></td>
+                </tr>
+                <tr>
+                    <td>작성일: </td>
+                    <td th:text="${review.createdDate}"></td>
+                </tr>
+                <tr>
+                    <td>작성자: </td>
+                    <td th:text="${review.user.name}"></td>
+                </tr>
+            </table>
+            <hr/>
+        </div>
         <p style="text-align: center">
-            <a th:href="@{/review/create(lectureId=${lecture.getId()})}"><button>후기 작성</button></a>
+            <a th:href="@{/review/create(lectureId=${lecture.getId()}, lctreNm=${lecture.getLctreNm()})}"><button>후기 작성</button></a>
         </p>
     </div>
 </body>
