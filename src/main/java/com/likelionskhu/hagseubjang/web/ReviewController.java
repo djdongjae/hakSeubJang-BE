@@ -17,33 +17,39 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping("create")
-    public String create(Model model, @RequestParam("lectureId") int lectureId) {
-        model.addAttribute("review", reviewService.create(lectureId));
-        return "review/edit";
+    public String create(Model model, @RequestParam("lectureId") int lectureId, @RequestParam("lctreNm") String lctreNm) {
+        model.addAttribute("requestDto", reviewService.create(lectureId));
+        model.addAttribute("lctreNm", lctreNm);
+        return "review/create";
     }
 
     @PostMapping("create")
-    public String create(Model model, Review review) {
-        reviewService.save(review);
-        return "redirect:/lecture/detail?id=" + review.getLecture().getId();
+    public String create(Model model, ReviewSaveRequestDto requestDto) {
+        reviewService.save(requestDto);
+        return "redirect:/lecture/detail?id=" + requestDto.getLectureId();
     }
 
     @GetMapping("edit")
     public String edit(Model model, @RequestParam("reviewId") int reviewId) {
-        model.addAttribute("review", reviewService.findById(reviewId));
+        Review review = reviewService.findById(reviewId);
+        ReviewUpdateRequestDto requestDto = new ReviewUpdateRequestDto(review.getTitle(), review.getContent());
+        model.addAttribute("lctreNm", review.getLecture().getLctreNm());
+        model.addAttribute("lectureId", review.getLecture().getId());
+        model.addAttribute("requestDto", requestDto);
+        model.addAttribute("reviewId", review.getId());
         return "review/edit";
     }
 
     @PostMapping (value = "edit", params = "cmd=save")
     public String edit(Model model, @RequestParam("reviewId") int reviewId, ReviewUpdateRequestDto requestDto) {
         reviewService.update(reviewId, requestDto);
-        return "redirect:/user";
+        return "redirect:/user/mypage";
     }
 
     @PostMapping(value = "edit", params = "cmd=delete")
     public String delete(Model model, @RequestParam("reviewId") int reviewId) {
         reviewService.delete(reviewId);
-        return "redirect:/user";
+        return "redirect:/user/mypage";
     }
 
 }

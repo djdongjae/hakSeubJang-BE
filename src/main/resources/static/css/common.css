@@ -1,0 +1,130 @@
+/* 공통적으로 적용되는 css 예를 들면 header, footer 등의 스타일을 모두 저장하는 css이다. common.css는 절대 건들지 말 것 */
+
+/* header */
+.nav_container {
+    border-bottom: 1px solid var(--gray-line);
+    background: #fff;
+    box-sizing: border-box;
+    height: 96px;
+}
+
+.nav {
+    max-width: var(--primary-width);
+    display: flex;
+    height: 96px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.nav_logo {
+    width: 150px;
+    height: 60px;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+}
+
+.navbar_Loginwrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.nav_list {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 10px;
+}
+
+/* footer */
+.footer_container {
+    border-top: 1px solid var(--gray-line);
+    background: #fff;
+    height: 180px;
+}
+
+.footer {
+    max-width: var(--primary-width);
+    padding: 40px 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.copyright h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.copyright_content {
+    color: #777;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+}
+
+.hakseubjang {
+    display: flex;
+    gap: 40px;
+    padding: 60px 0;
+}
+
+.ft14-fw600 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* 미디어 쿼리 */
+
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/ 
+@media all and (min-width:768px) and (max-width:1023px) {
+    .nav {
+        padding: 0 30px;
+    }
+    .footer {
+        padding: 40px 30px;
+    }
+} 
+
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/ 
+@media all and (max-width:767px) {
+    .nav_container {
+        height: 60px;
+    }
+    .nav {
+        height: 60px;
+        padding: 5px;
+    }
+    .nav_logo {
+        width: 100px;
+        height: 40px;
+    }
+
+    .footer {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .hakseubjang {
+        padding: 10px 0;
+        gap: 10px;
+    }
+    .copyright {
+        gap: 6px;
+    }
+    .copyright h2 {
+        font-size: 16px;
+    }
+    .copyright_content {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,81 @@
+.login_container {
+    display: flex;
+    flex-direction: column;
+    width: 390px;
+    margin: 50px auto;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.btn_list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.logo-img {
+    width: 150px;
+}
+
+
+
+.btn_social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 390px;
+    height: 58px;
+    border-radius: 8px;
+    gap: 16px;
+}
+
+.kakao {
+    background: #FAE64D;
+}
+
+.naver {
+    background: #01C73C;
+}
+
+.fs18fw600 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* 미디어 쿼리 */
+
+@media all and (min-width:1024px) {
+    .fs26fw600 {
+        font-size: 26px;
+        font-weight: 600;
+    }
+} 
+
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/ 
+@media all and (min-width:768px) and (max-width:1023px) {
+    .fs26fw600 {
+        font-size: 26px;
+        font-weight: 600;
+    }
+} 
+
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/ 
+@media all and (min-width: 488px) and (max-width:767px) {
+
+}
+
+@media all and (max-width: 425px){
+    .btn_social {
+        width: 240px;
+        height: 58px;
+    }
+    
+    .fs16 {
+        font-size: 16px;
+    }
+    .login_container {
+        width: 290px;
+    }
+}

@@ -1,0 +1,175 @@
+@charset "utf-8";
+
+
+:root {
+    /* 대표색 컬러 */
+    --primary-color: #779C3C;
+    --sub-color: #51672D;
+
+    /* 회색컬러 */
+    --gray-line: #d9d9d9;
+    --gray-box: #8b8b8b;
+
+    /* 박스 그림자(opacity 20%) */
+    --box-shadow: #8A959E;
+    
+    
+    /* 기본 너비 */
+    --primary-width: 996px;
+    --mypage-width: 800px;
+}
+
+/* 
+root는 다음과 같은 방식으로 사용한다
+
+.class {
+    color: var(--primary-color);
+    background: var(--sub-color);   
+}
+
+*/
+
+/* ======================================================================== */
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+body {
+    font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif !important;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, 
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+img{
+    vertical-align: middle;
+    border: none;
+}
+
+table{
+    /* 표의 구조 변형되지 않도록 */
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+button, 
+input{
+    border: none;
+}
+
+button[type=submit], 
+input[type=submit],
+button[type=button], 
+input[type=button] {
+    cursor: pointer;
+}
+
+fieldset{
+    border: none;
+}
+
+legend, 
+caption{
+    display: none;
+}
+
+article, 
+aside, 
+details, 
+figcaption, 
+figure, 
+footer, 
+header, 
+hgroup, 
+menu, 
+nav, 
+section{
+    display: block;
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+pre, 
+textarea{
+    font-size: 100%;
+}
+
+address, 
+em{
+    font-style: normal;
+}
+
+strong, 
+th{
+    font-weight: normal;
+}
+
+/* float 때문에 무너진 부모요소 살릴 때 */
+.cf:before, 
+.cf:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 말줄임표 표시 */
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 본문 바로가기 스타일 */
+.skip > a{ 
+    display:block;
+    background:#000; 
+    color:#fff;
+    text-align:center; 
+    width: 1px;  
+    height: 1px;
+    overflow:hidden; 
+    position:absolute; 
+    top:-100px 
+}
+.skip a:focus{ 
+    width: 100%;  
+    height:auto;
+    padding:10px 0px; 
+    position:fixed;
+    top:0px; 
+    z-index:9999999; 
+}
+
+.row{
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 15px;
+}
+
+/* IR 효과 */  
+.blind{
+    position:absolute;
+    overflow:hidden;
+    width:1px;
+    height:1px;
+    margin:-1px;
+    clip:rect(0,0,0,0);
+}
+
