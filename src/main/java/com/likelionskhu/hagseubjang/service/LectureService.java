@@ -156,6 +156,7 @@ public class LectureService {
             if (
                     rceptEndDate2.isAfter(LocalDate.now())
                             && referenceDate2.isAfter(LocalDate.of(2022, 6, 6))
+                    && edcEndDay2.isAfter(LocalDate.now())
             ) {
                 Lecture lecture = Lecture.builder()
                         .lctreNm((String) tmp.get("강좌명"))
