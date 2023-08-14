@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
             <a class="nav_logo" th:href="@{/}">
                 <img class="logo" th:src="@{/img/icon_word.png}">
             </a>
-            <div class="navbar_Loginwrapper" sec:authorize="isAnonymous()">
+            <div class="navbar_Loginwrapper" sec:authorize="!isAuthenticated()">
                 <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
                 <a th:href="@{/user/login}" class="nav_list">로그인</a>
             </div>
@@ -31,6 +31,7 @@
 <!--                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>-->
 <!--                <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>-->
 <!--                <a th:href="@{/user/logout}" class="nav_list"><span th:text="${userName}"></span>님 로그아웃</a>-->
+                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
                 <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>
                 <span th:text="${userName}"></span>
                 <form th:action="@{/user/logout}" method="post">

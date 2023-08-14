@@ -185,6 +185,7 @@ public class LectureService {
                         .lrnAcnutAckestYn(tmp.get("평생학습계좌제평가인정여부").equals("Y"))
                         .referenceDate(referenceDate2)
                         .insttCode((String) tmp.get("제공기관코드"))
+                        .remainDay(LocalDate.now().until(rceptEndDate2, ChronoUnit.DAYS))
                         .build();
 
                 lectureRepository.save(lecture);
@@ -267,6 +268,7 @@ public class LectureService {
                         .lrnAcnutAckestYn(tmp.get("lrnAcnutAckestYn").equals("Y"))
                         .referenceDate(referenceDate2)
                         .insttCode((String) tmp.get("insttCode"))
+                        .remainDay(LocalDate.now().until(rceptEndDate2, ChronoUnit.DAYS))
                         .build();
 
                 lectureRepository.save(lecture);

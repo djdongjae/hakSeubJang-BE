@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/common2.css}">
+    <script th:src="@{/common2.js}"></script>
+    <title>My Page</title>
+</head>
+<body>
+    <div>
+        <h1>프로필</h1>
+        <table>
+            <tr>
+                <td>이름 : </td>
+                <td th:text="${user.getName()}"></td>
+            </tr>
+            <tr>
+                <td>이메일 : </td>
+                <td th:text="${user.getEmail()}"></td>
+            </tr>
+            <tr>
+                <td>프로필 사진 : </td>
+                <td><img th:src="${user.getPicture()}"></td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h1>작성한 후기</h1>
+        <div th:each="review : ${reviews}">
+            <table>
+                <tr>
+                    <td>제목: </td>
+                    <td th:text="${review.title}"></td>
+                </tr>
+                <tr>
+                    <td>내용: </td>
+                    <td th:text="${review.content}"></td>
+                </tr>
+                <tr>
+                    <td>작성일: </td>
+                    <td th:text="${review.createdDate}"></td>
+                </tr>
+                <tr>
+                    <td>작성자: </td>
+                    <td th:text="${review.user.name}"></td>
+                </tr>
+                <tr>
+                    <td>수정하기: </td>
+                    <td><a th:href="@{/review/edit(reviewId=${review.getId()})}"><button>수정</button></a></td>
+                </tr>
+            </table>
+            <hr/>
+        </div>
+    </div>
+    <div>
+        <h1>찜한 강좌</h1>
+        <table class="table table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th>강좌명</th>
+                <th>강사명</th>
+                <th>접수시작일자</th>
+                <th>접수종료일자</th>
+                <th>교육대상</th>
+                <th>운영요일</th>
+                <th>교육장소</th>
+                <th>수강료</th>
+                <th>D-DAY</th>
+                <th>찜하기</th>
+                <th>상세정보</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each=" wish : ${wishes}" th:href="@{/lecture/detail(id=${wish.lecture.id})}">
+                <td th:text="${wish.lecture.getLctreNm()}"></td>
+                <td th:text="${wish.lecture.getInstrctrNm()}"></td>
+                <td th:text="${wish.lecture.getRceptStartDate()}"></td>
+                <td th:text="${wish.lecture.getRceptEndDate()}"></td>
+                <td th:text="${wish.lecture.getEdcTrgetType()}"></td>
+                <td th:text="${wish.lecture.getOperDay()}"></td>
+                <td th:text="${wish.lecture.getEdcRdnmadr()}"></td>
+                <td th:text="${wish.lecture.getLctreCost()}"></td>
+                <td th:text="${wish.lecture.getRemainDay()}"></td>
+                <td>
+                    <a th:href="@{delete/wish(wishId=${wish.getId()})}">삭제</a>
+                </td>
+                <td>
+                    <a th:href="@{/lecture/detail(id=${wish.lecture.id})}">상세</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

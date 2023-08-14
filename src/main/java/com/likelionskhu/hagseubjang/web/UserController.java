@@ -35,7 +35,7 @@ public class UserController {
             wish.getLecture().setRemainDay(LocalDate.now().until(wish.getLecture().getRceptEndDate(), ChronoUnit.DAYS));
         }
         model.addAttribute("wishes", userService.findWishes());
-        return "user/mypage";
+        return "pre_mypage";
     }
 
     @GetMapping("login")

@@ -2,6 +2,7 @@ package com.likelionskhu.hagseubjang.web;
 
 import com.likelionskhu.hagseubjang.config.auth.dto.SessionUser;
 import com.likelionskhu.hagseubjang.domain.lecture.Lecture;
+import com.likelionskhu.hagseubjang.domain.wish.Wish;
 import com.likelionskhu.hagseubjang.service.LectureService;
 import com.likelionskhu.hagseubjang.service.WishService;
 import lombok.RequiredArgsConstructor;
@@ -60,7 +61,7 @@ public class LectureController {
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("lecturePage", lecturePage);
+
 
         int totalPages = lecturePage.getTotalPages();
         if (totalPages > 0) {
@@ -74,6 +75,18 @@ public class LectureController {
         if (user != null) {
             model.addAttribute("user", user);
         }
+
+        for (Lecture lecture : lecturePage) {
+            lecture.setInWish(false);
+            for (Wish wish : lecture.getWishes()) {
+                if (wish.getUser().getEmail().equals(user.getEmail())) {
+                    lecture.setInWish(true);
+                }
+            }
+        }
+
+        model.addAttribute("lecturePage", lecturePage);
+
         return "lecture/list";
     }
 
