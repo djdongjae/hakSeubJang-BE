@@ -47,7 +47,7 @@
         <!-- 검색창 -->
         <form class="search" th:action="@{/lecture/list2}">
             <div class="search_bar">
-                <input type="text" name="srchText" placeholder="검색조건">
+                <input type="text" name="srchText" th:value="${session.srchText}" placeholder="검색조건">
                 <button type="submit">검색</button>
             </div>
         </form>
@@ -56,29 +56,30 @@
         <form class="lecture_filter" th:action="@{/lecture/list}">
             <h2 class="lecture_list_title">강의 리스트</h2>
             <div class="filter_block">
+
                 <div class="filter_and_schButton">
-                    <!-- 지역선택 필터 -->
+
                     <div class="filter_block_area">
                         <p class="area_title">지역 선택</p>
                         <select name="region" class="area_select">
-                            <option value="" th:text="전체" th:selected="${session.region} == ''"></option>
-                            <option value="서울" th:text="서울" th:selected="${session.region} == '서울'"></option>
-                            <option value="부산" th:text="부산" th:selected="${session.region} == '부산'"></option>
-                            <option value="대구" th:text="대구" th:selected="${session.region} == '대구'"></option>
-                            <option value="인천" th:text="인천" th:selected="${session.region} == '인천'"></option>
-                            <option value="광주" th:text="광주" th:selected="${session.region} == '광주'"></option>
-                            <option value="대전" th:text="대전" th:selected="${session.region} == '대전'"></option>
-                            <option value="울산" th:text="울산" th:selected="${session.region} == '울산'"></option>
-                            <option value="세종" th:text="세종" th:selected="${session.region} == '세종'"></option>
-                            <option value="경기" th:text="경기" th:selected="${session.region} == '경기'"></option>
-                            <option value="강원" th:text="강원" th:selected="${session.region} == '강원'"></option>
-                            <option value="충북" th:text="충북" th:selected="${session.region} == '충북'"></option>
-                            <option value="충남" th:text="충남" th:selected="${session.region} == '충남'"></option>
-                            <option value="전북" th:text="전북" th:selected="${session.region} == '전북'"></option>
-                            <option value="전남" th:text="전남" th:selected="${session.region} == '전남'"></option>
-                            <option value="경북" th:text="경북" th:selected="${session.region} == '경북'"></option>
-                            <option value="경남" th:text="경남" th:selected="${session.region} == '경남'"></option>
-                            <option value="제주" th:text="제주" th:selected="${session.region} == '제주'"></option>
+                            <option value="" th:text="전체" selected></option>
+                            <option value="서울" th:text="서울"></option>
+                            <option value="부산" th:text="부산"></option>
+                            <option value="대구" th:text="대구"></option>
+                            <option value="인천" th:text="인천"></option>
+                            <option value="광주" th:text="광주"></option>
+                            <option value="대전" th:text="대전"></option>
+                            <option value="울산" th:text="울산"></option>
+                            <option value="세종" th:text="세종"></option>
+                            <option value="경기" th:text="경기"></option>
+                            <option value="강원" th:text="강원"></option>
+                            <option value="충북" th:text="충북"></option>
+                            <option value="충남" th:text="충남"></option>
+                            <option value="전북" th:text="전북"></option>
+                            <option value="전남" th:text="전남"></option>
+                            <option value="경북" th:text="경북"></option>
+                            <option value="경남" th:text="경남"></option>
+                            <option value="제주" th:text="제주"></option>
                         </select>
                     </div>
 
@@ -92,12 +93,9 @@
                             <p class="onoff_title_p">온/오프라인</p>
                         </div>
                         <div class="button_filter">
-                            <input type="radio" class="onoff" th:name="edcMthType" value=""
-                                   th:checked="${session.edcMthType} == ''">전체</input>
-                            <input type="radio" class="onoff" th:name="edcMthType" value="오프라인"
-                                   th:checked="${session.edcMthType} == '오프라인'">오프라인</input>
-                            <input type="radio" class="onoff" th:name="edcMthType" value="온라인"
-                                   th:checked="${session.edcMthType} == '온라인'">온라인</input>
+                            <input type="radio" class="onoff" th:name="edcMthType" value="" checked>전체</input>
+                            <input type="radio" class="onoff" th:name="edcMthType" value="오프라인">오프라인</input>
+                            <input type="radio" class="onoff" th:name="edcMthType" value="온라인">온라인</input>
                         </div>
                     </div>
 
@@ -105,14 +103,10 @@
                     <div class="filter_block_anyone">
                         <p class="anyone_p">모집대상</p>
                         <div class="button_filter">
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value=""
-                                   th:checked="${session.edcTrgetType} == ''">전체</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="성인"
-                                   th:checked="${session.edcTrgetType} == '성인'">성인</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="어린이"
-                                   th:checked="${session.edcTrgetType} == '어린이'">어린이</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="장애인"
-                                   th:checked="${session.edcTrgetType} == '장애인'">장애인</input>
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="" checked>전체</input>
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="성인">성인</input>
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="어린이">어린이</input>
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="장애인">장애인</input>
                         </div>
                     </div>
                 </div>
@@ -181,28 +175,27 @@
             <ul class="pagination model"
                 th:with="start=${(lecturePage.number/10)*10 + 1}, end=(${(lecturePage.totalPages == 0) ? 1 : (start + (10 - 1) < lecturePage.totalPages ? start + (10 - 1) : lecturePage.totalPages)})">
                 <li th:if="${start > 1}">
-                    <a th:href="@{/lecture/list(page=1, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                       class="first" th:text="'처음 페이지'"></a>
+                    <a th:href="@{/lecture/list2(page=1, size=9, srchText=${session.srchText})}" class="first"
+                       th:text="'처음 페이지'"></a>
                 </li>
 
                 <li th:if="${start > 1}">
-                    <a th:href="@{/lecture/list(page=${start - 10}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
+                    <a th:href="@{/lecture/list2(page=${start - 10}, size=9, srchText=${session.srchText})}"
                        class="arrow left" th:text="'<'"></a>
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(start, end)}">
-                    <a th:text="${page}"
-                       th:href="@{/lecture/list(page=${page}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
+                    <a th:text="${page}" th:href="@{/lecture/list2(page=${page}, size=9, srchText=${session.srchText})}"
                        class="num"></a>
                 </li>
 
                 <li th:if="${end < lecturePage.totalPages}">
-                    <a th:href="@{/lecture/list(page=${start + 10}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
+                    <a th:href="@{/lecture/list2(page=${start + 10}, size=9, srchText=${session.srchText})}"
                        class="arrow right" th:text="'>'"></a>
                 </li>
 
                 <li th:if="${end < lecturePage.totalPages}">
-                    <a th:href="@{/lecture/list(page=${lecturePage.totalPages}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
+                    <a th:href="@{/lecture/list2(page=${lecturePage.totalPages}, size=9, srchText=${session.srchText})}"
                        th:text="'끝 페이지'" class="last"></a>
                 </li>
             </ul>

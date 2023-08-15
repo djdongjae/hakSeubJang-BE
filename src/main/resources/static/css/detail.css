@@ -1,0 +1,267 @@
+.section_summerize {
+    width: var(--mypage-width);
+    margin: 0 auto;
+}
+.container_summerize {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 40px 0;
+    width: 100%;
+    height: 200px;
+    border-radius: 16px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    box-shadow: 0px 10px 30px 0px rgba(138, 149, 158, 0.20);
+}
+
+.fs24fw600 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.container_summerize h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.container_summerize span {
+    color: #939393;
+    font-size: 16px;
+    font-weight: 350;
+}
+
+.btnWrap_summerize {
+    display: flex;
+    gap: 10px;
+}
+
+.btn_summerize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 170px;
+    height: 40px;
+    border-radius: 8px;
+    background: #779C3C;
+    color: #fff;
+}
+
+.whiteBg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #D9D9D9;
+    background: #fff;
+    color: #000;
+}
+
+.fs16fw500 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.container_toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    height: 80px;
+}
+
+.wrap_toggle_item > input[type = radio] {
+    display: none;
+}
+.wrap_toggle_item > label {
+    cursor: pointer;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--gray-line);
+}
+
+.wrap_toggle_item > input[type = radio]:checked ~ label{
+    color: #000;
+    padding: 5px;
+    border-bottom: 5px solid #000;
+}
+
+.section_introduce, .section_review{
+    max-width: var(--mypage-width);
+    margin: 0 auto;
+}
+
+.article_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 60px 0;
+}
+
+.art_headline {
+    font-size: 24px;
+    font-weight: 500;
+
+}
+
+.fs16fw400 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.premier {
+    color: #777;
+    font-size: 12px;
+    font-weight: 350;
+}
+
+.container_timetable {
+    display: flex;
+    gap: 20px;
+}
+
+.box-timetable {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    width: 390px;
+    height: 200px;
+    border-radius: 16px;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    box-shadow: 0px 10px 20px 0px rgba(138, 149, 158, 0.20);
+}
+.column-time {
+    display: flex;
+    gap: 16px;
+}
+.lbl_time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 24px;
+    border-radius: 4px;
+    background: rgba(119, 156, 60, 0.20);
+
+}
+
+.lbl_time span {
+    font-size: 12px;
+    text-align: center;
+    color: var(--sub-color);
+}
+
+.lbl_timeValue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lbl_timeValue span {
+    font-size: 16 px;
+    font-weight: 400;
+}
+
+.wrap_remark {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px;
+    border-radius: 16px;
+    background: #FCFCFC;
+    box-shadow: 0px 10px 20px 0px rgba(138, 149, 158, 0.20);
+}
+
+.wrap_headline_review {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.anchor_review {
+    text-decoration: underline;
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#sec_review {
+    display: none;
+}
+
+.conatiner_review_list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+}
+
+.inner_review {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--gray-line);
+    background: #FFF;
+    box-shadow: 0px 10px 30px 0px rgba(138, 149, 158, 0.20);
+}
+
+.fs20fw500 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.fs12fw500 {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.writer_information {
+    display: flex;
+    gap: 18px;
+}
+
+.wrap_writer_profile {
+    display: flex;
+    gap: 8px;
+}
+
+.writer_profile {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: var(--gray-line);
+    border-radius: 99%;
+    overflow: hidden;
+}
+
+.writer_img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.grayfs12fw500{
+    color: var(--gray-box);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.map_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

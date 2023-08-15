@@ -29,7 +29,7 @@ public class LectureController {
     private final WishService wishService;
     private final HttpSession httpSession;
 
-    @GetMapping ("list")
+    @GetMapping("list")
     public String list(
             Model model,
             @RequestParam("page") Optional<Integer> page,
@@ -52,7 +52,7 @@ public class LectureController {
 //        model.addAttribute("regionOnView", regionOnView);
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(10);
+        int pageSize = size.orElse(9);
 
         Page<Lecture> lecturePage = lectureService.findPaginatedInFilter(
                 PageRequest.of(currentPage - 1, pageSize),
@@ -74,13 +74,12 @@ public class LectureController {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("user", user);
-        }
-
-        for (Lecture lecture : lecturePage) {
-            lecture.setInWish(false);
-            for (Wish wish : lecture.getWishes()) {
-                if (wish.getUser().getEmail().equals(user.getEmail())) {
-                    lecture.setInWish(true);
+            for (Lecture lecture : lecturePage) {
+                lecture.setInWish(false);
+                for (Wish wish : lecture.getWishes()) {
+                    if (wish.getUser().getEmail().equals(user.getEmail())) {
+                        lecture.setInWish(true);
+                    }
                 }
             }
         }
@@ -90,7 +89,7 @@ public class LectureController {
         return "lecture/list";
     }
 
-    @GetMapping ("list2")
+    @GetMapping("list2")
     public String list2(
             Model model,
             @RequestParam("page") Optional<Integer> page,
@@ -104,7 +103,7 @@ public class LectureController {
         session.setAttribute("srchText", srchText);
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(10);
+        int pageSize = size.orElse(9);
 
         Page<Lecture> lecturePage = lectureService.findPaginatedInSearch(
                 PageRequest.of(currentPage - 1, pageSize),
@@ -132,7 +131,18 @@ public class LectureController {
 
     @GetMapping("detail")
     public String detail(Model model, int id) {
-        model.addAttribute("lecture", lectureService.findById(id));
+        Lecture lecture = lectureService.findById(id);
+        model.addAttribute("lecture", lecture);
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+            lecture.setInWish(false);
+            for (Wish wish : lecture.getWishes()) {
+                if (wish.getUser().getEmail().equals(user.getEmail())) {
+                    lecture.setInWish(true);
+                }
+            }
+        }
         return "lecture/detail";
     }
 
@@ -189,17 +199,27 @@ public class LectureController {
         return result;
     }
 
+    @GetMapping("wish3")
+    public String wish3(
+            Model model,
+            @RequestParam("lectureId") int lectureId
+    ) {
+        wishService.saveOrDelete(lectureId);
+
+        return "redirect:/lecture/detail?id=" + lectureId;
+    }
+
     @RequestMapping("load_save")
     public String loadSave(Model model) throws Exception {
         lectureService.loadSave();
         return "download_success";
     }
 
-    public static String toURLEncodeUtf8(String str){
+    public static String toURLEncodeUtf8(String str) {
         if (str == null || str.trim().equals("")) return "";
         try {
             return URLEncoder.encode(str, "UTF-8");
-        } catch(UnsupportedEncodingException ex){
+        } catch (UnsupportedEncodingException ex) {
             return null;
         }
     }
