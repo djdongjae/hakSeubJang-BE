@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- iOS는 자동 링크가 될 수 있다. 그것을 막은 것. -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+
     <script th:src="@{https://use.fontawesome.com/releases/v5.2.0/js/all.js}"></script>
 
     <!-- favicon 적용 모든 html에 적용되어야 함.-->
@@ -32,8 +38,7 @@
                 </div>
                 <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
                     <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
-                    <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>
-                    <span th:text="${session.user.getName()}"></span>
+                    <a th:href="@{/user/mypage}" class="nav_list" th:text="${session.user.getName()}"></a>
                     <form th:action="@{/user/logout}" method="post">
                         <input type="submit" th:value="로그아웃" class="nav_list">
                     </form>
@@ -48,7 +53,7 @@
                     <div class="edit__start">
                         <div class="lecture_info">
                             <div class="lecture__name">
-                                <input type="text" id="lecture" th:value="${lctreNm}" readonly style="width: 500px;">
+                                <input type="text" id="lecture" th:value="${lctreNm}" readonly>
                             </div>
                             <div class="lecture__id">
                                 <input type="text" id="lecture__id" th:value="${lectureId}" readonly>
@@ -57,17 +62,14 @@
                         <hr>
                         <div id="title-form">
                             <div class="title-form__display-flex">
-                                <input type="text" id="title" placeholder="제목을 입력해주세요" th:field="*{title}"
+                                <input type="text" id="title" placeholder="제목을 입력해주세요" maxlength="45" th:field="*{title}"
                                     th:value="${requestDto.title}">
                             </div>
                         </div>
                         <div class="edit__main">
-                            <div id="main-form">
-                                <div class="main-form__display-flex">
-                                    <label for="main"></label>
-                                    <textarea id="main" placeholder="내용을 입력해주세요" type="text" th:field="*{content}"
-                                        th:text="${requestDto.title}"></textarea>
-                                </div>
+                            <div class="main-form__display-flex">
+                                <textarea id="main" placeholder="내용을 입력해주세요" type="text" maxlength="1000" th:field="*{content}"
+                                    th:text="${requestDto.title}"></textarea>
                             </div>
                         </div>
                         <div class="edit__write">
@@ -76,7 +78,7 @@
                                     <div id="btn_group">
                                         <div class="btn_group1">
                                             <a th:href="@{/user/mypage}">
-                                                <button id="cancel">취소</button>
+                                                <button type="button" id="cancel">취소</button>
                                             </a>
                                             <button id="save" type="submit" name="cmd" value="save">저장</button>
                                         </div>

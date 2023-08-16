@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- iOS는 자동 링크가 될 수 있다. 그것을 막은 것. -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+
     <!-- 아이콘 사용을 위한 fontawesome CDN -->
     <script th:src="@{https://use.fontawesome.com/releases/v5.2.0/js/all.js}"></script>
 
@@ -33,8 +39,7 @@
             </div>
             <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
                 <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
-                <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>
-                <span th:text="${session.user.getName()}"></span>
+                <a th:href="@{/user/mypage}" class="nav_list" th:text="${session.user.getName()}"></a>
                 <form th:action="@{/user/logout}" method="post">
                     <input type="submit" th:value="로그아웃" class="nav_list">
                 </form>
