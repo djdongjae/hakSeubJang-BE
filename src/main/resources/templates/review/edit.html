@@ -63,13 +63,13 @@
                         <div id="title-form">
                             <div class="title-form__display-flex">
                                 <input type="text" id="title" placeholder="제목을 입력해주세요" maxlength="45" th:field="*{title}"
-                                    th:value="${requestDto.title}">
+                                    th:value="${requestDto.title}" required>
                             </div>
                         </div>
                         <div class="edit__main">
                             <div class="main-form__display-flex">
                                 <textarea id="main" placeholder="내용을 입력해주세요" type="text" maxlength="1000" th:field="*{content}"
-                                    th:text="${requestDto.title}"></textarea>
+                                    th:text="${requestDto.title}" required></textarea>
                             </div>
                         </div>
                         <div class="edit__write">

@@ -66,24 +66,24 @@
                 <div class="filter_block_area">
                     <p class="area_title">지역 선택</p>
                     <select name="region" class="area_select">
-                        <option value="" th:text="전체" th:selected="${session.region} == ''"></option>
-                        <option value="서울" th:text="서울" th:selected="${session.region} == '서울'"></option>
-                        <option value="부산" th:text="부산" th:selected="${session.region} == '부산'"></option>
-                        <option value="대구" th:text="대구" th:selected="${session.region} == '대구'"></option>
-                        <option value="인천" th:text="인천" th:selected="${session.region} == '인천'"></option>
-                        <option value="광주" th:text="광주" th:selected="${session.region} == '광주'"></option>
-                        <option value="대전" th:text="대전" th:selected="${session.region} == '대전'"></option>
-                        <option value="울산" th:text="울산" th:selected="${session.region} == '울산'"></option>
-                        <option value="세종" th:text="세종" th:selected="${session.region} == '세종'"></option>
-                        <option value="경기" th:text="경기" th:selected="${session.region} == '경기'"></option>
-                        <option value="강원" th:text="강원" th:selected="${session.region} == '강원'"></option>
-                        <option value="충북" th:text="충북" th:selected="${session.region} == '충북'"></option>
-                        <option value="충남" th:text="충남" th:selected="${session.region} == '충남'"></option>
-                        <option value="전북" th:text="전북" th:selected="${session.region} == '전북'"></option>
-                        <option value="전남" th:text="전남" th:selected="${session.region} == '전남'"></option>
-                        <option value="경북" th:text="경북" th:selected="${session.region} == '경북'"></option>
-                        <option value="경남" th:text="경남" th:selected="${session.region} == '경남'"></option>
-                        <option value="제주" th:text="제주" th:selected="${session.region} == '제주'"></option>
+                        <option value="" th:text="전체" selected></option>
+                        <option value="서울" th:text="서울"></option>
+                        <option value="부산" th:text="부산"></option>
+                        <option value="대구" th:text="대구"></option>
+                        <option value="인천" th:text="인천"></option>
+                        <option value="광주" th:text="광주"></option>
+                        <option value="대전" th:text="대전"></option>
+                        <option value="울산" th:text="울산"></option>
+                        <option value="세종" th:text="세종"></option>
+                        <option value="경기" th:text="경기"></option>
+                        <option value="강원" th:text="강원"></option>
+                        <option value="충북" th:text="충북"></option>
+                        <option value="충남" th:text="충남"></option>
+                        <option value="전북" th:text="전북"></option>
+                        <option value="전남" th:text="전남"></option>
+                        <option value="경북" th:text="경북"></option>
+                        <option value="경남" th:text="경남"></option>
+                        <option value="제주" th:text="제주"></option>
                     </select>
                 </div>
 
@@ -97,12 +97,9 @@
                         <p class="onoff_title_p">온/오프라인</p>
                     </div>
                     <div class="button_filter">
-                        <input type="radio" class="onoff-1" th:name="edcMthType" value=""
-                                th:checked="${session.edcMthType} == ''">전체</input>
-                        <input type="radio" class="onoff-1" th:name="edcMthType" value="오프라인"
-                                th:checked="${session.edcMthType} == '오프라인'">오프라인</input>
-                        <input type="radio" class="onoff-1" th:name="edcMthType" value="온라인"
-                                th:checked="${session.edcMthType} == '온라인'">온라인</input>
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value="" checked>전체</input>
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value="오프라인">오프라인</input>
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value="온라인">온라인</input>
                     </div>
                 </div>
 
@@ -110,14 +107,10 @@
                 <div class="filter_block_anyone">
                     <p class="anyone_p">모집대상</p>
                     <div class="button_filter">
-                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value=""
-                                th:checked="${session.edcTrgetType} == ''">전체</input>
-                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="성인"
-                                th:checked="${session.edcTrgetType} == '성인'">성인</input>
-                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="어린이"
-                                th:checked="${session.edcTrgetType} == '어린이'">어린이</input>
-                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="장애인"
-                                th:checked="${session.edcTrgetType} == '장애인'">장애인</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="" checked>전체</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="성인">성인</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="어린이">어린이</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="장애인">장애인</input>
                     </div>
                 </div>
             </div>
