@@ -22,11 +22,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/images/**",
                             "/js/**",
                             "/lecture/list",
+                            "/lecture/list2",
                             "/lecture/detail"
                     )
                     .permitAll()
                     .antMatchers(
                             "/lecture/wish",
+                            "/lecture/wish2",
+                            "/lecture/wish3",
                             "/lecture/load_save",
                             "/review/**",
                             "/user/**"
