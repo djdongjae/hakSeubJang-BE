@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- iOS는 자동 링크가 될 수 있다. 그것을 막은 것. -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+
     <!-- 아이콘 사용을 위한 fontawesome CDN -->
     <script th:src="@{https://use.fontawesome.com/releases/v5.2.0/js/all.js}"></script>
 
@@ -33,8 +39,7 @@
             </div>
             <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
                 <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
-                <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>
-                <span th:text="${session.user.getName()}"></span>
+                <a th:href="@{/user/mypage}" class="nav_list" th:text="${session.user.getName()}"></a>
                 <form th:action="@{/user/logout}" method="post">
                     <input type="submit" th:value="로그아웃" class="nav_list">
                 </form>
@@ -46,6 +51,7 @@
     <div class="content">
         <!-- 검색창 -->
         <form class="search" th:action="@{/lecture/list2}">
+            <h2 class="lecture_list_title">강의 검색</h2>
             <div class="search_bar">
                 <input type="text" name="srchText" placeholder="검색조건">
                 <button type="submit">검색</button>
@@ -56,70 +62,67 @@
         <form class="lecture_filter" th:action="@{/lecture/list}">
             <h2 class="lecture_list_title">강의 리스트</h2>
             <div class="filter_block">
-                <div class="filter_and_schButton">
-                    <!-- 지역선택 필터 -->
-                    <div class="filter_block_area">
-                        <p class="area_title">지역 선택</p>
-                        <select name="region" class="area_select">
-                            <option value="" th:text="전체" th:selected="${session.region} == ''"></option>
-                            <option value="서울" th:text="서울" th:selected="${session.region} == '서울'"></option>
-                            <option value="부산" th:text="부산" th:selected="${session.region} == '부산'"></option>
-                            <option value="대구" th:text="대구" th:selected="${session.region} == '대구'"></option>
-                            <option value="인천" th:text="인천" th:selected="${session.region} == '인천'"></option>
-                            <option value="광주" th:text="광주" th:selected="${session.region} == '광주'"></option>
-                            <option value="대전" th:text="대전" th:selected="${session.region} == '대전'"></option>
-                            <option value="울산" th:text="울산" th:selected="${session.region} == '울산'"></option>
-                            <option value="세종" th:text="세종" th:selected="${session.region} == '세종'"></option>
-                            <option value="경기" th:text="경기" th:selected="${session.region} == '경기'"></option>
-                            <option value="강원" th:text="강원" th:selected="${session.region} == '강원'"></option>
-                            <option value="충북" th:text="충북" th:selected="${session.region} == '충북'"></option>
-                            <option value="충남" th:text="충남" th:selected="${session.region} == '충남'"></option>
-                            <option value="전북" th:text="전북" th:selected="${session.region} == '전북'"></option>
-                            <option value="전남" th:text="전남" th:selected="${session.region} == '전남'"></option>
-                            <option value="경북" th:text="경북" th:selected="${session.region} == '경북'"></option>
-                            <option value="경남" th:text="경남" th:selected="${session.region} == '경남'"></option>
-                            <option value="제주" th:text="제주" th:selected="${session.region} == '제주'"></option>
-                        </select>
-                    </div>
+                <!-- 지역선택 필터 -->
+                <div class="filter_block_area">
+                    <p class="area_title">지역 선택</p>
+                    <select name="region" class="area_select">
+                        <option value="" th:text="전체" th:selected="${session.region} == ''"></option>
+                        <option value="서울" th:text="서울" th:selected="${session.region} == '서울'"></option>
+                        <option value="부산" th:text="부산" th:selected="${session.region} == '부산'"></option>
+                        <option value="대구" th:text="대구" th:selected="${session.region} == '대구'"></option>
+                        <option value="인천" th:text="인천" th:selected="${session.region} == '인천'"></option>
+                        <option value="광주" th:text="광주" th:selected="${session.region} == '광주'"></option>
+                        <option value="대전" th:text="대전" th:selected="${session.region} == '대전'"></option>
+                        <option value="울산" th:text="울산" th:selected="${session.region} == '울산'"></option>
+                        <option value="세종" th:text="세종" th:selected="${session.region} == '세종'"></option>
+                        <option value="경기" th:text="경기" th:selected="${session.region} == '경기'"></option>
+                        <option value="강원" th:text="강원" th:selected="${session.region} == '강원'"></option>
+                        <option value="충북" th:text="충북" th:selected="${session.region} == '충북'"></option>
+                        <option value="충남" th:text="충남" th:selected="${session.region} == '충남'"></option>
+                        <option value="전북" th:text="전북" th:selected="${session.region} == '전북'"></option>
+                        <option value="전남" th:text="전남" th:selected="${session.region} == '전남'"></option>
+                        <option value="경북" th:text="경북" th:selected="${session.region} == '경북'"></option>
+                        <option value="경남" th:text="경남" th:selected="${session.region} == '경남'"></option>
+                        <option value="제주" th:text="제주" th:selected="${session.region} == '제주'"></option>
+                    </select>
+                </div>
 
-                    <!-- 온/오프라인 필터 -->
-                    <div class="filter_block_onoff">
-                        <div class="onoff_title">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
-                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                <path d="M54.2 202.9C123.2 136.7 216.8 96 320 96s196.8 40.7 265.8 106.9c12.8 12.2 33 11.8 45.2-.9s11.8-33-.9-45.2C549.7 79.5 440.4 32 320 32S90.3 79.5 9.8 156.7C-2.9 169-3.3 189.2 8.9 202s32.5 13.2 45.2 .9zM320 256c56.8 0 108.6 21.1 148.2 56c13.3 11.7 33.5 10.4 45.2-2.8s10.4-33.5-2.8-45.2C459.8 219.2 393 192 320 192s-139.8 27.2-190.5 72c-13.3 11.7-14.5 31.9-2.8 45.2s31.9 14.5 45.2 2.8c39.5-34.9 91.3-56 148.2-56zm64 160a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z"/>
-                            </svg>
-                            <p class="onoff_title_p">온/오프라인</p>
-                        </div>
-                        <div class="button_filter">
-                            <input type="radio" class="onoff" th:name="edcMthType" value=""
-                                   th:checked="${session.edcMthType} == ''">전체</input>
-                            <input type="radio" class="onoff" th:name="edcMthType" value="오프라인"
-                                   th:checked="${session.edcMthType} == '오프라인'">오프라인</input>
-                            <input type="radio" class="onoff" th:name="edcMthType" value="온라인"
-                                   th:checked="${session.edcMthType} == '온라인'">온라인</input>
-                        </div>
+                <!-- 온/오프라인 필터 -->
+                <div class="filter_block_onoff">
+                    <div class="onoff_title">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
+                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path d="M54.2 202.9C123.2 136.7 216.8 96 320 96s196.8 40.7 265.8 106.9c12.8 12.2 33 11.8 45.2-.9s11.8-33-.9-45.2C549.7 79.5 440.4 32 320 32S90.3 79.5 9.8 156.7C-2.9 169-3.3 189.2 8.9 202s32.5 13.2 45.2 .9zM320 256c56.8 0 108.6 21.1 148.2 56c13.3 11.7 33.5 10.4 45.2-2.8s10.4-33.5-2.8-45.2C459.8 219.2 393 192 320 192s-139.8 27.2-190.5 72c-13.3 11.7-14.5 31.9-2.8 45.2s31.9 14.5 45.2 2.8c39.5-34.9 91.3-56 148.2-56zm64 160a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z"/>
+                        </svg>
+                        <p class="onoff_title_p">온/오프라인</p>
                     </div>
-
-                    <!-- 모집대상 필터 -->
-                    <div class="filter_block_anyone">
-                        <p class="anyone_p">모집대상</p>
-                        <div class="button_filter">
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value=""
-                                   th:checked="${session.edcTrgetType} == ''">전체</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="성인"
-                                   th:checked="${session.edcTrgetType} == '성인'">성인</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="어린이"
-                                   th:checked="${session.edcTrgetType} == '어린이'">어린이</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="장애인"
-                                   th:checked="${session.edcTrgetType} == '장애인'">장애인</input>
-                        </div>
+                    <div class="button_filter">
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value=""
+                                th:checked="${session.edcMthType} == ''">전체</input>
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value="오프라인"
+                                th:checked="${session.edcMthType} == '오프라인'">오프라인</input>
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value="온라인"
+                                th:checked="${session.edcMthType} == '온라인'">온라인</input>
                     </div>
                 </div>
 
-                <div class="filter_schButton">
-                    <button id="filter_search" type="submit">조회</button>
+                <!-- 모집대상 필터 -->
+                <div class="filter_block_anyone">
+                    <p class="anyone_p">모집대상</p>
+                    <div class="button_filter">
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value=""
+                                th:checked="${session.edcTrgetType} == ''">전체</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="성인"
+                                th:checked="${session.edcTrgetType} == '성인'">성인</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="어린이"
+                                th:checked="${session.edcTrgetType} == '어린이'">어린이</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="장애인"
+                                th:checked="${session.edcTrgetType} == '장애인'">장애인</input>
+                    </div>
                 </div>
+            </div>
+            <div class="filter_schButton">
+                <button id="filter_search" type="submit">조회</button>
             </div>
         </form>
 
@@ -137,27 +140,29 @@
                     </div>
                     <div class="list_block_title" th:text="${lecture.getLctreNm()}"></div>
                     <div class="list_block_location">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
-                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                            <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
-                        </svg>
-                        <p th:text="${lecture.getEdcRdnmadr()}"></p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12.0029 0.996582C7.59651 0.996582 4.00098 4.59212 4.00098 8.99855C4.00098 11.9652 5.87914 15.2447 7.66978 17.9306C9.46041 20.6166 11.25 22.655 11.25 22.655C11.3399 22.7574 11.4498 22.8404 11.5729 22.8988C11.696 22.9572 11.8298 22.9898 11.966 22.9946C12.1021 22.9994 12.2379 22.9764 12.3648 22.9269C12.4918 22.8774 12.6073 22.8025 12.7042 22.7067C12.7042 22.7067 14.5175 20.8988 16.3214 18.3219C18.1252 15.7449 19.9975 12.3874 19.9975 8.99855C19.9975 4.59212 16.4094 0.996582 12.0029 0.996582ZM12.0029 2.99707C15.3285 2.99707 17.997 5.673 17.997 8.99855C17.997 11.6097 16.3787 14.7547 14.6826 17.1777C13.3572 19.0711 12.5474 19.8464 12.0325 20.3888C11.523 19.7847 10.6795 18.8465 9.3307 16.8234C7.62134 14.2593 6.00147 11.0319 6.00147 8.99855C6.00147 5.673 8.67739 2.99707 12.0029 2.99707Z" fill="#00001D"/>
+                            <path d="M12.0029 4.99756C9.80565 4.99756 8.00195 6.80125 8.00195 8.99854C8.00195 11.1958 9.80565 12.9995 12.0029 12.9995C14.2002 12.9995 15.9965 11.1958 15.9965 8.99854C15.9965 6.80125 14.2002 4.99756 12.0029 4.99756ZM12.0029 6.99805C13.1193 6.99805 14.0034 7.88213 14.0034 8.99854C14.0034 10.115 13.1193 10.999 12.0029 10.999C10.8865 10.999 10.0024 10.115 10.0024 8.99854C10.0024 7.88213 10.8865 6.99805 12.0029 6.99805Z" fill="#FF2876"/>
+                            </svg>
+                        <p style="width: calc(100% - 34px);" th:text="${lecture.getEdcRdnmadr()}"></p>
                     </div>
-                    <hr>
+                    <hr style="height: 0.5px; background: #CDCDCD; border: 0;">
                     <div class="list_block_option">
-                        <div sec:authorize="isAuthenticated()">
-                            <div>
-                                <div class="list_block_option_heart"
-                                     th:style="${lecture.getInWish()} ? 'background-color:#CD0C22;' : ''">
-                                    <a th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                            <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
+                        <div sec:authorize="isAuthenticated()" class="tab_block">
+                            <a class="list_block_option_heart" th:style="${lecture.getInWish()} ? 'background-color:#ff5e5e; border: 0;' : ''"
+                                th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
+                                <svg th:if="${!lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                                class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>
+                                <svg th:if="${lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" style="color: #fff;" width="12" height="12" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/> 
+                                </svg>
+                                <h3 th:if="${!lecture.getInWish()}" class="fs16fw500">찜</h3>
+                                <h3 th:if="${lecture.getInWish()}" class="fs16fw500" style="color: #fff;">찜</h3>
+                            </a>
                         </div>
+
                         <div sec:authorize="!isAuthenticated()">
                             <div class="list_block_option_heart">
                                 <a th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
@@ -168,7 +173,7 @@
                                 </a>
                             </div>
                         </div>
-                        <a th:href="@{detail(id=${lecture.id})}">
+                        <a th:href="@{detail(id=${lecture.id})}" class="tab_block">
                             <button class="list_block_option_detail">자세히 보기</button>
                         </a>
                     </div>
@@ -190,7 +195,7 @@
                        class="arrow left" th:text="'<'"></a>
                 </li>
 
-                <li th:each="page: ${#numbers.sequence(start, end)}">
+                <li th:each="page: ${#numbers.sequence(start, end)}" class="pagination_center">
                     <a th:text="${page}"
                        th:href="@{/lecture/list(page=${page}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
                        class="num"></a>

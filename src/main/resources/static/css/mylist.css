@@ -1,10 +1,8 @@
 .content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 100px 0 100px 0;
-    padding: 0 30px;
+    max-width: var(--primary-width);
+    margin: 50px auto;
     box-sizing: border-box;
     gap: 20px;
 }
@@ -46,9 +44,6 @@
 .list_select input[type=radio]+label{
     display: inline-block;
     cursor: pointer;
-    height: 35px;
-    width: 125px;
-    line-height: 24px;
     text-align: center;
     font-weight:bold;
     font-size:20px;
@@ -79,6 +74,8 @@
 /* 강좌 한 개(블록) */
 .list_block {
     display: flex;
+    width: 320px;
+    height: 220px;
     flex-direction: column;
     justify-content: center;
     border: 2px solid #D9D9D9;
@@ -108,14 +105,16 @@
 }
 
 .list_block_title {
+    line-height: 1.2;
+    height: 2.4em;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .list_block_location {
     display: flex;
-    font-size: 10pt;
-    text-align: end;
+    align-items: center;
+    font-size: 12px;
     gap: 8px;
 }
 
@@ -127,16 +126,14 @@
 
 .list_block_option_heart {
     display: flex;
-    flex-direction: column;
     width: 130px;
     height: 30px;
-    gap: 5px;
+    gap: 10px;
     border: 1px solid #D9D9D9;
     border-radius: 5px;
-    padding: 5px;
     justify-content: center;
     align-items: center;
-    font-size: 12pt;
+    font-size: 12px
 }
 
 .list_block_option_detail {
@@ -144,6 +141,15 @@
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
+    background: var(--gray-line)
+}
+
+.list_block_option_detail:hover {
+    background: var(--gray-box);
+}
+
+.fs16fw500 {
+    font-size: 12px;
 }
 
 /* 작성한 후기 페이지 */
@@ -158,7 +164,6 @@
     flex-direction: column;
     justify-content: center;
     width: 800px;
-    /*height: 150px;*/
     border: 2px solid #D9D9D9;
     border-radius: 10px;
     padding: 20px;
@@ -194,14 +199,11 @@
 
 .pagination {
     list-style: none;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0;
     margin-top: 20px;
-}
-
-.pagination li {
-    display: inline;
-    text-align: center;
 }
 
 /* 숫자 스타일 */
@@ -266,16 +268,33 @@
 }
 
 .filter_block {
-    width: 996px;
+    display: flex;
+    max-width: var(--primary-width);
+    justify-content: space-between;
     border: 2px solid #D9D9D9;
     border-radius: 10px;
     padding: 30px;
-    margin: 10px 0 40px 0;
+    margin: 10px auto;
 }
 
-.filter_and_schButton {
+.filter_schButton {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#filter_search {
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: #fff;
+    width: 80px;
+    height: 40px;
+}
+
+#filter_search:hover {
+    background-color: var(--sub-color);
+    color: #fff;
 }
 
 .filter_block_area {
@@ -286,7 +305,6 @@
 
 .area_select {
     width: 150px;
-    height: 24px;
     margin-bottom: 10px;
     margin-top: 10px;
     outline: 0;
@@ -313,10 +331,11 @@
 .button_filter input[type=radio] {
     appearance: none;
     border: 2px solid #CDCDCD;
+    border-radius: 5px;
     display: inline-block;
     cursor: pointer;
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
     line-height: 24px;
     text-align: center;
     font-weight:bold;
@@ -325,7 +344,9 @@
 
 .button_filter input[type=radio]:checked{
     appearance: none;
-    border: 4px solid;
+    background-color: #779C3C;
+    border-radius: 5px;
+    font-size: 10pt;
 }
 
 /* 필터 제목 폰트 */
@@ -352,28 +373,28 @@
 /* 검색창 */
 .search_bar {
     width: 500px;
-    height: 40px;
-    border: 1px #D9D9D9 solid;
     border-radius: 15px;
     display: flex;
+    margin: 20px auto;
 }
+
 .search_bar input {
     width: 80%;
-    height: 40px;
     padding: 10px;
-    border-radius: 15px;
-    border-left: 1px #D9D9D9 solid;
-    border-bottom: 1px #D9D9D9 solid;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: 1px var(--gray-line) solid;
     font-size: 18px;
+    outline: none;
 }
 
 .search_bar button {
     font-size: 18px;
-    border: none;
-    background-color: #779C3C;
+    border: 0;
+    background-color: var(--primary-color);
     width: 20%;
-    height: 40px;
-    border-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
     color: #fff;
     cursor: pointer;
 }
@@ -384,6 +405,7 @@
 .button_filter {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .on {
@@ -398,7 +420,7 @@
 .onoff {
     background-color: #F0F8FF;
     border-radius: 5px;
-    width: 64px;
+    min-width: 64px;
     height: 24px;
     font-size: 10pt;
     color: 	#4169E1;
@@ -407,108 +429,85 @@
 .anyone {
     background-color: #F0FFF0;
     border-radius: 5px;
-    width: 64px;
+    min-width: 64px;
     height: 24px;
     font-size: 10pt;
     color: #779C3C;
 }
 
-.filter_schButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-}
-
-#filter_search {
-    border-radius: 5px;
-    background-color: var(--primary-color);
-    color: white;
-    width: 80px;
-    height: 40px;
-}
-
-#filter_search:hover {
-    background-color: #333333;
-    color: #8b8b8b;
-}
-
 /* 미디어 쿼리 */
 
 /* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
-@media all and (min-width:768px) and (max-width:1023px) {
-    .account img {
+@media all and (max-width:1023px) {
+    .content {
+        padding: 0 20px;
+    }
+
+    .list_select_content_1 {
+        gap: 10px;
+    }
+    .account_user {
         width: 80px;
         height: 80px;
     }
-
+    
     .account_mail {
         font-size: 16px;
-    }
-
-    svg {
-        width: 15px;
-        height: 15px;
+        margin: 10px;
     }
 
     .list_select input[type=radio]+label{
         cursor: pointer;
-        height: 30px;
-        width: 110px;
         line-height: 24px;
         font-size:18px;
     }
 
     .list_container {
-        gap: 5px;
+        gap: 20px;
     }
 
-    /* 찜목록 -3개당 1열 배치 */
-    .list_select_content_1 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+    .filter_schButton {
+        justify-content: center;
     }
-
     /* 강좌 한 개(블록) */
     .list_block {
-        width: 240px;
-        height: 130px;
-        gap: 3px;
+        width: 100%;
+        padding: 10px;
     }
 
     .list_block_option_heart {
-        width: 80px;
-        height: 18px;
+        width: 100%;
         gap: 5px;
         font-size: 8pt;
     }
-
+    
     .list_block_option_detail {
-        width: 80px;
-        height: 18px;
+        width: 100%;
         font-size: 8pt;
     }
 
-    .list_block_location {
-        font-size: 6pt;
-        gap: 8px;
+    .list_block_title {
+        font-size: 16px;
+    }
+
+    .tab_block {
+        width: calc(50% - 5px);
     }
 
     /* 작성한 후기 페이지 */
     .review_block {
         width: 500px;
-        height: 100px;
-        gap: 3px;
+        gap: 5px;
     }
-
+    
     .review_block_title {
-        font-size: 15px;
+        font-size: 18px;
     }
-
+    
     .review_block_body {
-        font-size: 8px;
+        font-size: 12px;
     }
-
+    
     .review_block_user {
         display: flex;
         gap: 10px;
@@ -525,126 +524,110 @@
     .model .num {
         margin-left: 3px;
         padding: 0;
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
     }
 
     .first {
         margin-right: 10px;
     }
-
+    
     .last {
         margin-left: 10px;
     }
 
     /* 리스트페이지 */
     .lecture_list_title {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .filter_block {
-        margin: 10px 0 20px 0;
+        padding: 20px;
     }
 
-    select {
-        width: 60px;
-        height: 25px;
+    .area_select {
         margin-top: 0;
         margin-bottom: 0;
+        width: 100px;
         padding: 4px;
+        font-size: 7pt;
+    }
+
+    .area_title {
+        font-size: 8pt;
+        font-weight: bold;
+    }
+    
+    .onoff_title_p {
+        font-size: 8pt;
+        font-weight: bold;
+    }
+    
+    .anyone_p {
+        font-size: 12px;
+        font-weight: bold;
     }
 
     /* 버튼 스타일 */
     .button_filter {
         gap: 6px;
+        font-size: 7pt;
+    }
+
+    .on {
+        font-size: 7pt;
     }
 
     .onoff {
-        width: 48px;
-        height: 25px;
         font-size: 7pt;
     }
 
     .anyone {
-        width: 48px;
-        height: 24px;
         font-size: 7pt;
-    }
-
-    .onoff:active {
-        width: 48px;
-        height: 24px;
-        font-size: 7pt;
-    }
-
-    .anyone:active {
-        width: 48px;
-        height: 24px;
-        font-size: 7pt;
-    }
-
-    /* 필터 제목 폰트 */
-    .area_title {
-        font-size: 10pt;
-    }
-
-    .onoff_title {
-        gap: 5px;
-    }
-
-    .onoff_title_p {
-        font-size: 10pt;
-    }
-
-    .anyone_p {
-        font-size: 10pt;
     }
 
     /* 검색창 */
-    .search_bar {
-        width: 300px;
-        height: 32px;
-    }
 
     .search_bar input {
-        height: 32px;
-        font-size: 13px;
+        font-size: 15px;
     }
-
+    
     .search_bar button {
-        font-size: 13px;
-        height: 32px;
+        font-size: 15px;
     }
 }
 
 
 /* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
-@media all and (min-width: 488px) and (max-width:767px) {
-    .account img {
-        width: 80px;
-        height: 80px;
+@media all and (max-width:767px) {
+    .account_user {
+        width: 40px;
+        height: 40px;
     }
 
+    img {
+        vertical-align: middle;
+        border: none;
+        width: 40px;
+        height: 40px;
+    }
+    
     .account_mail {
         font-size: 16px;
-    }
-
-    svg {
-        width: 15px;
-        height: 15px;
+        margin: 10px;
     }
 
     .list_select input[type=radio]+label{
         cursor: pointer;
-        height: 30px;
-        width: 110px;
         line-height: 24px;
         font-size:18px;
     }
 
     .list_container {
-        gap: 2px;
+        gap: 20px;
+    }
+
+    .button_filter {
+        gap: 6px;
+        font-size: 12px;
     }
 
     /* 찜목록 -3개당 1열 배치 */
@@ -655,49 +638,38 @@
 
     /* 강좌 한 개(블록) */
     .list_block {
-        width: 240px;
-        height: 130px;
-        gap: 3px;
+        width: 100%;
     }
 
-    .list_block_option_heart {
-        width: 80px;
-        height: 18px;
-        gap: 5px;
-        font-size: 8pt;
+    .list_block_title {
+        font-size: 15px;
     }
 
-    .list_block_option_detail {
-        width: 80px;
-        height: 18px;
-        font-size: 8pt;
-    }
-
-    .list_block_location {
-        font-size: 6pt;
-        gap: 8px;
+    .list_block_header_end {
+        font-size: 10pt;
     }
 
     /* 작성한 후기 페이지 */
     .review_block {
-        width: 400px;
-        height: 130px;
-        gap: 3px;
+        width: 410px;
+        gap: 5px;
+        padding: 10px;
     }
-
+    
     .review_block_title {
-        font-size: 13px;
+        font-size: 18px;
     }
-
+    
     .review_block_body {
-        font-size: 8px;
+        font-size: 12px;
     }
-
+    
     .review_block_user {
         display: flex;
-        gap: 5px;
+        gap: 10px;
         font-size: 8px;
     }
+
 
     /* 페이지네이션 */
     .pagination a {
@@ -709,279 +681,256 @@
     .model .num {
         margin-left: 3px;
         padding: 0;
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
     }
 
     .first {
         margin-right: 10px;
     }
-
+    
     .last {
         margin-left: 10px;
     }
 
     /* 리스트페이지 */
     .lecture_list_title {
-        font-size: 18px;
+        font-size: 20px;
     }
 
-    .filter_block {
-        margin: 10px 0 20px 0;
+    .filter_schButton {
+        justify-content: center;
     }
 
-    select {
-        width: 50px;
-        height: 25px;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding: 4px;
-    }
 
     /* 버튼 스타일 */
-    .button_filter {
-        gap: 6px;
+
+    .button_filter input[type=radio] {
+        appearance: none;
+        border: 2px solid #CDCDCD;
+        border-radius: 5px;
+        display: inline-block;
+        cursor: pointer;
+        width: 10px;
+        height: 10px;
+        text-align: center;
+        font-size: 5pt;
+    }
+
+    .on {
+        font-size: 7pt;
+        width: 40px;
     }
 
     .onoff {
-        width: 48px;
-        height: 25px;
         font-size: 7pt;
+        width: 40px;
     }
 
     .anyone {
-        width: 48px;
-        height: 24px;
         font-size: 7pt;
+        width: 40px;
     }
 
-    .onoff:active {
-        width: 48px;
-        height: 24px;
-        font-size: 7pt;
-    }
-
-    .anyone:active {
-        width: 48px;
-        height: 24px;
-        font-size: 7pt;
-    }
-
-    /* 필터 제목 폰트 */
-    .area_title {
-        font-size: 10pt;
-    }
-
-    .onoff_title {
-        gap: 5px;
-    }
-
-    .onoff_title_p {
-        font-size: 10pt;
-    }
-
-    .anyone_p {
-        font-size: 10pt;
+    #filter_search {
+        width: 60px;
+        height: 30px;
     }
 
     /* 검색창 */
     .search_bar {
-        width: 300px;
-        height: 32px;
+        width: 400px;
+        display: flex;
     }
 
     .search_bar input {
-        height: 32px;
-        font-size: 13px;
+        font-size: 15px;
     }
-
+    
     .search_bar button {
-        font-size: 13px;
-        height: 32px;
+        font-size: 15px;
+    }
+}
+
+@media all and (max-width:625px) {
+    .filter_block {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .filter_block_area, .filter_block_onoff, .filter_block_anyone {
+        width: 200px;
+    }
+    .area_select {
+        width: 70%;
+    }
+    .button_filter {
+        font-size: 12px;
+        align-items: center;
+    }
+    .onoff, .anyone, .on {
+        min-width: 40px;
+    }
+    .list_block_header_end {
+        font-size: 12px;
+        min-width: 24px;
+        padding: 0;
+    }
+    .list_block_title {
+        font-size: 12px;
+    }
+    .list_block_location {
+        font-size: 10px;
+    }
+    .list_block {
+        height: 180px;
+    }
+    
+    .pagination_center {
+        display: none;
     }
 
+    .pagination a {
+        font-size: 16px;
+    }
 
+    .pagination {
+        width: 300px;
+        justify-content: space-around;
+        margin: 20px auto;
+    }
 }
 
 @media all and (max-width: 425px){
-    .account img {
-        width: 80px;
-        height: 80px;
+    .content {
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .account_user {
+        width: 40px;
+        height: 40px;
     }
 
+    img {
+        vertical-align: middle;
+        border: none;
+        width: 40px;
+        height: 40px;
+    }
+    
     .account_mail {
-        font-size: 16px;
-    }
-
-    svg {
-        width: 15px;
-        height: 15px;
+        font-size: 10px;
+        margin: 5px;
     }
 
     .list_select input[type=radio]+label{
         cursor: pointer;
-        height: 30px;
-        width: 110px;
         line-height: 24px;
-        font-size:18px;
+        font-size: 10px;
     }
 
     .list_container {
-        gap: 2px;
+        gap: 20px;
     }
 
     /* 찜목록 -3개당 1열 배치 */
     .list_select_content_1 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-columns: repeat(1, 1fr);
     }
 
     /* 강좌 한 개(블록) */
     .list_block {
-        width: 240px;
-        height: 130px;
-        gap: 3px;
+        padding: 8px;
     }
 
-    .list_block_option_heart {
-        width: 80px;
-        height: 18px;
-        gap: 5px;
-        font-size: 8pt;
+    .list_block_title {
+        font-size: 12px;
     }
 
-    .list_block_option_detail {
-        width: 80px;
-        height: 18px;
-        font-size: 8pt;
-    }
-
-    .list_block_location {
-        font-size: 6pt;
-        gap: 8px;
+    .list_block_header_end {
+        font-size: 12px;
     }
 
     /* 작성한 후기 페이지 */
     .review_block {
-        width: 400px;
-        height: 130px;
-        gap: 3px;
+        width: 365px;
+        gap: 5px;
+        padding: 10px;
     }
-
+    
     .review_block_title {
-        font-size: 13px;
+        font-size: 18px;
     }
-
+    
     .review_block_body {
-        font-size: 8px;
+        font-size: 12px;
     }
-
+    
     .review_block_user {
         display: flex;
-        gap: 5px;
+        gap: 10px;
         font-size: 8px;
     }
 
     /* 페이지네이션 */
-    .pagination a {
-        font-size: 8px;
-        padding: 3px 3px;
-        line-height: 1.0;
-    }
 
     .model .num {
         margin-left: 3px;
         padding: 0;
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
     }
 
     .first {
         margin-right: 10px;
     }
-
+    
     .last {
         margin-left: 10px;
     }
 
     /* 리스트페이지 */
     .lecture_list_title {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .filter_block {
-        margin: 10px 0 20px 0;
+        width: 100%;
+        padding: 5px;
     }
 
-    select {
-        width: 50px;
-        height: 25px;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding: 4px;
+    .filter_block_area, .filter_block_onoff, .filter_block_anyone{
+        gap: 5px;
+        justify-content: center;
     }
+
 
     /* 버튼 스타일 */
-    .button_filter {
-        gap: 6px;
+
+    .button_filter input[type=radio] {
+        appearance: none;
+        border: 2px solid #CDCDCD;
+        border-radius: 5px;
+        display: inline-block;
+        cursor: pointer;
+        width: 10px;
+        height: 10px;
+        text-align: center;
+        font-size: 5pt;
     }
 
-    .onoff {
-        width: 48px;
-        height: 25px;
-        font-size: 7pt;
-    }
-
-    .anyone {
-        width: 48px;
-        height: 24px;
-        font-size: 7pt;
-    }
-
-    .onoff:active {
-        width: 48px;
-        height: 24px;
-        font-size: 7pt;
-    }
-
-    .anyone:active {
-        width: 48px;
-        height: 24px;
-        font-size: 7pt;
-    }
-
-    /* 필터 제목 폰트 */
-    .area_title {
-        font-size: 10pt;
-    }
-
-    .onoff_title {
-        gap: 5px;
-    }
-
-    .onoff_title_p {
-        font-size: 10pt;
-    }
-
-    .anyone_p {
-        font-size: 10pt;
+    #filter_search {
+        width: 60px;
+        height: 30px;
     }
 
     /* 검색창 */
     .search_bar {
-        width: 300px;
-        height: 32px;
+        width: 100%;
     }
 
     .search_bar input {
-        height: 32px;
-        font-size: 13px;
+        font-size: 10px;
     }
-
+    
     .search_bar button {
-        font-size: 13px;
-        height: 32px;
+        font-size: 10px;
     }
 }
