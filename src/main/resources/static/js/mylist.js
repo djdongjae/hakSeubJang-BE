@@ -7,6 +7,6 @@ $('input[type=radio]').on('click', function(){
     }
     else if (chkValue == '작성한 후기') {
         $('#list-1').css('display', 'none');
-        $('#list-2').css('display', 'grid');
+        $('#list-2').css('display', 'flex');
     }
 })

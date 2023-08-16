@@ -58,13 +58,13 @@
                     <hr>
                     <div id="title-form">
                         <div class="title-form__display-flex">
-                            <input type="text" id="title" placeholder="제목을 입력해주세요" th:field="*{title}" maxlength="45">
+                            <input type="text" id="title" placeholder="제목을 입력해주세요" th:field="*{title}" maxlength="45" required>
                         </div>
                     </div>
                     <div class="edit__main">
                         <div id="main-form">
                             <div class="main-form__display-flex">
-                                <textarea id="main" placeholder="내용을 입력해주세요" type="text" th:field="*{content}" maxlength="1000"></textarea>
+                                <textarea id="main" placeholder="내용을 입력해주세요" type="text" th:field="*{content}" maxlength="1000" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <div id="write-form">
                             <div class="write-form__display-flex">
                                 <div id="btn_group">
-                                    <a th:href="@{/user/mypage}"><button id="cancel">취소</button></a>
+                                    <a th:href="@{/lecture/detail(id=${requestDto.getLectureId()})}"><button type="button" id="cancel">취소</button></a>
                                     <button type="submit" id="save">저장</button>
                                 </div>
                             </div>
