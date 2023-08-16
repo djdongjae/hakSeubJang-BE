@@ -1,0 +1,147 @@
+.title-form__display-flex{
+    width: 100%;
+    height: 72px;
+    margin: 18px, 63px, 17px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.edit{
+    position: relative;
+    bottom: 100px;    
+}
+
+#lecture{
+    width: 300px;
+    height: 40px;
+    margin: 18px, 63px, 17px;
+    padding: 0px, 0px, 26px;
+    font-size: 20px;
+    font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
+}
+
+#lecture__id{
+    width: 50px;
+    height: 50px;
+    /*margin-right: 63px;*/
+    /*margin-left: 63px;*/
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    font-size: 14px;
+    font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
+}
+
+#title{
+    width: 800px;
+    height: 72px;
+    margin: 18px, 63px, 17px;
+    padding: 0px, 0px, 26px;    
+    font-size: 30px;
+    font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
+    
+}
+.edit__start{
+    width: var(--mypage-width);
+    margin: 130px auto 20px auto;
+
+}
+
+#title-form {
+    border-bottom: 1px solid var(--gray-line);
+}
+
+.title-form__display{
+    width: 100%;
+    height: 72px;
+    margin: 18px, 65px, 18px;
+    align-items: center;
+    justify-content: center;
+}
+
+#main{
+    width: 800px;
+    height: 460px;
+    font-size: 16px;
+    resize: both;
+    box-sizing: border-box;
+    border: none;
+    resize: none;
+    border-bottom: 1px solid var(--gray-line);
+    position: relative;
+    top: 14px;
+    font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
+}
+
+.main-form__display-flex{
+    display: flex;
+    width: 100%;
+    height: 460px;
+    /*margin-top: 18px;*/
+    /*margin-right: 65px;*/
+    /*margin-left: 65px;*/
+    /*margin-bottom: 18px;*/
+    align-items: center;
+    justify-content: center;
+}
+
+.edit__main{
+    width: var(--mypage-width);
+    margin: 0 auto 20px auto;
+    vertical-align: top;
+}
+
+#main-form {
+    border-bottom: 1px solid var(--gray-line);
+}
+
+#btn_group button{
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    position: relative;
+    left: 300px;
+    margin: 0px 10px 130px;
+}
+
+#cancel{
+    border-radius: 5px;
+    color: #8b8b8b;
+}
+
+#save{
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;  
+}
+
+#delete{
+    border-radius: 5px;
+    color: #8b8b8b; 
+}
+
+#btn_group button:hover{
+    color: white;
+    background-color: var(--primary-color);
+}
+
+#btn_group #delete{
+    position: relative;
+    left: 505px;
+}
+
+.lecture_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lecture__name {
+    height: 40px;
+}
+
+hr {
+    background:#d9d9d9;
+    height:1px;
+    border:0;
+}

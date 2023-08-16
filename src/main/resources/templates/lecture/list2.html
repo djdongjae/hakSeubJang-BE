@@ -1,148 +1,230 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="/common2.js"></script>
-  <link rel="stylesheet" type="text/css" href="/common2.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <title>강좌 목록</title>
-  <style>
-    div.container {
-      width: 1500px;
-      margin: 50px auto;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    thead th {
-      background-color: #eee;
-    }
+    <!-- 아이콘 사용을 위한 fontawesome CDN -->
+    <script th:src="@{https://use.fontawesome.com/releases/v5.2.0/js/all.js}"></script>
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
+    <!-- favicon 적용 모든 html에 적용되어야 함.-->
+    <link rel="icon" th:href="@{/img/icon_regular.png}">
 
-    td, th {
-      padding: 4px;
-      border: 1px solid lightgray;
-    }
+    <!-- reset.css, common 모든 html에 적용되어야 함. -->
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 
-    td:nth-child(4), td:nth-child(3) {
-      text-align: center;
-      width: 100px;
-    }
+    <!-- my,list page css -->
+    <link rel="stylesheet" th:href="@{/css/mylist.css}">
 
-    .wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .pagination {
-      text-align: center;
-    }
-
-    .inherited-list:hover { cursor: pointer; background-color: #ffe; }
-  </style>
+    <title>평생학습의 장터, 학습장</title>
 </head>
 <body>
-<div class="container">
-  <h1>강좌 목록</h1>
-  <br>
-  <form th:action="@{/lecture/list2}">
-    <label>이름</label>
-    <input type="text" name="srchText" th:value="${session.srchText}" placeholder="검색조건">
-    <button type="submit">조회</button>
-  </form>
-  <br>
-  <form th:action="@{/lecture/list}">
-    <select name="region">
-      <option value="" th:text="전체" selected></option>
-      <option value="서울" th:text="서울"></option>
-      <option value="경기" th:text="경기"></option>
-      <option value="부산" th:text="부산"></option>
-    </select>
-    <select name="edcMthType">
-      <option value="" th:text="전체" selected></option>
-      <option value="온라인" th:text="온라인"></option>
-      <option value="오프라인" th:text="오프라인"></option>
-    </select>
-    <select name="edcTrgetType">
-      <option value="" th:text="전체" selected></option>
-      <option value="성인" th:text="성인"></option>
-      <option value="어린이" th:text="어린이"></option>
-      <option value="장애인" th:text="장애인"></option>
-    </select>
-    <button type="submit">조회</button>
-  </form>
+<div id="root">
+    <!-- nav -->
+    <div class="nav_container">
+        <nav class="nav">
+            <a class="nav_logo" th:href="@{/}">
+                <img class="logo" th:src="@{/img/icon_word.png}">
+            </a>
+            <div class="navbar_Loginwrapper" sec:authorize="!isAuthenticated()">
+                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
+                <a th:href="@{/user/login}" class="nav_list">로그인</a>
+            </div>
+            <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
+                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
+                <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>
+                <span th:text="${session.user.getName()}"></span>
+                <form th:action="@{/user/logout}" method="post">
+                    <input type="submit" th:value="로그아웃" class="nav_list">
+                </form>
+            </div>
+        </nav>
+    </div> <!-- nav_container -->
 
-  <br>
-  <table class="table table-bordered table-condensed">
-    <thead>
-    <tr>
-      <th>강좌명</th>
-      <th>강사명</th>
-      <th>접수시작일자</th>
-      <th>접수종료일자</th>
-      <th>교육대상</th>
-      <th>운영요일</th>
-      <th>교육장소</th>
-      <th>수강료</th>
-      <th>찜하기</th>
-      <div sec:authorize="isAuthenticated()">
-        <th>찜여부</th>
-      </div>
-      <th>D-Day</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="lecture, iStat : ${lecturePage.content}" th:href="@{detail(id=${lecture.id})}" class="inherited-list">
-      <td th:text="${lecture.getLctreNm()}"></td>
-      <td th:text="${lecture.getInstrctrNm()}"></td>
-      <td th:text="${lecture.getRceptStartDate()}"></td>
-      <td th:text="${lecture.getRceptEndDate()}"></td>
-      <td th:text="${lecture.getEdcTrgetType()}"></td>
-      <td th:text="${lecture.getOperDay()}"></td>
-      <td th:text="${lecture.getEdcRdnmadr()}"></td>
-      <td th:text="${lecture.getLctreCost()}"></td>
-      <td>
-        <a th:href="@{wish2(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">찜</a>
-      </td>
-      <div sec:authorize="isAuthenticated()">
-        <td>
-          <div th:each="wish: ${lecture.wishes}">
-            <span th:if="${wish.user.getEmail() == user.getEmail()}">true</span>
-          </div>
-        </td>
-      </div>
-      <td th:text="${lecture.getRemainDay()}"></td>
-    </tr>
-    </tbody>
-  </table>
-  <div class="wrap">
-    <nav style="text-align: center;" aria-label="Page navigation example">
-      <ul class="pagination" th:with="start=${(lecturePage.number/10)*10 + 1}, end=(${(lecturePage.totalPages == 0) ? 1 : (start + (10 - 1) < lecturePage.totalPages ? start + (10 - 1) : lecturePage.totalPages)})">
-        <li th:if="${start > 1}" class="page-item">
-          <a th:href="@{/lecture/list2(page=1, size=10, srchText=${session.srchText})}" th:text="'First'" class="page-link"></a>
-        </li>
-        <li th:if="${start > 1}" class="page-item">
-          <a th:href="@{/lecture/list2(page=${start - 10}, size=10, srchText=${session.srchText})}" th:text="'<'" class="page-link"></a>
-        </li>
+    <!-- 여기서부터 코드 짜면됨. 단, content class이름 자체는 절대 건들지 말 것. -->
+    <div class="content">
+        <!-- 검색창 -->
+        <form class="search" th:action="@{/lecture/list2}">
+            <div class="search_bar">
+                <input type="text" name="srchText" th:value="${session.srchText}" placeholder="검색조건">
+                <button type="submit">검색</button>
+            </div>
+        </form>
 
-        <li th:each="page: ${#numbers.sequence(start, end)}" class="page-item">
-          <a th:text="${page}" th:href="@{/lecture/list2(page=${page}, size=10, srchText=${session.srchText})}" class="page-link"></a>
-        </li>
+        <!-- 강좌 필터 -->
+        <form class="lecture_filter" th:action="@{/lecture/list}">
+            <h2 class="lecture_list_title">강의 리스트</h2>
+            <div class="filter_block">
 
-        <li th:if="${end < lecturePage.totalPages}" class="page-item">
-          <a th:href="@{/lecture/list2(page=${start + 10}, size=10, srchText=${session.srchText})}" th:text="'>'" class="page-link"></a>
-        </li>
-        <li th:if="${end < lecturePage.totalPages}" class="page-item">
-          <a th:href="@{/lecture/list2(page=${lecturePage.totalPages}, size=10, srchText=${session.srchText})}" th:text="'Last'" class="page-link"></a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+                <div class="filter_and_schButton">
+
+                    <div class="filter_block_area">
+                        <p class="area_title">지역 선택</p>
+                        <select name="region" class="area_select">
+                            <option value="" th:text="전체" selected></option>
+                            <option value="서울" th:text="서울"></option>
+                            <option value="부산" th:text="부산"></option>
+                            <option value="대구" th:text="대구"></option>
+                            <option value="인천" th:text="인천"></option>
+                            <option value="광주" th:text="광주"></option>
+                            <option value="대전" th:text="대전"></option>
+                            <option value="울산" th:text="울산"></option>
+                            <option value="세종" th:text="세종"></option>
+                            <option value="경기" th:text="경기"></option>
+                            <option value="강원" th:text="강원"></option>
+                            <option value="충북" th:text="충북"></option>
+                            <option value="충남" th:text="충남"></option>
+                            <option value="전북" th:text="전북"></option>
+                            <option value="전남" th:text="전남"></option>
+                            <option value="경북" th:text="경북"></option>
+                            <option value="경남" th:text="경남"></option>
+                            <option value="제주" th:text="제주"></option>
+                        </select>
+                    </div>
+
+                    <!-- 온/오프라인 필터 -->
+                    <div class="filter_block_onoff">
+                        <div class="onoff_title">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
+                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path d="M54.2 202.9C123.2 136.7 216.8 96 320 96s196.8 40.7 265.8 106.9c12.8 12.2 33 11.8 45.2-.9s11.8-33-.9-45.2C549.7 79.5 440.4 32 320 32S90.3 79.5 9.8 156.7C-2.9 169-3.3 189.2 8.9 202s32.5 13.2 45.2 .9zM320 256c56.8 0 108.6 21.1 148.2 56c13.3 11.7 33.5 10.4 45.2-2.8s10.4-33.5-2.8-45.2C459.8 219.2 393 192 320 192s-139.8 27.2-190.5 72c-13.3 11.7-14.5 31.9-2.8 45.2s31.9 14.5 45.2 2.8c39.5-34.9 91.3-56 148.2-56zm64 160a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z"/>
+                            </svg>
+                            <p class="onoff_title_p">온/오프라인</p>
+                        </div>
+                        <div class="button_filter">
+                            <input type="radio" class="onoff" th:name="edcMthType" value="" checked>전체</input>
+                            <input type="radio" class="onoff" th:name="edcMthType" value="오프라인">오프라인</input>
+                            <input type="radio" class="onoff" th:name="edcMthType" value="온라인">온라인</input>
+                        </div>
+                    </div>
+
+                    <!-- 모집대상 필터 -->
+                    <div class="filter_block_anyone">
+                        <p class="anyone_p">모집대상</p>
+                        <div class="button_filter">
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="" checked>전체</input>
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="성인">성인</input>
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="어린이">어린이</input>
+                            <input type="radio" class="anyone" th:name="edcTrgetType" value="장애인">장애인</input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter_schButton">
+                    <button id="filter_search" type="submit">조회</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="list-1" class="list_select_content_1">
+            <div th:each="lecture, iStat : ${lecturePage.content}">
+                <!-- 강좌 한 블록 -->
+                <div class="list_block">
+                    <div class="list_block_header">
+                        <div class="list_block_header_start">
+                            <button class="onoff" th:text="${lecture.getEdcMthType()}"
+                                    th:style="${lecture.getEdcMthType()} == '온라인' ? 'background-color:#FFE0B2; color:#C58E00;' : ''"></button>
+                            <button class="anyone" th:text="${lecture.getEdcTrgetType()}"></button>
+                        </div>
+                        <div class="list_block_header_end" th:text="'D-' + ${lecture.getRemainDay()}"></div>
+                    </div>
+                    <div class="list_block_title" th:text="${lecture.getLctreNm()}"></div>
+                    <div class="list_block_location">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
+                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+                        </svg>
+                        <p th:text="${lecture.getEdcRdnmadr()}"></p>
+                    </div>
+                    <hr>
+                    <div class="list_block_option">
+                        <div sec:authorize="isAuthenticated()">
+                            <div>
+                                <div class="list_block_option_heart"
+                                     th:style="${lecture.getInWish()} ? 'background-color:#CD0C22;' : ''">
+                                    <a th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                            <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div sec:authorize="!isAuthenticated()">
+                            <div class="list_block_option_heart">
+                                <a th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <a th:href="@{detail(id=${lecture.id})}">
+                            <button class="list_block_option_detail">자세히 보기</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이지네이션 -->
+        <div class="list_page">
+            <ul class="pagination model"
+                th:with="start=${(lecturePage.number/10)*10 + 1}, end=(${(lecturePage.totalPages == 0) ? 1 : (start + (10 - 1) < lecturePage.totalPages ? start + (10 - 1) : lecturePage.totalPages)})">
+                <li th:if="${start > 1}">
+                    <a th:href="@{/lecture/list2(page=1, size=9, srchText=${session.srchText})}" class="first"
+                       th:text="'처음 페이지'"></a>
+                </li>
+
+                <li th:if="${start > 1}">
+                    <a th:href="@{/lecture/list2(page=${start - 10}, size=9, srchText=${session.srchText})}"
+                       class="arrow left" th:text="'<'"></a>
+                </li>
+
+                <li th:each="page: ${#numbers.sequence(start, end)}">
+                    <a th:text="${page}" th:href="@{/lecture/list2(page=${page}, size=9, srchText=${session.srchText})}"
+                       class="num"></a>
+                </li>
+
+                <li th:if="${end < lecturePage.totalPages}">
+                    <a th:href="@{/lecture/list2(page=${start + 10}, size=9, srchText=${session.srchText})}"
+                       class="arrow right" th:text="'>'"></a>
+                </li>
+
+                <li th:if="${end < lecturePage.totalPages}">
+                    <a th:href="@{/lecture/list2(page=${lecturePage.totalPages}, size=9, srchText=${session.srchText})}"
+                       th:text="'끝 페이지'" class="last"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer_container">
+        <footer class="footer">
+            <div class="copyright">
+                <h2>학습장</h2>
+                <div class="copyright_content">
+                    <span>Contact</span>
+                    <span>lemonherb0323@naver.com</span>
+                </div>
+                <div class="copyright_content">
+                    <span>Copyright</span>
+                    <span>HakSeubJang. All rights reserved</span>
+                </div>
+            </div>
+            <div class="hakseubjang">
+                <a class="ft14-fw600" href="#">이용약관</a>
+                <a class="ft14-fw600" href="#">개인정보처리방침</a>
+                <a class="ft14-fw600" href="#">서비스소개</a>
+            </div>
+
+        </footer>
+    </div>
 </div>
+
 </body>
 </html>

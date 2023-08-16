@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -54,7 +53,7 @@ public class LectureService {
                     .filter(l -> l.getEdcMthType().equals("온라인")).toList();
         } else {
             result1 = lectures.stream()
-                    .dropWhile(l -> l.getEdcMthType().equals("온라인")).toList();
+                    .filter(l -> !l.getEdcMthType().equals("온라인")).toList();
         }
         
         List<Lecture> result2 = null;
@@ -185,6 +184,7 @@ public class LectureService {
                         .lrnAcnutAckestYn(tmp.get("평생학습계좌제평가인정여부").equals("Y"))
                         .referenceDate(referenceDate2)
                         .insttCode((String) tmp.get("제공기관코드"))
+                        .remainDay(LocalDate.now().until(rceptEndDate2, ChronoUnit.DAYS))
                         .build();
 
                 lectureRepository.save(lecture);
@@ -267,6 +267,7 @@ public class LectureService {
                         .lrnAcnutAckestYn(tmp.get("lrnAcnutAckestYn").equals("Y"))
                         .referenceDate(referenceDate2)
                         .insttCode((String) tmp.get("insttCode"))
+                        .remainDay(LocalDate.now().until(rceptEndDate2, ChronoUnit.DAYS))
                         .build();
 
                 lectureRepository.save(lecture);

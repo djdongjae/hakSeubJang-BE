@@ -1,53 +1,109 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="/common2.css">
-  <script src="/common2.js"></script>
-  <style>
-    div.container { width: 600px; margin: 50px auto; font-size: 10pt; }
-    form { width: 600px; margin: auto;
-      box-shadow: 0 0 4px lightgray, 2px 2px 4px gray; overflow: auto; }
-    div.title { font-size: 20pt; padding: 10px; background-color: #eee; }
-    table { margin: 20px; }
-    td { min-width: 100px; padding: 5px; }
-    td:nth-child(1) { text-align: right; }
-    input, select { padding: 5px; }
-    .btn { padding: 0.4em 1em; border: 1px solid gray;
-      border-radius: 0.5em; background: linear-gradient(#fff, #ddd);
-      text-decoration: none; color: black; display: inline-block; }
-    button { margin: 5px 0 20px 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script th:src="@{https://use.fontawesome.com/releases/v5.2.0/js/all.js}"></script>
+
+    <!-- favicon 적용 모든 html에 적용되어야 함.-->
+    <link rel="icon" th:href="@{/img/icon_regular.png}">
+
+    <!-- reset.css, common 모든 html에 적용되어야 함. -->
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/edit.css}">
+
+    <title>평생학습의 장터, 학습장</title>
 </head>
 <body>
-<div class="container">
-  <form th:object="${requestDto}" method="post" th:action="@{/review/create}">
-    <div class="title">후기 작성</div>
-    <table>
-      <tr>
-        <td>강좌명 : </td>
-        <td><input type="text" th:value="${lctreNm}" readonly></td>
-      </tr>
-      <tr>
-        <td>강좌 ID : </td>
-        <td><input type="text" th:field="*{lectureId}" readonly></td>
-      </tr>
-      <tr>
-        <td>제목 : </td>
-        <td><input type="text" th:field="*{title}" placeholder="제목을 입력하세요"></td>
-      </tr>
-      <tr>
-        <td>내용 : </td>
-        <td><textarea type="text" rows="15" cols="50" th:field="*{content}" placeholder="내용을 입력하세요"></textarea></td>
-      </tr>
-    </table>
-    <hr />
-    <div style="margin: 10px">
-      <input type="submit" class="btn" />
-      <a th:href="@{/lecture/detail(id=${requestDto.getLectureId()})}" class="btn">목록으로</a>
+<div id="root">
+    <!-- nav -->
+    <div class="nav_container">
+        <nav class="nav">
+            <a class="nav_logo" href="/">
+                <img class="logo" th:src="@{/img/icon_word.png}">
+            </a>
+            <div class="navbar_Loginwrapper" sec:authorize="!isAuthenticated()">
+                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
+                <a th:href="@{/user/login}" class="nav_list">로그인</a>
+            </div>
+            <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
+                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
+                <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>
+                <span th:text="${session.user.getName()}"></span>
+                <form th:action="@{/user/logout}" method="post">
+                    <input type="submit" th:value="로그아웃" class="nav_list">
+                </form>
+            </div>
+        </nav>
+    </div> <!-- nav_container -->
+
+    <!-- 여기서부터 코드 짜면됨. 단, content class이름 자체는 절대 건들지 말 것. -->
+    <div class="content">
+        <form th:object="${requestDto}" method="post" th:action="@{/review/create}">
+            <section class="edit">
+                <div class="edit__start">
+                    <div class="lecture_info">
+                        <div class="lecture__name">
+                            <input type="text" id="lecture" th:value="${lctreNm}" readonly style="width: 500px;">
+                        </div>
+                        <div class="lecture__id">
+                            <input type="text" id="lecture__id" th:field="*{lectureId}" readonly>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="title-form">
+                        <div class="title-form__display-flex">
+                            <input type="text" id="title" placeholder="제목을 입력해주세요" th:field="*{title}">
+                        </div>
+                    </div>
+                    <div class="edit__main">
+                        <div id="main-form">
+                            <div class="main-form__display-flex">
+                                <textarea id="main" placeholder="내용을 입력해주세요" type="text" th:field="*{content}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit__write">
+                        <div id="write-form">
+                            <div class="write-form__display-flex">
+                                <div id="btn_group">
+                                    <a th:href="@{/user/mypage}"><button id="cancel">취소</button></a>
+                                    <button type="submit" id="save">저장</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+
     </div>
-  </form>
+
+    <!-- footer -->
+    <div class="footer_container">
+        <footer class="footer">
+            <div class="copyright">
+                <h2>학습장</h2>
+                <div class="copyright_content">
+                    <span>Contact</span>
+                    <span>lemonherb0323@naver.com</span>
+                </div>
+                <div class="copyright_content">
+                    <span>Copyright</span>
+                    <span>HakSeubJang. All rights reserved</span>
+                </div>
+            </div>
+            <div class="hakseubjang">
+                <a class="ft14-fw600" href="#">이용약관</a>
+                <a class="ft14-fw600" href="#">개인정보처리방침</a>
+                <a class="ft14-fw600" href="#">서비스소개</a>
+            </div>
+
+        </footer>
+    </div>
 </div>
+
 </body>
 </html>
-
