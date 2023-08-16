@@ -73,16 +73,39 @@
                             <h3 class="hs16fw500 mqheadline" th:text="${lecture.getOperPhoneNumber()}"></h3>
                         </button>
                     </a>
+                    <!-- 찜 기능 -->
                     <a th:href="@{/lecture/wish3(lectureId=${lecture.id})}">
-                        <button class="whiteBg" type="button"
-                                th:style="${lecture.getInWish()} ? 'background-color:#ff5e5e;' : ''">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        <button class="whiteBg" type="button" id="heartBtn"
+                                th:style="${lecture.getInWish()} ? 'background-color:#ff5e5e; border: 0;' : ''">
+                            <svg th:if="${!lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-heart" viewBox="0 0 16 16">
                                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                             </svg>
-                            <h3 class="hs16fw500">찜</h3>
+                            <svg th:if="${lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" style="color: #fff;" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/> 
+                                </svg>
+                            <h3 th:if="${!lecture.getInWish()}" class="hs16fw500">찜</h3>
+                            <h3 th:if="${lecture.getInWish()}" class="hs16fw500" style="color: #fff;">찜</h3>
                         </button>
                     </a>
+
+                    <!-- 찜 추가하시겠습니까 alert 메시지  -->
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        document.getElementById('heartBtn').addEventListener('click', function() {
+                            var lectureId = this.getAttribute('data-lecture-id');
+                            var isWished = /*[[${lecture.getInWish()}]]*/;
+                            var confirmed = confirm(isWished ? '찜 강좌를 해제하시겠습니까?' : '찜 강좌로 추가하시겠습니까?');
+                            
+                            if (confirmed) {
+                                var url = `@{/lecture/wish3(lectureId=${lectureId})}`;
+                                window.location.href = url;
+                            }
+                        });
+                        /*]]>*/
+                    </script>
+
+
                 </div>
             </div>
         </section> <!-- section_summerize-->
@@ -264,11 +287,11 @@
                 </div>
                 <div class="container_review_list">
 
-                    <!-- wrap_review 반`복 -->
+                    <!-- wrap_review 반복 -->
                     <div class="wrap_review" th:each="review : ${lecture.reviews}" id="click_review">
                         <div class="inner_review">
-                            <h2 class="fs20fw500" id="p_title" th:text="${review.title}"></h2>
-                            <p class="fs12fw500" id="p_content" th:text="${review.content}"></p>
+                            <h2 class="review_title" id="p_title" th:text="${review.title}"></h2>
+                            <p class="review_content" id="p_content" th:text="${review.content}"></p>
                             <div class="writer_information">
                                 <div class="wrap_writer_profile">
                                     <div class="writer_profile">
