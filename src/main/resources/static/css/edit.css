@@ -7,23 +7,24 @@
 
 }
 
-.edit{
-    position: relative;
-    bottom: 100px;    
+.edit {
+    max-width: var(--mypage-width);
+    margin: 130px auto;
 }
 
 #lecture{
-    width: 300px;
+    max-width: 300px;
     height: 40px;
     margin: 18px, 63px, 17px;
     padding: 0px, 0px, 26px;
     font-size: 20px;
     font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
+    outline: none;
 }
 
 #lecture__id{
     width: 50px;
-    height: 50px;
+    height: 100%;
     /*margin-right: 63px;*/
     /*margin-left: 63px;*/
     padding-top: 0px;
@@ -31,25 +32,24 @@
     padding-left: 0px;
     font-size: 14px;
     font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
+    outline: none;
 }
 
 #title{
-    width: 800px;
-    height: 72px;
-    margin: 18px, 63px, 17px;
-    padding: 0px, 0px, 26px;    
+    width: 100%;
+    height: 72px;   
     font-size: 30px;
     font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
-    
+    outline: none;
 }
 .edit__start{
-    width: var(--mypage-width);
-    margin: 130px auto 20px auto;
+    max-width: var(--mypage-width);
 
 }
 
 #title-form {
     border-bottom: 1px solid var(--gray-line);
+    padding: 0 5px 0 5px;
 }
 
 .title-form__display{
@@ -61,48 +61,54 @@
 }
 
 #main{
-    width: 800px;
-    height: 460px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
     font-size: 16px;
     resize: both;
     box-sizing: border-box;
     border: none;
     resize: none;
-    border-bottom: 1px solid var(--gray-line);
-    position: relative;
-    top: 14px;
+    outline: none;
     font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
 }
 
 .main-form__display-flex{
-    display: flex;
     width: 100%;
     height: 460px;
     /*margin-top: 18px;*/
     /*margin-right: 65px;*/
     /*margin-left: 65px;*/
     /*margin-bottom: 18px;*/
-    align-items: center;
-    justify-content: center;
 }
 
 .edit__main{
-    width: var(--mypage-width);
+    max-width: var(--mypage-width);
     margin: 0 auto 20px auto;
     vertical-align: top;
+    border-bottom: 1px solid var(--gray-line);
 }
 
 #main-form {
     border-bottom: 1px solid var(--gray-line);
 }
 
+#btn_group {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0 0 0;
+}
+
 #btn_group button{
     width: 80px;
     height: 40px;
     text-align: center;
-    position: relative;
-    left: 300px;
-    margin: 0px 10px 130px;
+    margin: 0px 10px 0 0;
+}
+
+.btn_group1 {
+    display: flex;
+    justify-content: center;
 }
 
 #cancel{
@@ -118,7 +124,7 @@
 
 #delete{
     border-radius: 5px;
-    color: #8b8b8b; 
+    color: #8b8b8b;
 }
 
 #btn_group button:hover{
@@ -127,21 +133,92 @@
 }
 
 #btn_group #delete{
-    position: relative;
-    left: 505px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
 }
 
 .lecture_info {
     display: flex;
     justify-content: space-between;
-}
-
-.lecture__name {
+    align-items: center;
+    padding: 0 5px 0 5px;
     height: 40px;
 }
+
+.lecture__name, .lecture__id {
+    height: 100%;
+}
+
 
 hr {
     background:#d9d9d9;
     height:1px;
     border:0;
+}
+
+/* 미디어 쿼리 */
+
+@media all and (min-width:1024px) {
+
+}
+
+/* 테블릿 가로, 테블릿 세로 (해상도 600px ~ 1023px)*/ 
+@media all and (max-width:1023px) {
+    .write-form__display-flex{
+        width: 100%;
+    }
+    #lecture{
+        font-size: 16px;
+    }
+    #lecture__id{
+        font-size: 16px;
+    }
+    #title{
+        font-size: 24px;
+    }
+    .edit {
+        margin: 60px auto;
+    }
+}
+
+/* 모바일 가로, 모바일 세로 (해상도 320px ~ 767px)*/ 
+@media all and (max-width:767px) {
+    .write-form__display-flex{
+        width: 100%;
+    }
+    #lecture{
+        font-size: 14px;
+    }
+    #lecture__id{
+        font-size: 14px;
+    }
+    #title{
+        font-size: 20px;
+    }
+    #main {
+        font-size: 8px;
+    }
+    .btn_group{
+        padding: 60px 0 0 0;
+    }
+    .edit__start{
+        max-width: var(--mypage-width);
+    }
+    #btn_group button{
+        width: 60px;
+        height: 30px
+    }
+    .edit {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+    #main {
+        font-size: 12px;
+    }
+}
+
+@media all and (max-width: 425px) {
+
 }
