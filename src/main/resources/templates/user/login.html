@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- iOS는 자동 링크가 될 수 있다. 그것을 막은 것. -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
 
     <!-- favicon 적용 모든 html에 적용되어야 함.-->
     <link rel="icon" th:href="@{/img/icon_regular.png}">
@@ -10,7 +16,6 @@
     <!-- reset.css, common 모든 html에 적용되어야 함. -->
     <link rel="stylesheet" th:href="@{/css/reset.css}">
     <link rel="stylesheet" th:href="@{/css/common.css}">
-
     <link rel="stylesheet" th:href="@{/css/login.css}">
 
     <title>평생학습의 장터, 학습장</title>
@@ -23,15 +28,13 @@
             <a class="nav_logo" th:href="@{/}">
                 <img class="logo" th:src="@{/img/icon_word.png}">
             </a>
-            <div class="navbar_Loginwrapper" sec:authorize="isAnonymous()">
+            <div class="navbar_Loginwrapper" sec:authorize="!isAuthenticated()">
                 <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
                 <a th:href="@{/user/login}" class="nav_list">로그인</a>
             </div>
             <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
-                <!--                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>-->
-                <!--                <a th:href="@{/user/mypage}" class="nav_list">마이페이지</a>-->
-                <!--                <a th:href="@{/user/logout}" class="nav_list"><span th:text="${userName}"></span>님 로그아웃</a>-->
-                <a th:href="@{/user/mypage}">마이페이지</a>
+                <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
+                <a th:href="@{/user/mypage}" class="nav_list" th:text="${session.user.getName()}"></a>
                 <form th:action="@{/user/logout}" method="post">
                     <input type="submit" th:value="로그아웃" class="nav_list">
                 </form>

@@ -7,10 +7,9 @@
 
 }
 
-.edit{
-    position: relative;
-    bottom: 100px;    
-    margin: 0 20px;
+.edit {
+    max-width: var(--mypage-width);
+    margin: 130px auto;
 }
 
 #lecture{
@@ -25,7 +24,7 @@
 
 #lecture__id{
     width: 50px;
-    height: 50px;
+    height: 100%;
     /*margin-right: 63px;*/
     /*margin-left: 63px;*/
     padding-top: 0px;
@@ -37,7 +36,7 @@
 }
 
 #title{
-    width: 800px;
+    width: 100%;
     height: 72px;   
     font-size: 30px;
     font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
@@ -45,7 +44,6 @@
 }
 .edit__start{
     max-width: var(--mypage-width);
-    margin: 130px auto 20px auto;
 
 }
 
@@ -63,37 +61,32 @@
 }
 
 #main{
-    width: 800px;
-    height: 460px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
     font-size: 16px;
-    padding: 5px 8px 4px 8px;
     resize: both;
     box-sizing: border-box;
     border: none;
     resize: none;
-    border-bottom: 1px solid var(--gray-line);
-    position: relative;
-    top: 14px;
     outline: none;
     font-family: "Noto Sans", "Noto Sans CJK KR", sans-serif;
 }
 
 .main-form__display-flex{
-    display: flex;
     width: 100%;
     height: 460px;
     /*margin-top: 18px;*/
     /*margin-right: 65px;*/
     /*margin-left: 65px;*/
     /*margin-bottom: 18px;*/
-    align-items: center;
-    justify-content: center;
 }
 
 .edit__main{
     max-width: var(--mypage-width);
     margin: 0 auto 20px auto;
     vertical-align: top;
+    border-bottom: 1px solid var(--gray-line);
 }
 
 #main-form {
@@ -110,7 +103,7 @@
     width: 80px;
     height: 40px;
     text-align: center;
-    margin: 0px 10px 130px;
+    margin: 0px 10px 0 0;
 }
 
 .btn_group1 {
@@ -143,17 +136,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 .lecture_info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0 5px 0 5px;
-}
-
-.lecture__name {
     height: 40px;
 }
+
+.lecture__name, .lecture__id {
+    height: 100%;
+}
+
 
 hr {
     background:#d9d9d9;
@@ -168,7 +165,7 @@ hr {
 }
 
 /* 테블릿 가로, 테블릿 세로 (해상도 600px ~ 1023px)*/ 
-@media all and (min-width:600px) and (max-width:1023px) {
+@media all and (max-width:1023px) {
     .write-form__display-flex{
         width: 100%;
     }
@@ -181,16 +178,13 @@ hr {
     #title{
         font-size: 24px;
     }
-    #main {
-        font-size: 12px;
-    }
     .edit {
-        margin: 0 35px;
+        margin: 60px auto;
     }
 }
 
 /* 모바일 가로, 모바일 세로 (해상도 320px ~ 767px)*/ 
-@media all and (min-width: 320px) and (max-width:767px) {
+@media all and (max-width:767px) {
     .write-form__display-flex{
         width: 100%;
     }
@@ -211,10 +205,20 @@ hr {
     }
     .edit__start{
         max-width: var(--mypage-width);
-        margin: 106px auto 20px auto;
     }
     #btn_group button{
         width: 60px;
         height: 30px
     }
+    .edit {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+    #main {
+        font-size: 12px;
+    }
+}
+
+@media all and (max-width: 425px) {
+
 }
