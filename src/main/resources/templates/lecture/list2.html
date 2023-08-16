@@ -56,64 +56,67 @@
         <form class="lecture_filter" th:action="@{/lecture/list}">
             <h2 class="lecture_list_title">강의 리스트</h2>
             <div class="filter_block">
+                <!-- 지역선택 필터 -->
+                <div class="filter_block_area">
+                    <p class="area_title">지역 선택</p>
+                    <select name="region" class="area_select">
+                        <option value="" th:text="전체" th:selected="${session.region} == ''"></option>
+                        <option value="서울" th:text="서울" th:selected="${session.region} == '서울'"></option>
+                        <option value="부산" th:text="부산" th:selected="${session.region} == '부산'"></option>
+                        <option value="대구" th:text="대구" th:selected="${session.region} == '대구'"></option>
+                        <option value="인천" th:text="인천" th:selected="${session.region} == '인천'"></option>
+                        <option value="광주" th:text="광주" th:selected="${session.region} == '광주'"></option>
+                        <option value="대전" th:text="대전" th:selected="${session.region} == '대전'"></option>
+                        <option value="울산" th:text="울산" th:selected="${session.region} == '울산'"></option>
+                        <option value="세종" th:text="세종" th:selected="${session.region} == '세종'"></option>
+                        <option value="경기" th:text="경기" th:selected="${session.region} == '경기'"></option>
+                        <option value="강원" th:text="강원" th:selected="${session.region} == '강원'"></option>
+                        <option value="충북" th:text="충북" th:selected="${session.region} == '충북'"></option>
+                        <option value="충남" th:text="충남" th:selected="${session.region} == '충남'"></option>
+                        <option value="전북" th:text="전북" th:selected="${session.region} == '전북'"></option>
+                        <option value="전남" th:text="전남" th:selected="${session.region} == '전남'"></option>
+                        <option value="경북" th:text="경북" th:selected="${session.region} == '경북'"></option>
+                        <option value="경남" th:text="경남" th:selected="${session.region} == '경남'"></option>
+                        <option value="제주" th:text="제주" th:selected="${session.region} == '제주'"></option>
+                    </select>
+                </div>
 
-                <div class="filter_and_schButton">
-
-                    <div class="filter_block_area">
-                        <p class="area_title">지역 선택</p>
-                        <select name="region" class="area_select">
-                            <option value="" th:text="전체" selected></option>
-                            <option value="서울" th:text="서울"></option>
-                            <option value="부산" th:text="부산"></option>
-                            <option value="대구" th:text="대구"></option>
-                            <option value="인천" th:text="인천"></option>
-                            <option value="광주" th:text="광주"></option>
-                            <option value="대전" th:text="대전"></option>
-                            <option value="울산" th:text="울산"></option>
-                            <option value="세종" th:text="세종"></option>
-                            <option value="경기" th:text="경기"></option>
-                            <option value="강원" th:text="강원"></option>
-                            <option value="충북" th:text="충북"></option>
-                            <option value="충남" th:text="충남"></option>
-                            <option value="전북" th:text="전북"></option>
-                            <option value="전남" th:text="전남"></option>
-                            <option value="경북" th:text="경북"></option>
-                            <option value="경남" th:text="경남"></option>
-                            <option value="제주" th:text="제주"></option>
-                        </select>
+                <!-- 온/오프라인 필터 -->
+                <div class="filter_block_onoff">
+                    <div class="onoff_title">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
+                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path d="M54.2 202.9C123.2 136.7 216.8 96 320 96s196.8 40.7 265.8 106.9c12.8 12.2 33 11.8 45.2-.9s11.8-33-.9-45.2C549.7 79.5 440.4 32 320 32S90.3 79.5 9.8 156.7C-2.9 169-3.3 189.2 8.9 202s32.5 13.2 45.2 .9zM320 256c56.8 0 108.6 21.1 148.2 56c13.3 11.7 33.5 10.4 45.2-2.8s10.4-33.5-2.8-45.2C459.8 219.2 393 192 320 192s-139.8 27.2-190.5 72c-13.3 11.7-14.5 31.9-2.8 45.2s31.9 14.5 45.2 2.8c39.5-34.9 91.3-56 148.2-56zm64 160a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z"/>
+                        </svg>
+                        <p class="onoff_title_p">온/오프라인</p>
                     </div>
-
-                    <!-- 온/오프라인 필터 -->
-                    <div class="filter_block_onoff">
-                        <div class="onoff_title">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
-                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                <path d="M54.2 202.9C123.2 136.7 216.8 96 320 96s196.8 40.7 265.8 106.9c12.8 12.2 33 11.8 45.2-.9s11.8-33-.9-45.2C549.7 79.5 440.4 32 320 32S90.3 79.5 9.8 156.7C-2.9 169-3.3 189.2 8.9 202s32.5 13.2 45.2 .9zM320 256c56.8 0 108.6 21.1 148.2 56c13.3 11.7 33.5 10.4 45.2-2.8s10.4-33.5-2.8-45.2C459.8 219.2 393 192 320 192s-139.8 27.2-190.5 72c-13.3 11.7-14.5 31.9-2.8 45.2s31.9 14.5 45.2 2.8c39.5-34.9 91.3-56 148.2-56zm64 160a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z"/>
-                            </svg>
-                            <p class="onoff_title_p">온/오프라인</p>
-                        </div>
-                        <div class="button_filter">
-                            <input type="radio" class="onoff" th:name="edcMthType" value="" checked>전체</input>
-                            <input type="radio" class="onoff" th:name="edcMthType" value="오프라인">오프라인</input>
-                            <input type="radio" class="onoff" th:name="edcMthType" value="온라인">온라인</input>
-                        </div>
-                    </div>
-
-                    <!-- 모집대상 필터 -->
-                    <div class="filter_block_anyone">
-                        <p class="anyone_p">모집대상</p>
-                        <div class="button_filter">
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="" checked>전체</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="성인">성인</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="어린이">어린이</input>
-                            <input type="radio" class="anyone" th:name="edcTrgetType" value="장애인">장애인</input>
-                        </div>
+                    <div class="button_filter">
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value=""
+                                th:checked="${session.edcMthType} == ''">전체</input>
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value="오프라인"
+                                th:checked="${session.edcMthType} == '오프라인'">오프라인</input>
+                        <input type="radio" class="onoff-1" th:name="edcMthType" value="온라인"
+                                th:checked="${session.edcMthType} == '온라인'">온라인</input>
                     </div>
                 </div>
 
-                <div class="filter_schButton">
-                    <button id="filter_search" type="submit">조회</button>
+                <!-- 모집대상 필터 -->
+                <div class="filter_block_anyone">
+                    <p class="anyone_p">모집대상</p>
+                    <div class="button_filter">
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value=""
+                                th:checked="${session.edcTrgetType} == ''">전체</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="성인"
+                                th:checked="${session.edcTrgetType} == '성인'">성인</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="어린이"
+                                th:checked="${session.edcTrgetType} == '어린이'">어린이</input>
+                        <input type="radio" class="anyone-1" th:name="edcTrgetType" value="장애인"
+                                th:checked="${session.edcTrgetType} == '장애인'">장애인</input>
+                    </div>
                 </div>
+            </div>
+            <div class="filter_schButton">
+                <button id="filter_search" type="submit">조회</button>
             </div>
         </form>
 
