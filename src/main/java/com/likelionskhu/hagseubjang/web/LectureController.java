@@ -112,7 +112,6 @@ public class LectureController {
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("lecturePage", lecturePage);
 
         int totalPages = lecturePage.getTotalPages();
         if (totalPages > 0) {
@@ -125,7 +124,16 @@ public class LectureController {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("user", user);
+            for (Lecture lecture : lecturePage) {
+                lecture.setInWish(false);
+                for (Wish wish : lecture.getWishes()) {
+                    if (wish.getUser().getEmail().equals(user.getEmail())) {
+                        lecture.setInWish(true);
+                    }
+                }
+            }
         }
+        model.addAttribute("lecturePage", lecturePage);
         return "lecture/list2";
     }
 
