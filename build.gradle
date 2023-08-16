@@ -35,7 +35,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation 'org.springframework.session:spring-session-jdbc:2.7.0'
+//    implementation 'org.springframework.session:spring-session-jdbc:2.7.0'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'
 
 }
