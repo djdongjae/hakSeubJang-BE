@@ -44,6 +44,8 @@ public class LectureService {
         List<Lecture> lectures =
                 lectureRepository.findByEdcRdnmadrLikeOrderByRceptEndDate("%" + region + "%");
 
+        lectures = lectures.stream().filter(l -> l.getRemainDay() >= 0).toList();
+
         List<Lecture> result1;
 
         if (edcMthType.equals("")) {
@@ -102,6 +104,7 @@ public class LectureService {
         List<Lecture> lectures =
                 lectureRepository.findByLctreNmLikeOrderByRceptEndDate("%" + srchText + "%");
 
+        lectures = lectures.stream().filter(l -> l.getRemainDay() >= 0).toList();
 
         List<Lecture> list;
 
@@ -192,8 +195,8 @@ public class LectureService {
         }
     }
 
-    // OpenAPI를 이용하여 매일 11시 55분에 새로운 강좌 추가
-    @Scheduled(cron = "0 42 03 * * *")
+    // OpenAPI를 이용하여 매일 00시 00분에 새로운 강좌 추가
+    @Scheduled(cron = "0 00 00 * * *")
     @Transactional
     public void update() throws Exception {
 
@@ -278,6 +281,8 @@ public class LectureService {
         for (Lecture lecture : lectures) {
             lecture.setRemainDay(LocalDate.now().until(lecture.getRceptEndDate(), ChronoUnit.DAYS));
         }
+
+
     }
 
 }
