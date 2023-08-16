@@ -79,7 +79,7 @@
                                 <div class="list_block_header_start">
                                     <button class="onoff" th:text="${wish.lecture.getEdcMthType()}"
                                             th:style="${wish.lecture.getEdcMthType()} == '온라인' ? 'background-color:#FFE0B2; color:#C58E00;' : ''"></button>
-                                    <button class="anyone" th:text="${wish.lecture.getEdcMthType()}"></button>
+                                    <button class="anyone" th:text="${wish.lecture.getEdcTrgetType()}"></button>
                                 </div>
                                 <div class="list_block_header_end" th:text="'D-' + ${wish.lecture.getRemainDay()}"></div>
                             </div>
