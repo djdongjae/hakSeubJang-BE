@@ -9,7 +9,8 @@
     align-items: center;
     gap: 5px;
     margin: 40px 0;
-    height: 200px;
+    padding: 20px 0;
+    min-height: 200px;
     border-radius: 16px;
     border: 1px solid #D9D9D9;
     background: #FFF;
@@ -22,7 +23,7 @@
 }
 
 .container_summerize h1 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
 }
 
@@ -274,7 +275,6 @@
     word-wrap: break-word;
     overflow: hidden;
     line-height: 1.2;
-    white-space: nowrap;
 }
 
 .review_content_tg {
@@ -289,7 +289,6 @@
     word-wrap: break-word;
     /* overflow: hidden; */
     line-height: 1.2;
-    /* white-space: nowrap; */
 }
 
 .writer_information {
@@ -358,6 +357,9 @@
         flex-direction: column;
         align-items: normal;
     }
+    .container_summerize h1 {
+        font-size: 16px;
+    }
 }
 
 @media all and (max-width: 425px){
@@ -410,5 +412,4 @@
     .fs16fw400 {
         font-size: 12px;
     }
-
 }

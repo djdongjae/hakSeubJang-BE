@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- iOS는 자동 링크가 될 수 있다. 그것을 막은 것. -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+
     <script th:src="@{https://use.fontawesome.com/releases/v5.2.0/js/all.js}"></script>
 
     <!-- favicon 적용 모든 html에 적용되어야 함.-->
@@ -60,8 +66,9 @@
                             <h3 class="hs16fw500 mqheadline">홈페이지 바로가기</h3>
                         </button>
                     </a>
-                    <a th:href="@{tel:${lecture.getOperPhoneNumber()}}">
-                        <button class="btn_summerize" type="button">
+                    
+                    <a target="_parent" id="phoneNumBtn">
+                        <button class="btn_summerize" type="button" id="phoneNumBtn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M16.8111 21.8456C16.0778 21.8402 15.3477 21.7481 14.6361 21.5714C12.1784 20.9784 9.64763 19.4742 7.51107 17.3358C5.37451 15.1974 3.86841 12.6661 3.27545 10.2108C2.65107 7.62798 3.09638 5.41829 4.52795 3.98673L4.9367 3.57798C5.30755 3.20787 5.81009 3 6.33404 3C6.85798 3 7.36053 3.20787 7.73138 3.57798L10.0803 5.92642C10.4506 6.29715 10.6587 6.79974 10.6587 7.32376C10.6587 7.84778 10.4506 8.35037 10.0803 8.7211L8.69279 10.1081C9.35795 11.2753 10.2626 12.4434 11.3319 13.5127C12.4011 14.5819 13.5701 15.487 14.7369 16.1522L16.1239 14.7647C16.3074 14.5812 16.5252 14.4356 16.765 14.3362C17.0047 14.2369 17.2617 14.1857 17.5212 14.1857C17.7808 14.1857 18.0377 14.2369 18.2775 14.3362C18.5173 14.4356 18.7351 14.5812 18.9186 14.7647L21.267 17.1131C21.6374 17.4837 21.8455 17.9863 21.8455 18.5102C21.8455 19.0342 21.6374 19.5368 21.267 19.9074L20.8578 20.3161C19.8486 21.3272 18.4517 21.8456 16.8111 21.8456ZM6.33404 4.40532C6.2592 4.40495 6.18503 4.41952 6.11589 4.44817C6.04675 4.47683 5.98402 4.51899 5.93138 4.5722L5.52216 4.98095C4.45013 6.05298 4.13701 7.79345 4.64045 9.87892C5.17341 12.0881 6.54545 14.3836 8.50341 16.3411C10.4614 18.2986 12.7564 19.6692 14.9661 20.2041C17.052 20.7075 18.7915 20.3944 19.8636 19.3224L20.2723 18.9136C20.3791 18.8067 20.4391 18.6618 20.4391 18.5107C20.4391 18.3596 20.3791 18.2147 20.2723 18.1078L17.9244 15.7594C17.8175 15.6526 17.6726 15.5926 17.5215 15.5926C17.3704 15.5926 17.2255 15.6526 17.1186 15.7594L15.3603 17.5177C15.2548 17.6232 15.1184 17.6925 14.971 17.7154C14.8235 17.7383 14.6725 17.7137 14.54 17.6452C13.0986 16.8999 11.6454 15.8147 10.3376 14.5069C9.02982 13.1991 7.94701 11.7469 7.19982 10.3055C7.1312 10.173 7.10653 10.022 7.12937 9.87458C7.1522 9.7271 7.22137 9.59072 7.32685 9.48517L9.0856 7.72688C9.1924 7.62 9.25239 7.47509 9.25239 7.32399C9.25239 7.1729 9.1924 7.02799 9.0856 6.9211L6.73716 4.5722C6.68436 4.51908 6.62153 4.47698 6.55233 4.44834C6.48313 4.41969 6.40893 4.40507 6.33404 4.40532Z"
                                       fill="white"/>
@@ -73,16 +80,52 @@
                             <h3 class="hs16fw500 mqheadline" th:text="${lecture.getOperPhoneNumber()}"></h3>
                         </button>
                     </a>
-                    <a th:href="@{/lecture/wish3(lectureId=${lecture.id})}">
-                        <button class="whiteBg" type="button"
-                                th:style="${lecture.getInWish()} ? 'background-color:#ff5e5e;' : ''">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        var phoneNumber = /*[[${lecture.getOperPhoneNumber()}]]*/;
+                        document.getElementById('phoneNumBtn').addEventListener('click', function() {
+                            var url = 'tel:' + phoneNumber;
+                            document.location.href = url;
+                        });
+                        /*]]>*/
+                    </script>
+                    
+                    <!-- 찜 기능 -->
+                        <button class="whiteBg" type="button" id="heartBtn"
+                                th:style="${lecture.getInWish()} ? 'background-color:#ff5e5e; border: 0;' : ''">
+                            <svg th:if="${!lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-heart" viewBox="0 0 16 16">
                                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                             </svg>
-                            <h3 class="hs16fw500">찜</h3>
+                            <svg th:if="${lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" style="color: #fff;" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/> 
+                                </svg>
+                            <h3 th:if="${!lecture.getInWish()}" class="hs16fw500">찜</h3>
+                            <h3 th:if="${lecture.getInWish()}" class="hs16fw500" style="color: #fff;">찜</h3>
                         </button>
-                    </a>
+
+                    <!-- 찜 추가하시겠습니까 alert 메시지  -->
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        document.getElementById('heartBtn').addEventListener('click', function() {
+                            var lectureId = /*[[${lecture.getId()}]]*/;
+                            var isWished = /*[[${lecture.getInWish()}]]*/;
+                            var user = /*[[${session.user}]]*/;
+
+                            var confirmed = confirm(isWished ? '찜 강좌를 해제하시겠습니까?' : '찜 강좌로 추가하시겠습니까?');
+                            
+                            if (confirmed) {
+                                if (!user) {
+                                    alert("로그인이 필요합니다.");
+                                }
+                                    window.location.href = 'wish3?lectureId=' + lectureId;
+                            }
+                        });
+                        /*]]>*/
+                    </script>
+
+
                 </div>
             </div>
         </section> <!-- section_summerize-->
@@ -264,11 +307,11 @@
                 </div>
                 <div class="container_review_list">
 
-                    <!-- wrap_review 반`복 -->
+                    <!-- wrap_review 반복 -->
                     <div class="wrap_review" th:each="review : ${lecture.reviews}" id="click_review">
                         <div class="inner_review">
-                            <h2 class="fs20fw500" id="p_title" th:text="${review.title}"></h2>
-                            <p class="fs12fw500" id="p_content" th:text="${review.content}"></p>
+                            <h2 class="review_title" id="p_title" th:text="${review.title}"></h2>
+                            <p class="review_content" id="p_content" th:text="${review.content}"></p>
                             <div class="writer_information">
                                 <div class="wrap_writer_profile">
                                     <div class="writer_profile">

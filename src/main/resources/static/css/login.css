@@ -19,8 +19,6 @@
     width: 150px;
 }
 
-
-
 .btn_social {
     display: flex;
     justify-content: center;
@@ -42,6 +40,7 @@
 .fs18fw600 {
     font-size: 18px;
     font-weight: 600;
+    color: #000;
 }
 
 /* 미디어 쿼리 */
