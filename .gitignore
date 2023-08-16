@@ -275,7 +275,6 @@ Temporary Items
 *.icloud
 
 ### Gradle ###
-.gradle
 **/build/
 !src/**/build/
 
@@ -303,4 +302,4 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,intellij,eclipse,macos
 
-application-secrets.properties
+application.properties
