@@ -16,22 +16,38 @@
 }
 
 .account_user {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
+    border-radius: 99%;
+    overflow: hidden;
 }
 
-.account_user svg {
+.account_user img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.account_mail {
+.account_inform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account_inform h2 {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 500;
+}
+
+.account_inform p {
+    font-size: 16px;
 }
 
 /* 찜, 후기작성 페이지 선택 */
+.list {
+    margin: 0 auto;
+}
+
 .list_container {
     display: flex;
     gap: 30px;
@@ -45,18 +61,23 @@
     display: inline-block;
     cursor: pointer;
     text-align: center;
-    font-weight:bold;
-    font-size:20px;
+    font-weight: 500;
+    font-size:24px;
 }
 
-.list_select input[type=radio]+label{
-    background-color: #fff;
-    color: #333;
+.list_select input[type=radio]:checked ~ label{
+    color: #000;
+    padding: 5px;
+    border-bottom: 5px solid #000;
 }
 
-.list_select input[type=radio]:checked+label{
-    text-decoration: underline #CDCDCD;
-    color: #333;
+.list_select > label {
+    cursor: pointer;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--gray-line);
 }
 
 .list_content {
@@ -141,7 +162,8 @@
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
-    background: var(--gray-line)
+    background: var(--gray-line);
+    color: #000;
 }
 
 .list_block_option_detail:hover {
@@ -435,6 +457,142 @@
     color: #779C3C;
 }
 
+.wrap_review {
+    cursor: pointer;
+}
+
+.conatiner_review_list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+}
+
+.inner_review {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--gray-line);
+    background: #FFF;
+    box-shadow: 0px 10px 30px 0px rgba(138, 149, 158, 0.20);
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
+
+.inner_review:active {
+    background: rgba(138, 149, 158, 0.20);
+}
+
+.review_title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    height: 1.2em;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.review_title_tg {
+    /* display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; */
+    /* height: 1.2em; */
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.review_content {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 2.4em;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.review_content_tg {
+    /* display: -webkit-box; */
+    /* -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; */
+    /* height: 2.4em; */
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    /* text-overflow: ellipsis; */
+    word-wrap: break-word;
+    /* overflow: hidden; */
+    line-height: 1.2;
+}
+
+.writer_information {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.wrap_writer_profile {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.writer_profile {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: var(--gray-line);
+    border-radius: 99%;
+    overflow: hidden;
+}
+
+.writer_img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.grayfs12fw500{
+    color: var(--gray-box);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.container_review_list {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.btn_option_detail {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+}
+
 /* 미디어 쿼리 */
 
 /* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
@@ -599,13 +757,6 @@
 /* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
 @media all and (max-width:767px) {
     .account_user {
-        width: 40px;
-        height: 40px;
-    }
-
-    img {
-        vertical-align: middle;
-        border: none;
         width: 40px;
         height: 40px;
     }
@@ -809,32 +960,22 @@
         width: 40px;
         height: 40px;
     }
-
-    img {
-        vertical-align: middle;
-        border: none;
-        width: 40px;
-        height: 40px;
-    }
     
     .account_mail {
         font-size: 10px;
         margin: 5px;
     }
 
-    .list_select input[type=radio]+label{
-        cursor: pointer;
-        line-height: 24px;
-        font-size: 10px;
-    }
-
     .list_container {
         gap: 20px;
+        margin: 0 auto;
+        width: 100%;
     }
 
     /* 찜목록 -3개당 1열 배치 */
     .list_select_content_1 {
         grid-template-columns: repeat(1, 1fr);
+        margin: 0 auto;
     }
 
     /* 강좌 한 개(블록) */
@@ -932,5 +1073,9 @@
     
     .search_bar button {
         font-size: 10px;
+    }
+    .list_content {
+        margin: 0 auto;
+        width: 100%;
     }
 }
