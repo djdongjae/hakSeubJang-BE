@@ -64,7 +64,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 150px auto;
+    margin: 300px auto;
     width: var(--primary-width);
 }
 
@@ -302,6 +302,7 @@ button.scroll_down {
         width: auto;
         padding: 0 10px;
         justify-content: space-around;
+        margin: 200px auto;
     }
     .ft36gr {
         font-size: 20px;

@@ -187,30 +187,30 @@
         <div class="list_page">
             <ul class="pagination model"
                 th:with="start=${(lecturePage.number/10)*10 + 1}, end=(${(lecturePage.totalPages == 0) ? 1 : (start + (10 - 1) < lecturePage.totalPages ? start + (10 - 1) : lecturePage.totalPages)})">
-                <li th:if="${start > 1}">
+                <li th:if="${start > 1}"  class="pagination_end">
                     <a th:href="@{/lecture/list(page=1, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                       class="first" th:text="'<<'"></a>
+                       class="first anchor_pag" th:text="'<<'"></a>
                 </li>
 
-                <li th:if="${start > 1}">
+                <li th:if="${start > 1}"  class="pagination_end">
                     <a th:href="@{/lecture/list(page=${start - 10}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                       class="arrow left" th:text="'<'"></a>
+                       class="arrow left anchor_pag" th:text="'<'"></a>
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(start, end)}" class="pagination_center">
                     <a th:text="${page}"
                        th:href="@{/lecture/list(page=${page}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                       class="num"></a>
+                       class="num anchor_pag"></a>
                 </li>
 
-                <li th:if="${end < lecturePage.totalPages}">
+                <li th:if="${end < lecturePage.totalPages}" class="pagination_end">
                     <a th:href="@{/lecture/list(page=${start + 10}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                       class="arrow right" th:text="'>'"></a>
+                       class="arrow right anchor_pag" th:text="'>'"></a>
                 </li>
 
-                <li th:if="${end < lecturePage.totalPages}">
+                <li th:if="${end < lecturePage.totalPages}"  class="pagination_end">
                     <a th:href="@{/lecture/list(page=${lecturePage.totalPages}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                       th:text="'>>'" class="last"></a>
+                       th:text="'>>'" class="last anchor_pag"></a>
                 </li>
             </ul>
         </div>
