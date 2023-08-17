@@ -139,7 +139,7 @@
                         </div>
                         <div th:if="${lecture.getRemainDay() == 0}" class="list_block_header_end" th:text="'D-DAY'"></div>
                         <div th:if="${lecture.getRemainDay() > 0 and lecture.getRemainDay() < 1000}" class="list_block_header_end" th:text="'D-' + ${lecture.getRemainDay()}"></div>
-                        <div th:if="${lecture.getRemainDay() >= 1000}" class="list_block_header_end" th:text="'D-999+'"></div>
+                        <div th:if="${lecture.getRemainDay() >= 1000}" class="list_block_header_end" th:text="'상시'"></div>
                     </div>
                     <div class="list_block_title" th:text="${lecture.getLctreNm()}"></div>
                     <div class="list_block_location">
@@ -165,8 +165,8 @@
                                 <h3 th:if="${lecture.getInWish()}" class="fs16fw500" style="color: #fff;">찜</h3>
                             </a>
                         </div>
-
-                        <div sec:authorize="!isAuthenticated()" class="tab_block">
+                                
+                                <div sec:authorize="!isAuthenticated()" class="tab_block">
                             <a class="list_block_option_heart" th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
                                 class="bi bi-heart" viewBox="0 0 16 16">
@@ -197,9 +197,9 @@
                        class="arrow left anchor_pag" th:text="'<'"></a>
                 </li>
 
-                <li th:if="${currentPage > 1}">
+                <li th:if="${currentPage > 1}" class="pagination_end mobile_lr">
                     <a th:href="@{/lecture/list(page=${currentPage - 1}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                    th:text="'이전'"></a>
+                    class="anchor_pag" th:text="'←'"></a>
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(start, end)}" class="pagination_center">
@@ -208,14 +208,14 @@
                        class="num anchor_pag"></a>
                 </li>
 
+                <li th:if="${currentPage < lecturePage.totalPages}" class="pagination_end mobile_lr">
+                    <a th:href="@{/lecture/list(page=${currentPage + 1}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
+                    class="anchor_pag" th:text="'→'"></a>
+                </li>
+
                 <li th:if="${end < lecturePage.totalPages}" class="pagination_end">
                     <a th:href="@{/lecture/list(page=${start + 10}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
                        class="arrow right anchor_pag" th:text="'>'"></a>
-                </li>
-
-                <li th:if="${currentPage < lecturePage.totalPages}">
-                    <a th:href="@{/lecture/list(page=${currentPage + 1}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                       th:text="'다음'"></a>
                 </li>
 
                 <li th:if="${end < lecturePage.totalPages}"  class="pagination_end">

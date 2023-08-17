@@ -131,10 +131,19 @@
 }
 
 .list_block_title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     line-height: 1.2;
     height: 2.4em;
     font-size: 20px;
     font-weight: 500;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.2;
 }
 
 .list_block_location {
@@ -250,12 +259,8 @@
     cursor: pointer;
 }
 
-.arrow-left {
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid blue;
+.mobile_lr {
+    display: none;
 }
 
 /* 리스트페이지 */
@@ -995,4 +1000,21 @@
         margin: 0 auto;
         /* width: 100%; */
     }
+
+    /* 페이지네이션 */
+    .mobile_lr {
+        display: flex;
+    }
+    
+    .pagination_center {
+        display: none;
+    } 
+
+    .pagination_center, .pagination_end {
+        width: 30px;
+        height: 30px;
+
+    }
+    
+    
 }
