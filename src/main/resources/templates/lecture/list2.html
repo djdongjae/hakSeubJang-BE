@@ -179,29 +179,29 @@
         <div class="list_page">
             <ul class="pagination model"
                 th:with="start=${(lecturePage.number/10)*10 + 1}, end=(${(lecturePage.totalPages == 0) ? 1 : (start + (10 - 1) < lecturePage.totalPages ? start + (10 - 1) : lecturePage.totalPages)})">
-                <li th:if="${start > 1}">
-                    <a th:href="@{/lecture/list2(page=1, size=9, srchText=${session.srchText})}" class="first"
-                       th:text="'<<'"></a>
+                <li th:if="${start > 1}"  class="pagination_end">
+                    <a th:href="@{/lecture/list2(page=1, size=9, srchText=${session.srchText})}"
+                    class="first anchor_pag" th:text="'<<'"></a>
                 </li>
 
-                <li th:if="${start > 1}">
+                <li th:if="${start > 1}" class="pagination_end">
                     <a th:href="@{/lecture/list2(page=${start - 10}, size=9, srchText=${session.srchText})}"
-                       class="arrow left" th:text="'<'"></a>
+                       class="arrow left anchor_pag" th:text="'<'"></a>
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(start, end)}"  class="pagination_center">
                     <a th:text="${page}" th:href="@{/lecture/list2(page=${page}, size=9, srchText=${session.srchText})}"
-                       class="num"></a>
+                       class="num anchor_pag"></a>
                 </li>
 
-                <li th:if="${end < lecturePage.totalPages}">
+                <li th:if="${end < lecturePage.totalPages}" class="pagination_end"></li>>
                     <a th:href="@{/lecture/list2(page=${start + 10}, size=9, srchText=${session.srchText})}"
-                       class="arrow right" th:text="'>'"></a>
+                       class="arrow right anchor_pag" th:text="'>'"></a>
                 </li>
 
-                <li th:if="${end < lecturePage.totalPages}">
+                <li th:if="${end < lecturePage.totalPages}" class="pagination_end"></li>>
                     <a th:href="@{/lecture/list2(page=${lecturePage.totalPages}, size=9, srchText=${session.srchText})}"
-                       th:text="'>>'" class="last"></a>
+                       th:text="'>>'" class="last anchor_pag"></a>
                 </li>
             </ul>
         </div>

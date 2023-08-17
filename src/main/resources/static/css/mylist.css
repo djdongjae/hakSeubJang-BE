@@ -105,7 +105,7 @@
     gap: 10px;
     background: #FBFBFB;
     box-shadow: 0px 10px 30px 0px rgba(138, 149, 158, 0.20);
-    transition: all 0.3s;
+    transition: transform 0.3s;
 }
 
 .list_block:hover {
@@ -159,7 +159,8 @@
     border-radius: 5px;
     justify-content: center;
     align-items: center;
-    font-size: 12px
+    font-size: 12px;
+    cursor: pointer;
 }
 
 .list_block_option_detail {
@@ -215,67 +216,37 @@
 }
 
 /* 페이지네이션 */
-.page {
-    text-align: center;
-    width: 50%;
-}
-
-.list_page {
-    text-align: center;
-}
-
 .pagination {
-    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0;
+}
+
+.pagination_center, .pagination_end {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    margin-top: 20px;
-}
-
-/* 숫자 스타일 */
-.pagination a {
-    float: left;
-    display: block;
-    font-size: 14px;
-    text-decoration: none;
-    padding: 5px 12px;
-    color: #96a0ad;
-    line-height: 1.5;
-}
-
-.first {
-    margin-right: 15px;
-}
-
-.last {
-    margin-left: 15px;
-}
-
-.first:hover, .last:hover, .left:hover, .right:hover {
-    color: #779C3C;
-}
-
-.pagination a.active {
-    cursor: default;
-    color: #ffffff;
-}
-
-.pagination a:active {
-    outline: none;
-}
-
-.model .num {
-    margin-left: 3px;
-    padding: 0;
+    border-radius: 99%;
+    font-size: 12px;
     width: 30px;
     height: 30px;
-    line-height: 30px;
-    border-radius: 100%;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 5px 5px 0px rgba(138, 149, 158, 0.20)
 }
 
-.model .num.active, .model .num:active {
-    background-color: #779C3C;
+.pagination_center:hover, .pagination_end:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.anchor_pag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
 }
 
@@ -682,26 +653,6 @@
         font-size: 8px;
     }
 
-    /* 페이지네이션 */
-    .pagination a {
-        font-size: 8px;
-        padding: 3px 3px;
-        line-height: 1.0;
-    }
-
-    .model .num {
-        margin-left: 3px;
-        padding: 0;
-    }
-
-    .first {
-        margin-right: 10px;
-    }
-    
-    .last {
-        margin-left: 10px;
-    }
-
     /* 리스트페이지 */
     .lecture_list_title {
         font-size: 20px;
@@ -832,26 +783,6 @@
     }
 
 
-    /* 페이지네이션 */
-    .pagination a {
-        font-size: 8px;
-        padding: 3px 3px;
-        line-height: 1.0;
-    }
-
-    .model .num {
-        margin-left: 3px;
-        padding: 0;
-    }
-
-    .first {
-        margin-right: 10px;
-    }
-    
-    .last {
-        margin-left: 10px;
-    }
-
     /* 리스트페이지 */
     .lecture_list_title {
         font-size: 20px;
@@ -945,19 +876,10 @@
     .list_block {
         height: 180px;
     }
-    
-    .pagination_center {
-        display: none;
-    }
-
-    .pagination a {
-        font-size: 16px;
-    }
-
-    .pagination {
-        width: 300px;
-        justify-content: space-around;
-        margin: 20px auto;
+    .pagination_center, .pagination_end {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
     }
 }
 
@@ -1022,21 +944,6 @@
         font-size: 8px;
     }
 
-    /* 페이지네이션 */
-
-    .model .num {
-        margin-left: 3px;
-        padding: 0;
-    }
-
-    .first {
-        margin-right: 10px;
-    }
-    
-    .last {
-        margin-left: 10px;
-    }
-
     /* 리스트페이지 */
     .lecture_list_title {
         font-size: 20px;
@@ -1086,6 +993,6 @@
     }
     .list_content {
         margin: 0 auto;
-        width: 100%;
+        /* width: 100%; */
     }
 }
