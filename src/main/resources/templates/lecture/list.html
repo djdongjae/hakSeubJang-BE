@@ -197,6 +197,11 @@
                        class="arrow left anchor_pag" th:text="'<'"></a>
                 </li>
 
+                <li th:if="${currentPage > 1}">
+                    <a th:href="@{/lecture/list(page=${currentPage - 1}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
+                    th:text="'이전'"></a>
+                </li>
+
                 <li th:each="page: ${#numbers.sequence(start, end)}" class="pagination_center">
                     <a th:text="${page}"
                        th:href="@{/lecture/list(page=${page}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
@@ -206,6 +211,11 @@
                 <li th:if="${end < lecturePage.totalPages}" class="pagination_end">
                     <a th:href="@{/lecture/list(page=${start + 10}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
                        class="arrow right anchor_pag" th:text="'>'"></a>
+                </li>
+
+                <li th:if="${currentPage < lecturePage.totalPages}">
+                    <a th:href="@{/lecture/list(page=${currentPage + 1}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
+                       th:text="'다음'"></a>
                 </li>
 
                 <li th:if="${end < lecturePage.totalPages}"  class="pagination_end">
