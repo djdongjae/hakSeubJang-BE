@@ -181,7 +181,7 @@
                 th:with="start=${(lecturePage.number/10)*10 + 1}, end=(${(lecturePage.totalPages == 0) ? 1 : (start + (10 - 1) < lecturePage.totalPages ? start + (10 - 1) : lecturePage.totalPages)})">
                 <li th:if="${start > 1}">
                     <a th:href="@{/lecture/list2(page=1, size=9, srchText=${session.srchText})}" class="first"
-                       th:text="'처음 페이지'"></a>
+                       th:text="'<<'"></a>
                 </li>
 
                 <li th:if="${start > 1}">
@@ -201,7 +201,7 @@
 
                 <li th:if="${end < lecturePage.totalPages}">
                     <a th:href="@{/lecture/list2(page=${lecturePage.totalPages}, size=9, srchText=${session.srchText})}"
-                       th:text="'끝 페이지'" class="last"></a>
+                       th:text="'>>'" class="last"></a>
                 </li>
             </ul>
         </div>
