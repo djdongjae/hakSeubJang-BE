@@ -36,8 +36,9 @@
             <div class="navbar_Loginwrapper" sec:authorize="isAuthenticated()">
                 <a th:href="@{/lecture/list}" class="nav_list">전체 강의</a>
                 <a th:href="@{/user/mypage}" class="nav_list" th:text="${session.user.getName()}"></a>
-                <form th:action="@{/user/logout}" method="post">
-                    <input type="submit" th:value="로그아웃" class="nav_list">
+                <form th:action="@{/user/logout}" method="post" style="display: flex;
+                align-items: center;">
+                    <input type="submit" th:value="로그아웃" class="sb_nav_list">
                 </form>
             </div>
 
