@@ -92,7 +92,9 @@
                                             th:style="${wish.lecture.getEdcMthType()} == '온라인' ? 'background-color:#FFE0B2; color:#C58E00;' : ''"></button>
                                     <button class="anyone" th:text="${wish.lecture.getEdcTrgetType()}"></button>
                                 </div>
-                                <div class="list_block_header_end" th:text="'D-' + ${wish.lecture.getRemainDay()}"></div>
+                                <div th:if="${wish.lecture.getRemainDay() <= 0}" class="list_block_header_end" th:text="'D-DAY'"></div>
+                                <div th:if="${wish.lecture.getRemainDay() > 0 and wish.lecture.getRemainDay() < 1000}" class="list_block_header_end" th:text="'D-' + ${wish.lecture.getRemainDay()}"></div>
+                                <div th:if="${wish.lecture.getRemainDay() >= 1000}" class="list_block_header_end" th:text="'상시'"></div>
                             </div>
                             <div class="list_block_title" th:text="${wish.lecture.getLctreNm()}"></div>
                             <div class="list_block_location">
