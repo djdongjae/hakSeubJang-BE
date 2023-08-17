@@ -99,11 +99,11 @@
                     </div>
                     <div class="button_filter">
                         <input type="radio" class="onoff-1" th:name="edcMthType" value=""
-                                th:checked="${session.edcMthType} == ''">전체</input>
+                               th:checked="${session.edcMthType} == ''">전체</input>
                         <input type="radio" class="onoff-1" th:name="edcMthType" value="오프라인"
-                                th:checked="${session.edcMthType} == '오프라인'">오프라인</input>
+                               th:checked="${session.edcMthType} == '오프라인'">오프라인</input>
                         <input type="radio" class="onoff-1" th:name="edcMthType" value="온라인"
-                                th:checked="${session.edcMthType} == '온라인'">온라인</input>
+                               th:checked="${session.edcMthType} == '온라인'">온라인</input>
                     </div>
                 </div>
 
@@ -112,13 +112,13 @@
                     <p class="anyone_p">모집대상</p>
                     <div class="button_filter">
                         <input type="radio" class="anyone-1" th:name="edcTrgetType" value=""
-                                th:checked="${session.edcTrgetType} == ''">전체</input>
+                               th:checked="${session.edcTrgetType} == ''">전체</input>
                         <input type="radio" class="anyone-1" th:name="edcTrgetType" value="성인"
-                                th:checked="${session.edcTrgetType} == '성인'">성인</input>
+                               th:checked="${session.edcTrgetType} == '성인'">성인</input>
                         <input type="radio" class="anyone-1" th:name="edcTrgetType" value="어린이"
-                                th:checked="${session.edcTrgetType} == '어린이'">어린이</input>
+                               th:checked="${session.edcTrgetType} == '어린이'">어린이</input>
                         <input type="radio" class="anyone-1" th:name="edcTrgetType" value="장애인"
-                                th:checked="${session.edcTrgetType} == '장애인'">장애인</input>
+                               th:checked="${session.edcTrgetType} == '장애인'">장애인</input>
                     </div>
                 </div>
             </div>
@@ -137,44 +137,55 @@
                                     th:style="${lecture.getEdcMthType()} == '온라인' ? 'background-color:#FFE0B2; color:#C58E00;' : ''"></button>
                             <button class="anyone" th:text="${lecture.getEdcTrgetType()}"></button>
                         </div>
-                        <div th:if="${lecture.getRemainDay() == 0}" class="list_block_header_end" th:text="'D-DAY'"></div>
-                        <div th:if="${lecture.getRemainDay() > 0 and lecture.getRemainDay() < 1000}" class="list_block_header_end" th:text="'D-' + ${lecture.getRemainDay()}"></div>
-                        <div th:if="${lecture.getRemainDay() >= 1000}" class="list_block_header_end" th:text="'상시'"></div>
+                        <div th:if="${lecture.getRemainDay() == 0}" class="list_block_header_end"
+                             th:text="'D-DAY'"></div>
+                        <div th:if="${lecture.getRemainDay() > 0 and lecture.getRemainDay() < 1000}"
+                             class="list_block_header_end" th:text="'D-' + ${lecture.getRemainDay()}"></div>
+                        <div th:if="${lecture.getRemainDay() >= 1000}" class="list_block_header_end"
+                             th:text="'상시'"></div>
                     </div>
                     <div class="list_block_title" th:text="${lecture.getLctreNm()}"></div>
                     <div class="list_block_location">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12.0029 0.996582C7.59651 0.996582 4.00098 4.59212 4.00098 8.99855C4.00098 11.9652 5.87914 15.2447 7.66978 17.9306C9.46041 20.6166 11.25 22.655 11.25 22.655C11.3399 22.7574 11.4498 22.8404 11.5729 22.8988C11.696 22.9572 11.8298 22.9898 11.966 22.9946C12.1021 22.9994 12.2379 22.9764 12.3648 22.9269C12.4918 22.8774 12.6073 22.8025 12.7042 22.7067C12.7042 22.7067 14.5175 20.8988 16.3214 18.3219C18.1252 15.7449 19.9975 12.3874 19.9975 8.99855C19.9975 4.59212 16.4094 0.996582 12.0029 0.996582ZM12.0029 2.99707C15.3285 2.99707 17.997 5.673 17.997 8.99855C17.997 11.6097 16.3787 14.7547 14.6826 17.1777C13.3572 19.0711 12.5474 19.8464 12.0325 20.3888C11.523 19.7847 10.6795 18.8465 9.3307 16.8234C7.62134 14.2593 6.00147 11.0319 6.00147 8.99855C6.00147 5.673 8.67739 2.99707 12.0029 2.99707Z" fill="#00001D"/>
-                            <path d="M12.0029 4.99756C9.80565 4.99756 8.00195 6.80125 8.00195 8.99854C8.00195 11.1958 9.80565 12.9995 12.0029 12.9995C14.2002 12.9995 15.9965 11.1958 15.9965 8.99854C15.9965 6.80125 14.2002 4.99756 12.0029 4.99756ZM12.0029 6.99805C13.1193 6.99805 14.0034 7.88213 14.0034 8.99854C14.0034 10.115 13.1193 10.999 12.0029 10.999C10.8865 10.999 10.0024 10.115 10.0024 8.99854C10.0024 7.88213 10.8865 6.99805 12.0029 6.99805Z" fill="#FF2876"/>
-                            </svg>
+                            <path d="M12.0029 0.996582C7.59651 0.996582 4.00098 4.59212 4.00098 8.99855C4.00098 11.9652 5.87914 15.2447 7.66978 17.9306C9.46041 20.6166 11.25 22.655 11.25 22.655C11.3399 22.7574 11.4498 22.8404 11.5729 22.8988C11.696 22.9572 11.8298 22.9898 11.966 22.9946C12.1021 22.9994 12.2379 22.9764 12.3648 22.9269C12.4918 22.8774 12.6073 22.8025 12.7042 22.7067C12.7042 22.7067 14.5175 20.8988 16.3214 18.3219C18.1252 15.7449 19.9975 12.3874 19.9975 8.99855C19.9975 4.59212 16.4094 0.996582 12.0029 0.996582ZM12.0029 2.99707C15.3285 2.99707 17.997 5.673 17.997 8.99855C17.997 11.6097 16.3787 14.7547 14.6826 17.1777C13.3572 19.0711 12.5474 19.8464 12.0325 20.3888C11.523 19.7847 10.6795 18.8465 9.3307 16.8234C7.62134 14.2593 6.00147 11.0319 6.00147 8.99855C6.00147 5.673 8.67739 2.99707 12.0029 2.99707Z"
+                                  fill="#00001D"/>
+                            <path d="M12.0029 4.99756C9.80565 4.99756 8.00195 6.80125 8.00195 8.99854C8.00195 11.1958 9.80565 12.9995 12.0029 12.9995C14.2002 12.9995 15.9965 11.1958 15.9965 8.99854C15.9965 6.80125 14.2002 4.99756 12.0029 4.99756ZM12.0029 6.99805C13.1193 6.99805 14.0034 7.88213 14.0034 8.99854C14.0034 10.115 13.1193 10.999 12.0029 10.999C10.8865 10.999 10.0024 10.115 10.0024 8.99854C10.0024 7.88213 10.8865 6.99805 12.0029 6.99805Z"
+                                  fill="#FF2876"/>
+                        </svg>
                         <p style="width: calc(100% - 34px);" th:text="${lecture.getEdcRdnmadr()}"></p>
                     </div>
                     <hr style="height: 0.5px; background: #CDCDCD; border: 0;">
                     <div class="list_block_option">
                         <div sec:authorize="isAuthenticated()" class="tab_block">
-                            <a class="list_block_option_heart" th:style="${lecture.getInWish()} ? 'background-color:#ff5e5e; border: 0;' : ''"
-                            th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
-                                <svg th:if="${!lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            <a class="list_block_option_heart"
+                               th:style="${lecture.getInWish()} ? 'background-color:#ff5e5e; border: 0;' : ''"
+                               th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
+                                <svg th:if="${!lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" width="12"
+                                     height="12" fill="currentColor"
+                                     class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                                 </svg>
-                                <svg th:if="${lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg" style="color: #fff;" width="12" height="12" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/> 
+                                <svg th:if="${lecture.getInWish()}" xmlns="http://www.w3.org/2000/svg"
+                                     style="color: #fff;" width="12" height="12" fill="currentColor"
+                                     class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                                 </svg>
                                 <h3 th:if="${!lecture.getInWish()}" class="fs16fw500">찜</h3>
                                 <h3 th:if="${lecture.getInWish()}" class="fs16fw500" style="color: #fff;">찜</h3>
                             </a>
                         </div>
-                                
-                                <div sec:authorize="!isAuthenticated()" class="tab_block">
-                            <a class="list_block_option_heart" th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
+                        <div sec:authorize="!isAuthenticated()" class="tab_block">
+                            <a class="list_block_option_heart"
+                               th:href="@{wish(lectureId=${lecture.getId()}, page=${currentPage}, size=${pageSize})}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
-                                class="bi bi-heart" viewBox="0 0 16 16">
-                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                     class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                                 </svg>
                                 <h3 class="fs16fw500">찜</h3>
                             </a>
                         </div>
+
                         <a th:href="@{detail(id=${lecture.id})}" class="tab_block">
                             <button class="list_block_option_detail">자세히 보기</button>
                         </a>
@@ -187,19 +198,19 @@
         <div class="list_page">
             <ul class="pagination model"
                 th:with="start=${(lecturePage.number/10)*10 + 1}, end=(${(lecturePage.totalPages == 0) ? 1 : (start + (10 - 1) < lecturePage.totalPages ? start + (10 - 1) : lecturePage.totalPages)})">
-                <li th:if="${start > 1}"  class="pagination_end">
+                <li th:if="${start > 1}" class="pagination_end">
                     <a th:href="@{/lecture/list(page=1, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
                        class="first anchor_pag" th:text="'<<'"></a>
                 </li>
 
-                <li th:if="${start > 1}"  class="pagination_end">
+                <li th:if="${start > 1}" class="pagination_end">
                     <a th:href="@{/lecture/list(page=${start - 10}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
                        class="arrow left anchor_pag" th:text="'<'"></a>
                 </li>
 
                 <li th:if="${currentPage > 1}" class="pagination_end mobile_lr">
                     <a th:href="@{/lecture/list(page=${currentPage - 1}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                    class="anchor_pag" th:text="'←'"></a>
+                       class="anchor_pag" th:text="'←'"></a>
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(start, end)}" class="pagination_center">
@@ -210,7 +221,7 @@
 
                 <li th:if="${currentPage < lecturePage.totalPages}" class="pagination_end mobile_lr">
                     <a th:href="@{/lecture/list(page=${currentPage + 1}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
-                    class="anchor_pag" th:text="'→'"></a>
+                       class="anchor_pag" th:text="'→'"></a>
                 </li>
 
                 <li th:if="${end < lecturePage.totalPages}" class="pagination_end">
@@ -218,7 +229,7 @@
                        class="arrow right anchor_pag" th:text="'>'"></a>
                 </li>
 
-                <li th:if="${end < lecturePage.totalPages}"  class="pagination_end">
+                <li th:if="${end < lecturePage.totalPages}" class="pagination_end">
                     <a th:href="@{/lecture/list(page=${lecturePage.totalPages}, size=9, region=${session.region}, edcMthType=${session.edcMthType}, edcTrgetType=${session.edcTrgetType})}"
                        th:text="'>>'" class="last anchor_pag"></a>
                 </li>
@@ -241,14 +252,13 @@
                 </div>
             </div>
             <div class="hakseubjang">
-                <a class="ft14-fw600" href="#">이용약관</a>
+                <a class="ft14-fw600"
+                   href="https://gracekim-space.notion.site/b654eb51c12a4968a64d2b0e8a03d421">이용약관</a>
                 <a class="ft14-fw600" href="#">개인정보처리방침</a>
                 <a class="ft14-fw600" href="#">서비스소개</a>
             </div>
-
         </footer>
     </div>
 </div>
-
 </body>
 </html>
