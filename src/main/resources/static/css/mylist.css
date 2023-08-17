@@ -105,6 +105,11 @@
     gap: 10px;
     background: #FBFBFB;
     box-shadow: 0px 10px 30px 0px rgba(138, 149, 158, 0.20);
+    transition: all 0.3s;
+}
+
+.list_block:hover {
+    transform: translateY(-5px);
 }
 
 .list_block_header {
@@ -166,7 +171,7 @@
     color: #000;
 }
 
-.list_block_option_detail:hover {
+.list_block_option_detail:hover, .list_block_option_heart:hover {
     background: var(--gray-box);
 }
 
@@ -380,6 +385,7 @@
 .onoff_title {
     display: flex;
     gap: 8px;
+    align-items: center;
 }
 
 .onoff_title_p {
@@ -451,10 +457,14 @@
 .anyone {
     background-color: #F0FFF0;
     border-radius: 5px;
+    max-width: 64px;
     min-width: 64px;
     height: 24px;
     font-size: 10pt;
-    color: #779C3C;
+    color: #779C3C; 
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 
 .wrap_review {
@@ -919,6 +929,7 @@
     }
     .onoff, .anyone, .on {
         min-width: 40px;
+        max-width: 40px;
     }
     .list_block_header_end {
         font-size: 12px;
@@ -975,7 +986,6 @@
     /* 찜목록 -3개당 1열 배치 */
     .list_select_content_1 {
         grid-template-columns: repeat(1, 1fr);
-        margin: 0 auto;
     }
 
     /* 강좌 한 개(블록) */
