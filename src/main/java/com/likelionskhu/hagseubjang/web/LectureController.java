@@ -140,6 +140,8 @@ public class LectureController {
     @GetMapping("detail")
     public String detail(Model model, int id) {
         Lecture lecture = lectureService.findById(id);
+        String homepageUrl = lecture.getHomepageUrl();
+        lecture.setHomepageUrl(removefirstChar(homepageUrl, "https://", "http://"));
         model.addAttribute("lecture", lecture);
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
@@ -152,6 +154,17 @@ public class LectureController {
             }
         }
         return "lecture/detail";
+    }
+
+    public static String removefirstChar(String str, String start, String start2)
+    {
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        if (!(str.startsWith(start) || str.startsWith(start2))) {
+            return "https://" + str;
+        }
+        return str;
     }
 
     @GetMapping("wish")
