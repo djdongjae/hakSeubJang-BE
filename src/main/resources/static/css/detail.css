@@ -292,6 +292,12 @@
     line-height: 1.2;
 }
 
+.wrap_empty {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
 .writer_information {
     display: flex;
     gap: 18px;
