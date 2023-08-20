@@ -42,12 +42,12 @@
 <img src="https://github.com/LikeLion-11th-SKHU/hakSeubJang-BE/assets/93889207/0e188551-65d6-406c-859a-a3ff4c614be2">
 <img src="https://github.com/LikeLion-11th-SKHU/hakSeubJang-BE/assets/93889207/ac917e3f-d39f-4572-999a-e4acd0c12df5">
 
-# 8. 활용 스택
+## 8. 활용 스택
 > 해당 프로젝트는 기본적으로 스프링 부트 2.7.14 버전과 Thymeleaf를 활용하여 제작되었다. 웹서버 프로그래밍이다 보니 프론트와 백엔드 구분이 명확하지 않고 와이어 프레임 형식으로 디자인이 적용 되지 않은 뷰를 통해 백엔드 기능을 테스트하고 추후 필요한 디자인을 입히는 방식으로 프로젝트를 진행하였다. 전체 활용 스택은 다음과 같다.
 <img src="https://github.com/LikeLion-11th-SKHU/hakSeubJang-BE/assets/93889207/f4578ea3-3ca0-49b6-bbe2-0f350943536c">
 <img src="https://github.com/LikeLion-11th-SKHU/hakSeubJang-BE/assets/93889207/5a2493d4-78ea-4bdf-bc67-b88222ab7753">
 
-# 9. 기타 구현 모습
+## 9. 기타 구현 모습
 <img src="https://github.com/LikeLion-11th-SKHU/hakSeubJang-BE/assets/93889207/a43ffe47-2495-4842-a9f8-8c120015d7f2">
 <img src="https://github.com/LikeLion-11th-SKHU/hakSeubJang-BE/assets/93889207/308e93dd-11a5-45c8-a4ac-0dd38e0d0bd6">
 
