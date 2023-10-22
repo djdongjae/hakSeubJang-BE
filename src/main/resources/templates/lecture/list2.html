@@ -50,6 +50,21 @@
 
     <!-- 여기서부터 코드 짜면됨. 단, content class이름 자체는 절대 건들지 말 것. -->
     <div class="content">
+        <div>
+            <table>
+                <tr>
+                    <td>순위</td>
+                    <td>강좌</td>
+                    <td>상세</td>
+                </tr>
+                <tr th:each="lecture, cnt: ${hotLectures}">
+                    <td th:text="${cnt.index + 1}"></td>
+                    <td th:text="${lecture.getLctreNm()}"></td>
+                    <td><a th:href="@{detail(id=${lecture.id})}">바로가기</a></td>
+                </tr>
+            </table>
+        </div>
+
         <!-- 검색창 -->
         <form class="search" th:action="@{/lecture/list2}">
             <h2 class="lecture_list_title">강의 검색</h2>

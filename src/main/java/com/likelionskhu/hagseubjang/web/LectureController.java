@@ -92,7 +92,7 @@ public class LectureController {
             lecture.setScore((double) sum / cnt);
         }
 
-
+        model.addAttribute("hotLectures", lectureService.hotLectures());
         model.addAttribute("lecturePage", lecturePage);
 
         return "lecture/list";
@@ -153,6 +153,7 @@ public class LectureController {
             lecture.setScore((double) sum / cnt);
         }
 
+        model.addAttribute("hotLectures", lectureService.hotLectures());
         model.addAttribute("lecturePage", lecturePage);
         return "lecture/list2";
     }
