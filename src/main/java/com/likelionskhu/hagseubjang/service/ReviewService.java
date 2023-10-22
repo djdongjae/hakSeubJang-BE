@@ -32,7 +32,6 @@ public class ReviewService {
         return review;
     }
 
-    @Transactional
     public ReviewSaveRequestDto create(int lectureId) {
         ReviewSaveRequestDto requestDto = new ReviewSaveRequestDto();
         requestDto.setLectureId(lectureId);
@@ -41,7 +40,14 @@ public class ReviewService {
 
     @Transactional
     public void save(ReviewSaveRequestDto requestDto) {
-        Review review = requestDto.toEntity();
+        ReviewSaveRequestDto requestDto1 = ReviewSaveRequestDto.builder()
+                .title(requestDto.getTitle())
+                .content(requestDto.getContent())
+                .grade(requestDto.getGrade())
+                .lectureId(requestDto.getLectureId())
+                .build();
+
+        Review review = requestDto1.toEntity();
 
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         User user1 = userRepository.findByEmail(user.getEmail())
@@ -60,7 +66,7 @@ public class ReviewService {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 후기가 없습니다. id=" + id));
 
-        review.update(requestDto.getTitle(), requestDto.getContent());
+        review.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getGrade() == null ? 0 : requestDto.getGrade());
     }
 
     @Transactional

@@ -32,7 +32,7 @@ public class ReviewController {
     @GetMapping("edit")
     public String edit(Model model, @RequestParam("reviewId") int reviewId) {
         Review review = reviewService.findById(reviewId);
-        ReviewUpdateRequestDto requestDto = new ReviewUpdateRequestDto(review.getTitle(), review.getContent());
+        ReviewUpdateRequestDto requestDto = new ReviewUpdateRequestDto(review.getTitle(), review.getContent(), review.getGrade());
         model.addAttribute("lctreNm", review.getLecture().getLctreNm());
         model.addAttribute("lectureId", review.getLecture().getId());
         model.addAttribute("requestDto", requestDto);

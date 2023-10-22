@@ -50,6 +50,21 @@
 
     <!-- 여기서부터 코드 짜면됨. 단, content class이름 자체는 절대 건들지 말 것. -->
     <div class="content">
+        <div>
+            <table>
+                <tr>
+                    <td>순위</td>
+                    <td>강좌</td>
+                    <td>상세</td>
+                </tr>
+                <tr th:each="lecture, cnt: ${hotLectures}">
+                    <td th:text="${cnt.index + 1}"></td>
+                    <td th:text="${lecture.getLctreNm()}"></td>
+                    <td><a th:href="@{detail(id=${lecture.id})}">바로가기</a></td>
+                </tr>
+            </table>
+        </div>
+
         <!-- 검색창 -->
         <form class="search" th:action="@{/lecture/list2}">
             <h2 class="lecture_list_title">강의 검색</h2>
@@ -78,12 +93,12 @@
                         <option value="세종" th:text="세종"></option>
                         <option value="경기" th:text="경기"></option>
                         <option value="강원" th:text="강원"></option>
-                        <option value="충북" th:text="충북"></option>
-                        <option value="충남" th:text="충남"></option>
-                        <option value="전북" th:text="전북"></option>
-                        <option value="전남" th:text="전남"></option>
-                        <option value="경북" th:text="경북"></option>
-                        <option value="경남" th:text="경남"></option>
+                        <option value="충청북도" th:text="충북"></option>
+                        <option value="충청남도" th:text="충남"></option>
+                        <option value="전라북도" th:text="전북"></option>
+                        <option value="전라남도" th:text="전남"></option>
+                        <option value="경상북도" th:text="경북"></option>
+                        <option value="경상남도" th:text="경남"></option>
                         <option value="제주" th:text="제주"></option>
                     </select>
                 </div>
@@ -129,6 +144,7 @@
                             <button class="onoff" th:text="${lecture.getEdcMthType()}"
                                     th:style="${lecture.getEdcMthType()} == '온라인' ? 'background-color:#FFE0B2; color:#C58E00;' : ''"></button>
                             <button class="anyone" th:text="${lecture.getEdcTrgetType()}"></button>
+                            <div th:text="${lecture.getScore()}"></div>
                         </div>
                         <div th:if="${lecture.getRemainDay() == 0}" class="list_block_header_end" th:text="'D-DAY'"></div>
                         <div th:if="${lecture.getRemainDay() > 0 and lecture.getRemainDay() < 1000}" class="list_block_header_end" th:text="'D-' + ${lecture.getRemainDay()}"></div>

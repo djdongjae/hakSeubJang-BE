@@ -11,10 +11,12 @@ import lombok.Setter;
 public class ReviewUpdateRequestDto {
     private String title;
     private String content;
+    private Integer grade;
 
     @Builder
-    public ReviewUpdateRequestDto(String title, String content) {
+    public ReviewUpdateRequestDto(String title, String content, Integer grade) {
         this.title = title;
         this.content = content;
+        this.grade = grade;
     }
 }

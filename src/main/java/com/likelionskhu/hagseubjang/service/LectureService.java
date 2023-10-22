@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @EnableScheduling
@@ -120,6 +121,13 @@ public class LectureService {
         return lecturePage;
     }
 
+    public List<Lecture> hotLectures() {
+        List<Lecture> top5Lectures = lectureRepository.findByWishCount().stream()
+                .limit(5)
+                .collect(Collectors.toList());
+
+        return top5Lectures;
+    }
 
     @Transactional
     public Lecture findById(int id) {
