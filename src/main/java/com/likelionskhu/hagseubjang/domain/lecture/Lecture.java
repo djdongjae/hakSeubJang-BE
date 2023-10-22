@@ -47,6 +47,7 @@ public class Lecture {
     private String insttCode;
     private Long remainDay;
     private Boolean inWish;
+    private double score;
 
     @JsonIgnore
     @ToString.Exclude
@@ -89,7 +90,8 @@ public class Lecture {
             LocalDate referenceDate,
             String insttCode,
             Long remainDay,
-            Boolean inWish
+            Boolean inWish,
+            double score
     ) {
         this.lctreNm = lctreNm;
         this.instrctrNm = instrctrNm;
@@ -119,6 +121,7 @@ public class Lecture {
         this.insttCode = insttCode;
         this.remainDay = remainDay;
         this.inWish = inWish;
+        this.score = score;
     }
 
     @Override

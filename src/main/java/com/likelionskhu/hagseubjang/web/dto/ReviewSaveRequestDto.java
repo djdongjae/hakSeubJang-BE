@@ -13,12 +13,14 @@ public class ReviewSaveRequestDto {
 
     private String title;
     private String content;
+    private Integer grade;
     private Integer lectureId;
 
     @Builder
-    public ReviewSaveRequestDto(String title, String content, Integer lectureId) {
+    public ReviewSaveRequestDto(String title, String content, Integer grade, Integer lectureId) {
         this.title = title;
         this.content = content;
+        this.grade = grade == null ? 0 : grade;
         this.lectureId = lectureId;
     }
 
@@ -26,6 +28,7 @@ public class ReviewSaveRequestDto {
         return Review.builder()
                 .title(title)
                 .content(content)
+                .grade(grade)
                 .build();
     }
 

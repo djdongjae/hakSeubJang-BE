@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -26,6 +27,9 @@ public class Review extends BaseTimeEntity {
     @Column
     private String content;
 
+    @Column
+    private int grade;
+
     @ManyToOne
     @JoinColumn(name = "lectureId")
     Lecture lecture;
@@ -35,16 +39,18 @@ public class Review extends BaseTimeEntity {
     User user;
 
     @Builder
-    public Review(String title, String content, Lecture lecture, User user) {
+    public Review(String title, String content, int grade, Lecture lecture, User user) {
         this.title = title;
         this.content = content;
+        this.grade = grade;
         this.lecture = lecture;
         this.user = user;
     }
 
-    public void update(String title, String content) {
+    public void update(String title, String content, int grade) {
         this.title = title;
         this.content = content;
+        this.grade = grade;
     }
 
     @Override

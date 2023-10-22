@@ -2,6 +2,7 @@ package com.likelionskhu.hagseubjang.web;
 
 import com.likelionskhu.hagseubjang.config.auth.dto.SessionUser;
 import com.likelionskhu.hagseubjang.domain.lecture.Lecture;
+import com.likelionskhu.hagseubjang.domain.review.Review;
 import com.likelionskhu.hagseubjang.domain.wish.Wish;
 import com.likelionskhu.hagseubjang.service.LectureService;
 import com.likelionskhu.hagseubjang.service.WishService;
@@ -48,9 +49,6 @@ public class LectureController {
         session.setAttribute("edcMthType", edcMthType);
         session.setAttribute("edcTrgetType", edcTrgetType);
 
-//        String regionOnView = (String) session.getAttribute("region");
-//        model.addAttribute("regionOnView", regionOnView);
-
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(9);
 
@@ -83,6 +81,17 @@ public class LectureController {
                 }
             }
         }
+
+        for (Lecture lecture : lecturePage) {
+            int sum = 0;
+            int cnt = 0;
+            for (Review review : lecture.getReviews()) {
+                sum += review.getGrade();
+                cnt += 1;
+            }
+            lecture.setScore((double) sum / cnt);
+        }
+
 
         model.addAttribute("lecturePage", lecturePage);
 
@@ -133,6 +142,17 @@ public class LectureController {
                 }
             }
         }
+
+        for (Lecture lecture : lecturePage) {
+            int sum = 0;
+            int cnt = 0;
+            for (Review review : lecture.getReviews()) {
+                sum += review.getGrade();
+                cnt += 1;
+            }
+            lecture.setScore((double) sum / cnt);
+        }
+
         model.addAttribute("lecturePage", lecturePage);
         return "lecture/list2";
     }
@@ -153,6 +173,14 @@ public class LectureController {
                 }
             }
         }
+
+        int sum = 0;
+        int cnt = 0;
+        for (Review review : lecture.getReviews()) {
+            sum += review.getGrade();
+            cnt += 1;
+        }
+        lecture.setScore((double) sum / cnt);
         return "lecture/detail";
     }
 

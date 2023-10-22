@@ -52,6 +52,7 @@
                 <h2 class="fs24fw600" th:text="${lecture.getOperInstitutionNm()}">경상북도 의성군청</h2>
                 <h1 th:text="${lecture.getLctreNm()}"></h1>
                 <span th:text="${lecture.getInstrctrNm()} + ' 강사님'"></span>
+                <span th:text="${lecture.getScore()}"></span>
                 <div class="btnWrap_summerize">
                     <a th:href="@{${lecture.getHomepageUrl()}}" th:target="_blank">
                         <button class="btn_summerize" type="button">
@@ -351,6 +352,7 @@
                         <div class= "inner_review">
                             <h2 class="review_title" id="p_title" th:text="${review.title}"></h2>
                             <p class="review_content" id="p_content" th:text="${review.content}"></p>
+                            <p th:text="${review.grade}"></p>
                             <div class="writer_information">
                                 <div class="wrap_writer_profile">
                                     <div class="writer_profile">

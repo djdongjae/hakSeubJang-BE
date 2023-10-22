@@ -59,6 +59,13 @@
                             <div class="lecture__id">
                                 <input type="text" id="lecture__id" th:value="${lectureId}" readonly>
                             </div>
+                            <!-- 평점 입력 부분-->
+                            <div>
+                                <label>
+                                    평점
+                                    <input type="number" th:field="*{grade}">
+                                </label>
+                            </div>
                         </div>
                         <hr>
                         <div id="title-form">
