@@ -158,6 +158,10 @@ hr {
     border:0;
 }
 
+.lecture_grade select {
+    width: 100px;
+}
+
 /* 미디어 쿼리 */
 
 @media all and (min-width:1024px) {

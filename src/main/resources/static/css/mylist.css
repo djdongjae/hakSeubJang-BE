@@ -96,7 +96,7 @@
 .list_block {
     display: flex;
     width: 320px;
-    height: 220px;
+    height: 240px;
     flex-direction: column;
     justify-content: center;
     border: 2px solid #D9D9D9;
@@ -180,6 +180,10 @@
     cursor: pointer;
     background: var(--gray-line);
     color: #000;
+}
+
+.only_one_block_option {
+    width: 260px;
 }
 
 .list_block_option_detail:hover, .list_block_option_heart:hover {
@@ -633,7 +637,7 @@
         font-size: 8pt;
     }
     
-    .list_block_option_detail {
+    .list_block_option_detail, .only_one_block_option{
         width: 100%;
         font-size: 8pt;
     }
@@ -644,6 +648,10 @@
 
     .tab_block {
         width: calc(50% - 5px);
+    }
+
+    .only_one_tab_block {
+        width: calc(100% - 5px);
     }
 
     /* 작성한 후기 페이지 */
@@ -887,7 +895,7 @@
         font-size: 10px;
     }
     .list_block {
-        height: 180px;
+        height: 220px;
     }
     .pagination_center, .pagination_end {
         width: 20px;
