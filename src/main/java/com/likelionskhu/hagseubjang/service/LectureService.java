@@ -123,7 +123,7 @@ public class LectureService {
 
     public List<Lecture> hotLectures() {
         List<Lecture> top5Lectures = lectureRepository.findByWishCount().stream()
-                .limit(5)
+                .limit(6)
                 .collect(Collectors.toList());
 
         return top5Lectures;
