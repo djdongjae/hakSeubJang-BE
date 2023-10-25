@@ -123,6 +123,9 @@ public class LectureService {
 
     public List<Lecture> hotLectures() {
         List<Lecture> top5Lectures = lectureRepository.findByWishCount().stream()
+                .filter(l -> l.getRceptEndDate().isAfter(LocalDate.now()))
+                .filter(l -> l.getReferenceDate().isAfter(LocalDate.of(2022, 6, 6)))
+                .filter(l -> l.getEdcEndDay().isAfter(LocalDate.now()))
                 .limit(6)
                 .collect(Collectors.toList());
 
