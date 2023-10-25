@@ -89,7 +89,8 @@ public class LectureController {
                 sum += review.getGrade();
                 cnt += 1;
             }
-            lecture.setScore((double) sum / cnt);
+            if (cnt == 0) lecture.setScore(0.0);
+            else lecture.setScore((double) sum / cnt);
         }
 
         model.addAttribute("hotLectures", lectureService.hotLectures());
@@ -150,7 +151,8 @@ public class LectureController {
                 sum += review.getGrade();
                 cnt += 1;
             }
-            lecture.setScore((double) sum / cnt);
+            if (cnt == 0) lecture.setScore(0.0);
+            else lecture.setScore((double) sum / cnt);
         }
 
         model.addAttribute("hotLectures", lectureService.hotLectures());
@@ -181,7 +183,8 @@ public class LectureController {
             sum += review.getGrade();
             cnt += 1;
         }
-        lecture.setScore((double) sum / cnt);
+        if (cnt == 0) lecture.setScore(0.0);
+        else lecture.setScore((double) sum / cnt);
         return "lecture/detail";
     }
 
