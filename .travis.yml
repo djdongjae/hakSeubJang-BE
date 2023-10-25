@@ -6,11 +6,8 @@ branches:
   only:
     - main
 
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
-    - "./gradlew clean build -x test"
+script:
+  - ./mvnw package -DskipTests=true
 
 notifications:
   email:
