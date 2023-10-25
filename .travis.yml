@@ -6,8 +6,7 @@ branches:
   only:
     - main
 
-script:
-  - ./mvnw package -DskipTests=true
+script: "./gradlew clean build -x test"
 
 notifications:
   email:
