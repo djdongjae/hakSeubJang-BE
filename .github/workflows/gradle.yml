@@ -39,9 +39,8 @@ jobs:
       uses: actions/aws/cli@v1
       with:
         args: s3 cp deploy/hagseubjang.zip s3://hagseubjang-build/hagseubjang.zip
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
 
     - name: Notify via Email
       run: echo "Notify via Email"  # Add your email notification logic here
