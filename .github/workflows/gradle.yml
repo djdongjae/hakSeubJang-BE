@@ -1,0 +1,47 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+    - name: Build with Gradle
+      run: ./gradlew clean build -x test
+
+    - name: Prepare artifacts for deployment
+      run: |
+        zip -r hagseubjang *
+        mkdir -p deploy
+        mv hagseubjang.zip deploy/hagseubjang.zip
+
+    - name: Deploy to S3
+      uses: actions/upload-artifact@v2
+      with:
+        name: deploy
+        path: deploy
+
+    - name: Deploy to S3 (continued)
+      uses: actions/aws/cli@v1
+      with:
+        args: s3 cp deploy/hagseubjang.zip s3://hagseubjang-build/hagseubjang.zip
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+
+    - name: Notify via Email
+      run: echo "Notify via Email"  # Add your email notification logic here
