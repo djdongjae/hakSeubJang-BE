@@ -25,6 +25,7 @@ public class Lecture {
     private LocalDate edcEndDay;
     private String edcStartTime;
     private String edcCloseTime;
+    @Column(length = 1000)
     private String lctreCo;
     private String edcTrgetType;
     private String edcMthType;

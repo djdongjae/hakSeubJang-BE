@@ -262,11 +262,11 @@ public class LectureController {
         return "redirect:/lecture/detail?id=" + lectureId;
     }
 
-    @RequestMapping("load_save")
-    public String loadSave(Model model) throws Exception {
-        lectureService.loadSave();
-        return "download_success";
-    }
+//    @RequestMapping("load_save")
+//    public String loadSave(Model model) throws Exception {
+//        lectureService.loadSave();
+//        return "download_success";
+//    }
 
     public static String toURLEncodeUtf8(String str) {
         if (str == null || str.trim().equals("")) return "";

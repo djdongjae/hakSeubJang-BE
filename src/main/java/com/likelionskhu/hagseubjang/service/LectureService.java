@@ -144,7 +144,7 @@ public class LectureService {
     @Transactional
     public void loadSave() throws Exception {
         JSONParser parser = new JSONParser();
-        Reader reader = new FileReader("/Users/dongjae/Desktop/hagseubjang/lecture.json");
+        Reader reader = new FileReader("/Users/dongjae/Desktop/lecture.json");
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
         JSONArray records = (JSONArray) jsonObject.get("records");
 
